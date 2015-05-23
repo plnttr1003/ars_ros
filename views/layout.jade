@@ -5,11 +5,10 @@ html
 	body
 		include counters
 		.main_block
-			.header_block
+			//.header_block
 				.header_inner
 					a.header_logo(href='/')
 						img.logo_image(src='/images/design/logo.png')
-						.logo_title Государственный центральный музей современной истории России
 					.menu_block.left
 						.menu_item_block
 							a.menu_item(href='#') Музей
@@ -23,24 +22,6 @@ html
 									a.menu_item(href='/internships') Стажировки
 									a.menu_item(href='/team') Команда
 									a.menu_item(href='/official').block Официальная информация
-						.menu_item_block
-							a.menu_item(href='http://vm.sovrhistory.ru/sovremennoy-istorii-rossii/', target='_blank') Виртуальный музей
-						.menu_item_block
-							a.menu_item(href='#') События
-							.menu_drop
-								.drop_inner
-									a.menu_item(href='/events/exhibition') Выставки
-									a.menu_item(href='/events/excursion') Экскурсии
-									a.menu_item(href='/events/lecture') Лекции
-									a.menu_item(href='/events/action') Мероприятия
-									a.menu_item(href='/events/xxi') Дискуссионная площадка Тверская XXI
-						.menu_item_block
-							a.menu_item(href='#') Посетителям
-							.menu_drop
-								.drop_inner
-									a.menu_item(href='/visitors/souvenirs').block Сувенирная продукция
-									a.menu_item(href='/visitors/schedule') Билеты и расписание
-									a.menu_item(href='/visitors/contacts') Контакты
 						.menu_item_block
 							a.menu_item(href='/partners') Партнерство
 						//- .menu_item_block
@@ -77,8 +58,8 @@ html
 									a(href='https://www.facebook.com/sovr.history', target='_blank') 
 									a(href='https://twitter.com/sovrmuse', target='_blank') 
 									a(href='https://instagram.com/sovr.history', target='_blank') 
-								.footer_block_inner 2015. Государственный центральный музей современной истории России. Все права защищены. Использование материалов сайта разрешено только с предварительного согласия правообладателей.
+								.footer_block_inner Все тексты и изображения ©Арсений Россихин
 									br
-									b Сайт находится в стадии бета-тестирования.
+									| 2015 Все права защищены
 					.content_column.scroll
 						block scroll

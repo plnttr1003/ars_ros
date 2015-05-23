@@ -1,3 +1,19 @@
+html
+body
+	height 100%
+.screen_block
+	height 100%
+	&.intro_block
+		background-size cover
+		background-position 50%
+		opacity 0.9
+		width 100%
+		display table
+		.intro_block_inner
+			height 100%
+			display table-cell
+			vertical-align middle
+			text-align center
 .content_outer_block
 	opacity 0
 	transition opacity 0.2s ease-in-out
@@ -36,6 +52,19 @@
 		&:hover
 			background-color rgb(240, 240, 240)
 			color #000
+
+.item_fancy
+	position absolute
+	display block
+	top 0
+	left 0
+	right 0
+	bottom 0
+	z-index 100
+	//background #fc0
+	//display none
+	&:hover
+		background #f00
 
 .content_news_block
 	// background-color #318A4E

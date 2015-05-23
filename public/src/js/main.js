@@ -8,7 +8,7 @@ $(document).ready(function() {
 
 	$container.imagesLoaded(function() {
 		$container.masonry({
-			columnWidth: 60,
+			columnWidth: 30,
 			gutter: 20,
 			itemSelector: '.event',
 			isInitLayout: false
