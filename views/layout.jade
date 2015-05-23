@@ -1,0 +1,84 @@
+doctype html
+html
+	head
+		include header
+	body
+		include counters
+		.main_block
+			.header_block
+				.header_inner
+					a.header_logo(href='/')
+						img.logo_image(src='/images/design/logo.png')
+						.logo_title Государственный центральный музей современной истории России
+					.menu_block.left
+						.menu_item_block
+							a.menu_item(href='#') Музей
+							.menu_drop
+								.drop_inner
+									a.menu_item(href='/news') Новости
+									a.menu_item(href='/history') История музея
+									a.menu_item(href='/subsidiarys') Филиалы
+									a.menu_item(href='/exposure') Экспозиция
+									a.menu_item(href='/collections') Коллекции
+									a.menu_item(href='/internships') Стажировки
+									a.menu_item(href='/team') Команда
+									a.menu_item(href='/official').block Официальная информация
+						.menu_item_block
+							a.menu_item(href='http://vm.sovrhistory.ru/sovremennoy-istorii-rossii/', target='_blank') Виртуальный музей
+						.menu_item_block
+							a.menu_item(href='#') События
+							.menu_drop
+								.drop_inner
+									a.menu_item(href='/events/exhibition') Выставки
+									a.menu_item(href='/events/excursion') Экскурсии
+									a.menu_item(href='/events/lecture') Лекции
+									a.menu_item(href='/events/action') Мероприятия
+									a.menu_item(href='/events/xxi') Дискуссионная площадка Тверская XXI
+						.menu_item_block
+							a.menu_item(href='#') Посетителям
+							.menu_drop
+								.drop_inner
+									a.menu_item(href='/visitors/souvenirs').block Сувенирная продукция
+									a.menu_item(href='/visitors/schedule') Билеты и расписание
+									a.menu_item(href='/visitors/contacts') Контакты
+						.menu_item_block
+							a.menu_item(href='/partners') Партнерство
+						//- .menu_item_block
+						//- 	a.menu_item(href='/live') Живая история
+					.menu_block.right
+						.social_block
+							a(href='https://vk.com/sovr_history', target='_blank') 
+							a(href='https://www.facebook.com/sovr.history', target='_blank') 
+							a(href='https://twitter.com/sovrmuse', target='_blank') 
+							a(href='https://instagram.com/sovr.history', target='_blank') 
+						.options_block
+							.option.search 
+							.option.lang.block EN
+				.search_block
+					.search_inner
+						input.search_input(type='text', placeholder='Найти...')
+						.search_result
+							.search_context.exhibits
+								.context_title Экспонаты
+								.context_results_block
+							.search_context.events
+								.context_title События
+								.context_results_block
+			.content_block
+				.content_up_block
+					block content_up
+				.content_columns_block
+					.content_column.main
+						.column_main_inner
+							block content
+							.footer_block
+								.social_block
+									a(href='https://vk.com/sovr_history', target='_blank') 
+									a(href='https://www.facebook.com/sovr.history', target='_blank') 
+									a(href='https://twitter.com/sovrmuse', target='_blank') 
+									a(href='https://instagram.com/sovr.history', target='_blank') 
+								.footer_block_inner 2015. Государственный центральный музей современной истории России. Все права защищены. Использование материалов сайта разрешено только с предварительного согласия правообладателей.
+									br
+									b Сайт находится в стадии бета-тестирования.
+					.content_column.scroll
+						block scroll

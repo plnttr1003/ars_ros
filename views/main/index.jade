@@ -1,0 +1,51 @@
+extends ../layout
+
+block title
+	title ГЛАВНАЯ
+
+block content_style
+	link(rel='stylesheet', type='text/css', href='/build/css/blocks_grid.css' + version)
+	link(rel='stylesheet', type='text/css', href='/build/css/main.css' + version)
+
+block content_scripts
+	script(type='text/javascript', src='/build/libs/js/imagesloaded.pkgd.min.js' + version)
+	script(type='text/javascript', src='/build/libs/js/masonry.pkgd.min.js' + version)
+	script(type='text/javascript', src='/build/js/scroll.js' + version)
+	script(type='text/javascript', src='/build/js/main.js' + version)
+
+
+block content
+	- var months = ['января', 'февраля', 'мара', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря']
+	.content_title Историю создаете вы
+	.content_navigate_block
+		.navigate_title Наши последние события:
+		.navigate_items_block
+			.navigate_item.excursion экскурсии
+			.navigate_item.exhibition выставки
+			.navigate_item.lecture лекции
+			.navigate_item.action мероприятия
+			.navigate_item.xxi Дискуссионная площадка Тверская XXI
+	.content_outer_block
+		.content_news_block
+			each item in news
+				a.content_item.news(href='/news/' + item._id)
+					.item_title= item.i18n.title.get('ru')
+					.item_date= item.date.getDate() + ' ' + months[item.date.getMonth()] + ' ' + item.date.getFullYear()
+
+		each event in events
+			if (event.status == 'important')
+				a.content_item.event.important(href='/events/' + event.type +'/' + event._id, style='background-image: url(' + (event.images && event.images.length > 0 && event.images[0].original) + ')')
+					.item_description
+						.item_date= ('0' + event.interval.start.getUTCDate()).slice(-2)  + '/' + ('0' + event.interval.start.getUTCMonth()).slice(-2) + '/' + ('0' + event.interval.start.getUTCFullYear()).slice(-2) + ' - ' + ('0' + event.interval.end.getUTCDate()).slice(-2)  + '/' + ('0' + event.interval.end.getUTCMonth()).slice(-2) + '/' + ('0' + event.interval.end.getUTCFullYear()).slice(-2)
+						.item_title= event.i18n.title.get('ru')
+			else
+				a.content_item.event(href='/events/' + event.type +'/' + event._id)
+					img.item_image(src=event.images && event.images.length > 0 && event.images[0].thumb)
+					.item_description
+						.item_date= ('0' + event.interval.start.getUTCDate()).slice(-2)  + '/' + ('0' + event.interval.start.getUTCMonth()).slice(-2) + '/' + ('0' + event.interval.start.getUTCFullYear()).slice(-2) + ' - ' + ('0' + event.interval.end.getUTCDate()).slice(-2)  + '/' + ('0' + event.interval.end.getUTCMonth()).slice(-2) + '/' + ('0' + event.interval.end.getUTCFullYear()).slice(-2)
+						.item_title= event.i18n.title.get('ru')
+
+block scroll
+	.content_title Государственный центральный музей современной истории России
+	.content_scroll_items
+		include ../gallerys/main.jade

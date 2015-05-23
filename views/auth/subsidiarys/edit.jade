@@ -1,0 +1,51 @@
+extends ../../layout
+include ../forms.jade
+
+block title
+	title РЕДАКТИРОВАТЬ ФИЛИАЛ
+
+block content_style
+	link(rel='stylesheet', type='text/css', href='/build/libs/css/font-awesome.css')
+	link(rel='stylesheet', type='text/css', href='/build/libs/css/wysiwyg-editor.css')
+	link(rel='stylesheet', type='text/css', href='/build/css/add.css')
+
+block content_scripts
+	script(type='text/javascript', src='/build/libs/js/wysiwyg.js')
+	script(type='text/javascript', src='/build/libs/js/wysiwyg-editor.js')
+	script(type='text/javascript', src='/build/libs/js/jquery-ui-1.10.4.custom.min.js')
+	script(type='text/javascript', src='/build/libs/js/jquery.filedrop.js')
+	script(type='text/javascript', src='/build/js/upload.js')
+	script(type='text/javascript', src='/build/js/add.js')
+
+block content
+	- var year = new Date()
+	- year = year.getFullYear()
+	- var months = ['ЯНВАРЬ', 'ФЕВРАЛЬ', 'МАРТ', 'АПРЕЛЬ', 'МАЙ', 'ИЮНЬ', 'ИЮЛЬ', 'АВГУСТ', 'СЕНТЯБРЬ', 'ОКТЯБРЬ', 'НОЯБРЬ', 'ДЕКАБРЬ']
+	.form_block
+		a.back_link(href='/auth/subsidiarys/') < Назад
+		.title РЕДАКТИРОВАТЬ ФИЛИАЛ
+		form(action="", method="post", enctype="multipart/form-data")
+			.form_title Заголовок:
+			+form_text_single('title', subsidiary)
+			.form_title Описание:
+			+form_text_multi('description', subsidiary)
+			.form_title Адрес:
+			+form_text_single('adress', subsidiary)
+			.form_title Логотип:
+			input(type='file', name='logo')
+			.form_title Логотип (координата x)
+			input(type="text", name="position[x]", value=subsidiary.logo.position.x)
+			.form_title Логотип (координата y)
+			input(type="text", name="position[y]", value=subsidiary.logo.position.y)
+			.form_title Изображения:
+			.form_images_upload
+				.form_desc_title Нажми или перетащи
+				each image, i in subsidiary.images
+					.image_upload_block
+						.image_upload_preview(style='background-image:url(' + image.thumb + ')')
+							.image_upload_delete Удалить
+						textarea.image_upload_description(name='images[description][]')= image.description.filter(function(locale) { return locale.lg == 'ru' })[0].value
+						input.image_upload_form(type='hidden', name='images[path][]', value=images_preview[i])
+			br
+			br
+			input(type='submit', value='отправить')

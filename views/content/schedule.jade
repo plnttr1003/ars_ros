@@ -1,0 +1,81 @@
+extends ../layout
+
+block title
+	title БИЛЕТЫ И РАСПИСАНИЕ
+
+block content_style
+	link(rel='stylesheet', type='text/css', href='/build/css/schedule.css' + version)
+	link(rel='stylesheet', type='text/css', href='/build/css/schedule_mobile.css' + version)
+
+block content_scripts
+	script(type='text/javascript', src='/build/js/scroll.js' + version)
+
+
+block content
+	.content_title Билеты
+
+	.schedule_block
+		.schedule_block_inner.content_block_left
+			.info_block_title Стоимость
+			p.info_block
+				span.highlited_block 250 руб.
+				span полный билет
+			p.info_block
+				span.highlited_block.benefit_block 100 руб.
+				span льготный билет
+					br
+					| (для учащихся, студентов вузов РФ, 
+					br
+					| пенсионеров).
+
+			.info_block_title Единый билет:
+			p.info_block
+				i (ГЦМСИР и 4 отдела;
+					br
+					| срок действия — 10 дней,
+				br
+				| включая день продажи):
+				br
+			p.info_block
+				span.highlited_block 550 руб.
+				span для взрослых
+			p.info_block
+				span.highlited_block.benefit_block.benefit_block2 250 руб.
+				span для учащихся, студентов вузов РФ, 
+					br
+					| пенсионеров
+			p.info_block
+				span.highlited_block 250 руб.
+				span любительская фотосъемка
+			p.info_block
+				span.highlited_block 500 руб.
+				span любительская видеосъемка
+
+		.schedule_block_inner.content_block_right
+			.info_block_title Бесплатное посещение
+			p.info_block Дети до 7 лет
+				br
+				| Инвалиды 1,2 групп*
+				br
+				|	Герои Советского Союза
+				br
+				|	Герои Российской Федерации
+				br
+				|	Полные кавалеры Ордена Славы*
+				br
+				|	Члены ИКОМ*
+			p.info_block.highlited_block Первый вторник месяца:
+			p.info_block лица, не достигшие 18 лет;
+				br
+				| члены многодетных семей
+			p.info_block.highlited_block Каждый вторник:
+			p.info_block воспитанники Суворовских военных
+				br
+				| и Нахимовских военно-морских училищ*.
+			p.info_block
+				i * по предоставлении соответствующих документов
+
+block scroll
+	.content_title
+	.content_scroll_items
+		include ../gallerys/main.jade

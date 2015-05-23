@@ -1,0 +1,33 @@
+extends ../layout
+
+block title
+	title= 'ЭКСПОЗИЦИЯ | ' + hall.i18n.title.get('ru').toUpperCase()
+
+block content_style
+	link(rel='stylesheet', type='text/css', href='/build/css/blocks_grid.css' + version)
+	link(rel='stylesheet', type='text/css', href='/build/css/hall.css' + version)
+
+block content_scripts
+	script(type='text/javascript', src='/build/libs/js/imagesloaded.pkgd.min.js' + version)
+	script(type='text/javascript', src='/build/libs/js/masonry.pkgd.min.js' + version)
+	script(type='text/javascript', src='/build/js/scroll.js' + version)
+	script(type='text/javascript', src='/build/js/hall.js' + version)
+
+
+block content
+	.content_title= hall.i18n.title.get('ru')
+	.content_s_title= hall.i18n.s_title.get('ru')
+	.content_description: != hall.i18n.description.get('ru')
+	.content_outer_block
+		each exhibit in exhibits
+			.content_item.exhibit
+				img.item_image(src=exhibit.images && exhibit.images.length > 0 && exhibit.images[0].thumb)
+				.item_description
+					.item_title= exhibit.i18n.title.get('ru')
+
+
+block scroll
+	.content_title
+	.content_scroll_items
+		each image in hall.images
+			img.content_scroll_item(src=image.thumb)

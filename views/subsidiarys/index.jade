@@ -1,0 +1,36 @@
+extends ../layout
+
+block title
+	title ФИЛИАЛЫ
+
+block content_style
+	link(rel='stylesheet', type='text/css', href='/build/css/subsidiarys.css' + version)
+	link(rel='stylesheet', type='text/css', href='/build/css/subsidiarys_mobile.css' + version)
+
+block content_scripts
+	script(type='text/javascript', src='/build/js/scroll.js' + version)
+	script(type='text/javascript', src='/build/js/subsidiarys.js' + version)
+
+
+block content
+	.content_title Филиалы
+	.content_outer_block
+		.content_map_block(style='background-image: url(/images/design/map.png)')
+			each subsidiary in subsidiarys
+				a(href='/subsidiarys/' + subsidiary._id)
+					img.content_map_item(src=subsidiary.logo.path, class=subsidiary._id, style='top:' + subsidiary.logo.position.x + 'px; left:' + subsidiary.logo.position.y + 'px;')
+
+		.content_items_block
+			.content_items_title В структуру музея Современной истории России входят 7 отделов, включая два мемориальных комплекса.
+			each subsidiary in subsidiarys
+				a.content_item(class=subsidiary._id, href='/subsidiarys/' + subsidiary._id)= subsidiary.i18n.title.get('ru')
+			.content_note Музей предлагает специальные единые абонементы на посещение всех отделов музея.
+
+
+
+block scroll
+	.content_title Государственный центральный музей современной истории России
+	.content_scroll_items
+		each subsidiary in subsidiarys
+			if (subsidiary.images && subsidiary.images.length > 0)
+				img.content_scroll_item(src=subsidiary.images[0].thumb)

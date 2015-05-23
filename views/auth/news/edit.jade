@@ -1,0 +1,52 @@
+extends ../../layout
+include ../forms.jade
+
+block title
+	title РЕДАКТИРОВАТЬ НОВОСТЬ
+
+block content_style
+	link(rel='stylesheet', type='text/css', href='/build/libs/css/font-awesome.css')
+	link(rel='stylesheet', type='text/css', href='/build/libs/css/wysiwyg-editor.css')
+	link(rel='stylesheet', type='text/css', href='/build/css/add.css')
+
+block content_scripts
+	script(type='text/javascript', src='/build/libs/js/wysiwyg.js')
+	script(type='text/javascript', src='/build/libs/js/wysiwyg-editor.js')
+	script(type='text/javascript', src='/build/libs/js/jquery-ui-1.10.4.custom.min.js')
+	script(type='text/javascript', src='/build/libs/js/jquery.filedrop.js')
+	script(type='text/javascript', src='/build/js/upload.js')
+	script(type='text/javascript', src='/build/js/add.js')
+
+//- block content_right
+//- 	.navigator
+//- 		.nav_title КАТЕГОРИЮ
+//- 		.nav_project_children
+//- 		br
+//- 		b.nav_settings_title настройки
+//- 		.toggle_eng перевод
+//- 		br
+//- 		b.form_submit ОТПРАВИТЬ
+
+block content
+	.form_block
+		a.back_link(href='/auth/news') < Назад
+		.title РЕДАКТИРОВАТЬ НОВОСТЬ
+		form(action="", method="post")
+			.form_title Заголовок:
+			+form_text_single('title', news)
+			.form_title Описание:
+			+form_text_multi('description', news)
+			.form_title Дата:
+			+form_calendar('date', news.date)
+			.form_title Изображения:
+			.form_images_upload
+				.form_desc_title Нажми или перетащи
+				each image, i in news.images
+					.image_upload_block
+						.image_upload_preview(style='background-image:url(' + image.thumb + ')')
+							.image_upload_delete Удалить
+						textarea.image_upload_description(name='images[description][]')= image.description.filter(function(locale) { return locale.lg == 'ru' })[0].value
+						input.image_upload_form(type='hidden', name='images[path][]', value=images_preview[i])
+			br
+			br
+			input(type='submit', value='отправить')

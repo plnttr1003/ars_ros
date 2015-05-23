@@ -1,0 +1,6 @@
+each item in news
+	.content_item.news.important
+		.item_description
+			.item_date= ('0' + item.date.getUTCDate()).slice(-2) + '/' + ('0' + item.date.getUTCMonth()).slice(-2)
+			.item_title= item.i18n.title.get('ru')
+			.item_body= item.i18n.description.get('ru')

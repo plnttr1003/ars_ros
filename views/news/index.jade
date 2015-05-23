@@ -1,0 +1,39 @@
+extends ../layout
+
+block title
+	title НОВОСТИ
+
+block content_style
+	//- link(rel='stylesheet', type='text/css', href='/build/css/blocks_grid.css' + version)
+	link(rel='stylesheet', type='text/css', href='/build/css/news.css' + version)
+	link(rel='stylesheet', type='text/css', href='/build/css/news_mobile.css' + version)
+
+block content_scripts
+	script(type='text/javascript', src='/build/libs/js/masonry.pkgd.min.js' + version)
+	script(type='text/javascript', src='/build/js/scroll.js' + version)
+	script(type='text/javascript', src='/build/js/news.js' + version)
+
+mixin trimString(str, length)
+	if (str.length > length)
+		span.body: != str.substr(0, length)
+		span.etc ...
+		span.hide= str.substr(length, str.length)
+	- else
+		span.body: != str
+
+
+block content
+	- var months = ['января', 'февраля', 'мара', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря']
+	.content_title Новости
+	.content_outer_block
+		each item in news
+			a.content_item.news.important(href='/news/' + item._id)
+				.item_description
+					.item_title= item.i18n.title.get('ru')
+					.item_body: +trimString(item.i18n.description.get('ru').replace(/(<([^>]+)>)/ig, ''), 100)
+					.item_date= item.date.getDate() + ' ' + months[item.date.getMonth()] + ' ' + item.date.getFullYear()
+
+block scroll
+	.content_title
+	.content_scroll_items
+		include ../gallerys/main.jade

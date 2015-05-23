@@ -1,0 +1,68 @@
+//- Calendar form
+
+mixin form_calendar(path, date)
+	- var year = new Date()
+	- year = year.getFullYear()
+	- var months = ['ЯНВАРЬ', 'ФЕВРАЛЬ', 'МАРТ', 'АПРЕЛЬ', 'МАЙ', 'ИЮНЬ', 'ИЮЛЬ', 'АВГУСТ', 'СЕНТЯБРЬ', 'ОКТЯБРЬ', 'НОЯБРЬ', 'ДЕКАБРЬ']
+	- var now = date ? date : new Date()
+	select(name= path + '[date]')
+		option(value='') Дата
+		- for (var i=1; i<32; i++)
+			option(value=i, selected=(i == now.getDate()))= i
+	select(name= path + '[month]')
+		option(value='') Месяц
+		each month, i in months
+			option(value=i, selected=(i == now.getMonth()))= month
+	select(name= path + '[year]')
+		option(value='') Год
+		option(value=year, selected=(year == now.getFullYear()))= year
+		option(value=year - 1, selected=(year - 1 == now.getFullYear()))= year - 1
+
+//- Single Text Form
+
+mixin form_text_single(path, object)
+	input.ru(type="text", name="ru[" + path + "]", value=object && object['i18n'][path].get('ru'))
+	input.en(type="text", name="en[" + path + "]", disabled, value=object && object['i18n'][path].get('en'))
+
+//- Multiple Text Form
+
+mixin form_text_multi(path, object)
+	textarea.ru.editor(name="ru[" + path + "]", rows="8",)= object && object['i18n'][path].get('ru')
+	textarea.en(name="en[" + path + "]", rows="8", disabled)= object && object['i18n'][path].get('en')
+
+
+//- Single Select Form
+
+mixin form_single_select(path, options, select_option)
+	if (!select_option)
+		select(name=path)
+			option(value='none') нет
+			each option in options
+				option(value=option._id)= option['i18n']['title'].get('ru')
+	else
+		select(name=path)
+			option(value='none') нет
+			each option in options
+				option(value=option._id, selected=select_option == option._id.toString())= option['i18n']['title'].get('ru')
+
+
+//- Multiple Select Form
+
+mixin form_multiple_select(path, options, select_options)
+	.snake_outer
+		if (!select_options || select_options.length == 0)
+			span.snake
+				input.back(type="button", value="-")
+				select(name=path + '[]')
+					option(value='') нет
+					each option in options
+						option(value=option._id)= option['i18n']['title'].get('ru')
+		else
+			each select_option in select_options
+				span.snake
+					input.back(type="button", value="-")
+					select(name=path + '[]')
+						option(value='') нет
+						each option in options
+							option(value=option._id, selected=option._id.toString() == select_option)= option['i18n']['title'].get('ru')
+		input.forward(type="button", value="+")

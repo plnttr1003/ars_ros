@@ -1,0 +1,32 @@
+extends ../../layout
+include ../forms.jade
+
+block title
+	title ДОБАВИТЬ КАТЕГОРИЮ
+
+block content_style
+	link(rel='stylesheet', type='text/css', href='/build/css/add.css')
+
+block content_scripts
+	script(type='text/javascript', src='/build/js/add.js')
+
+//- block content_right
+//- 	.navigator
+//- 		.nav_title КАТЕГОРИЮ
+//- 		.nav_project_children
+//- 		br
+//- 		b.nav_settings_title настройки
+//- 		.toggle_eng перевод
+//- 		br
+//- 		b.form_submit ОТПРАВИТЬ
+
+block content
+	.form_block
+		a.back_link(href='/auth/categorys') < Назад
+		.title ДОБАВИТЬ КАТЕГОРИЮ
+		form(action="/auth/categorys/add", method="post")
+			.form_title Заголовок:
+			+form_text_single('title')
+			br
+			br
+			input(type='submit', value='отправить')

@@ -1,0 +1,46 @@
+extends ../layout
+
+block title
+	title КОНТАКТЫ
+
+block content_style
+	link(rel='stylesheet', type='text/css', href='/build/css/contacts.css' + version)
+	link(rel='stylesheet', type='text/css', href='/build/css/contacts_mobile.css' + version)
+
+block content_scripts
+	script(type='text/javascript', src='http://maps.googleapis.com/maps/api/js?sensor=false')
+	script(type='text/javascript', src='/build/js/g_maps.js' + version)
+	//script(type='text/javascript', src='/build/js/contacts.js' + version)
+
+
+block content
+	.map_block#map_canvas
+
+block scroll
+	.contacts_scroll_inner
+		.contacts_title= 'Контактная информация'
+
+		p.info_block Информация: 
+			span +7 (495) 699-54-58
+		p.info_block Экскурсионное бюро: 
+			span +7 (495)699-67-24
+		p.info_block Приемная: 
+			span +7 (495)699-52-17,
+		p.info_block Факс: 
+			span +7 (495)699-12-73
+		p.info_block sovrhistory@mail.ru
+		.info_block_title Адрес:
+		p.info_block 125009, Россия, Москва,
+			br
+			| Тверская ул., дом 21
+		.info_block_title Время работы:
+		p.info_block Вторник, среда, пятница: с 10.00 до 18.00,
+			br
+			| касса до 17.30
+		p.info_block Четверг: с 12.00 до 21.00,
+			br
+			| касса до 20.30
+		p.info_block Суббота, воскресенье: с 11.00 до 19.00,
+			br
+			| касса до 18.30
+		p.info_block.info_block_last Понедельник — выходной день

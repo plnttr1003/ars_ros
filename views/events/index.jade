@@ -1,0 +1,53 @@
+extends ../layout
+
+block title
+	- var types = {'exhibition': 'Выставки', 'excursion': 'Экскурсии', 'lecture': 'Лекции', 'xii': 'Дискуссионная площадка Тверская XXI', 'action': 'Мероприятия'}
+	title= types[type]
+
+block content_style
+	link(rel='stylesheet', type='text/css', href='/build/css/blocks_grid.css' + version)
+	link(rel='stylesheet', type='text/css', href='/build/css/events.css' + version)
+
+block content_scripts
+	script(type='text/javascript', src='/build/libs/js/imagesloaded.pkgd.min.js' + version)
+	script(type='text/javascript', src='/build/libs/js/masonry.pkgd.min.js' + version)
+	script(type='text/javascript', src='/build/js/scroll.js' + version)
+	script(type='text/javascript', src='/build/js/events.js' + version)
+
+
+block content
+	- var types = {'exhibition': 'Выставки', 'excursion': 'Экскурсии', 'lecture': 'Лекции', 'xxi': 'Дискуссионная площадка Тверская XXI', 'action': 'Мероприятия'}
+	.content_title(class=type)= types[type]
+
+	.content_navigate_block.subsidiarys
+		.navigate_title Филиалы:
+		.navigate_items_block
+			each subsidiary in subsidiarys
+				.navigate_item(class=subsidiary._id)= subsidiary.i18n.title.get('ru')
+
+	if (categorys.length > 0)
+		.content_navigate_block.categorys
+			.navigate_title Категории:
+			.navigate_items_block
+				each category in categorys
+					.navigate_item(class=category._id)= category.i18n.title.get('ru')
+
+	.content_outer_block
+		each event in events
+			if (event.status == 'important')
+				a.content_item.event.important(href='/events/' + event.type +'/' + event._id, style='background-image: url(' + (event.images && event.images.length > 0 && event.images[0].original) + ')')
+					.item_description
+						.item_date= ('0' + event.interval.start.getUTCDate()).slice(-2)  + '/' + ('0' + event.interval.start.getUTCMonth()).slice(-2) + '/' + ('0' + event.interval.start.getUTCFullYear()).slice(-2) + ' - ' + ('0' + event.interval.end.getUTCDate()).slice(-2)  + '/' + ('0' + event.interval.end.getUTCMonth()).slice(-2) + '/' + ('0' + event.interval.end.getUTCFullYear()).slice(-2)
+						.item_title= event.i18n.title.get('ru')
+			else
+				a.content_item.event(href='/events/' + event.type +'/' + event._id)
+					img.item_image(src=event.images && event.images.length > 0 && event.images[0].thumb)
+					.item_description
+						.item_date= ('0' + event.interval.start.getUTCDate()).slice(-2)  + '/' + ('0' + event.interval.start.getUTCMonth()).slice(-2) + '/' + ('0' + event.interval.start.getUTCFullYear()).slice(-2) + ' - ' + ('0' + event.interval.end.getUTCDate()).slice(-2)  + '/' + ('0' + event.interval.end.getUTCMonth()).slice(-2) + '/' + ('0' + event.interval.end.getUTCFullYear()).slice(-2)
+						.item_title= event.i18n.title.get('ru')
+
+block scroll
+	.content_title
+	.content_scroll_items
+		each event in events
+			img.content_scroll_item(src=event.images && event.images.length > 0 && event.images[0].thumb)

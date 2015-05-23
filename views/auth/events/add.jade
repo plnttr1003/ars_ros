@@ -1,0 +1,56 @@
+extends ../../layout
+include ../forms.jade
+
+block title
+	title ДОБАВИТЬ СОБЫТИЕ
+
+block content_style
+	link(rel='stylesheet', type='text/css', href='/build/libs/css/font-awesome.css')
+	link(rel='stylesheet', type='text/css', href='/build/libs/css/wysiwyg-editor.css')
+	link(rel='stylesheet', type='text/css', href='/build/css/add.css')
+
+block content_scripts
+	script(type='text/javascript', src='/build/libs/js/wysiwyg.js')
+	script(type='text/javascript', src='/build/libs/js/wysiwyg-editor.js')
+	script(type='text/javascript', src='/build/libs/js/jquery-ui-1.10.4.custom.min.js')
+	script(type='text/javascript', src='/build/libs/js/jquery.filedrop.js')
+	script(type='text/javascript', src='/build/js/upload.js')
+	script(type='text/javascript', src='/build/js/add.js')
+
+block content
+	- var year = new Date()
+	- year = year.getFullYear()
+	- var months = ['ЯНВАРЬ', 'ФЕВРАЛЬ', 'МАРТ', 'АПРЕЛЬ', 'МАЙ', 'ИЮНЬ', 'ИЮЛЬ', 'АВГУСТ', 'СЕНТЯБРЬ', 'ОКТЯБРЬ', 'НОЯБРЬ', 'ДЕКАБРЬ']
+	.form_block
+		a.back_link(href='/auth/events') < Назад
+		.title ДОБАВИТЬ СОБЫТИЕ
+		form(action="", method="post")
+			.form_title Заголовок:
+			+form_text_single('title')
+			.form_title Описание:
+			+form_text_multi('description')
+			.form_title Категории:
+			+form_multiple_select('categorys', categorys)
+			.form_title Филиал:
+			+form_single_select('subsidiary', subsidiarys)
+			.form_title Статус
+			input(type='checkbox', name='status', value='important')
+			|важное
+			.form_title Тип:
+			select(name='type')
+				option(value='exhibition') Выставка
+				option(value='excursion') Экскурсия
+				option(value='lecture') Лекция
+				option(value='action') Мероприятие
+				option(value='xxi') Дискуссионная площадка Тверская XXI
+			.form_title Дата начала:
+			+form_calendar('date_start')
+			.form_title Дата конца:
+			+form_calendar('date_end')
+			.form_title Изображения:
+			.form_images_upload
+				.form_desc_title Перетащи сюда
+			br
+			br
+			input(type='submit', value='отправить')
+			//- button.toggle_eng перевод

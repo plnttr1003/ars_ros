@@ -1,0 +1,25 @@
+extends ../layout
+
+block title
+	title= 'НОВОСТИ | ' + news.i18n.title.get('ru').toUpperCase()
+
+block content_style
+	link(rel='stylesheet', type='text/css', href='/build/css/news_item.css' + version)
+
+block content_scripts
+	script(type='text/javascript', src='/build/js/scroll.js' + version)
+	script(type='text/javascript', src='/build/js/news_item.js' + version)
+
+
+block content
+	- var months = ['января', 'февраля', 'мара', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря']
+	.content_title= news.i18n.title.get('ru')
+	.content_date= news.date.getDate() + ' ' + months[news.date.getMonth()] + ' ' + news.date.getFullYear()
+	.content_body: != news.i18n.description.get('ru')
+
+
+block scroll
+	.content_title
+	.content_scroll_items
+		each image in news.images
+			img.content_scroll_item(src=image.thumb)

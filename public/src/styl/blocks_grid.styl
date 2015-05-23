@@ -1,0 +1,60 @@
+.content_column
+	&.main
+		// background-color #DFA3D7
+	&.scroll
+		// background-color #48A1DF
+		.content_scroll_item
+			// background-color #647A8A
+			width 320px
+			min-height 100px
+			display block
+
+.content_item
+	// background-color #647A8A
+	width 220px
+	margin-bottom 20px
+	float left
+	min-height 120px
+	text-decoration none
+	color black
+	display block
+	.item_image
+		width 220px
+		display block
+	.item_description
+		padding-top 10px
+		position relative
+		z-index 1
+		background #fff
+		.item_date
+			font 10pt/12pt 'PT Sans'
+		.item_title
+			font-weight bold
+	&.important
+		background-size cover
+		background-position center
+		width 460px
+		height 460px
+		.item_description
+			background transparent
+			box-sizing border-box
+			width 460px
+			color white
+			text-shadow 1px 1px 2px black
+			position absolute
+			padding 10px
+			bottom 0
+			.item_date
+				font 10pt/12pt 'PT Sans'
+			.item_title
+				font 16pt/18pt 'PT Sans'
+
+
+// Test
+
+
+.content_item.h1
+	height 280px
+
+.content_item.h2
+	height 520px

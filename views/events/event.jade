@@ -1,0 +1,25 @@
+extends ../layout
+
+block title
+	title= 'СОБЫТИЯ | ' + event.i18n.title.get('ru').toUpperCase()
+
+block content_style
+	link(rel='stylesheet', type='text/css', href='/build/css/event.css' + version)
+
+block content_scripts
+	script(type='text/javascript', src='/build/js/scroll.js' + version)
+	script(type='text/javascript', src='/build/js/event.js' + version)
+
+
+block content
+	- var months = ['января', 'февраля', 'мара', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря']
+	.content_title= event.i18n.title.get('ru')
+	.content_date= event.interval.start.getDate() + ' ' + months[event.interval.start.getMonth()] + ' ' + event.interval.start.getFullYear() + ' - ' + event.interval.end.getDate() + ' ' + months[event.interval.end.getMonth()] + ' ' + event.interval.end.getFullYear()
+	.content_body: != event.i18n.description.get('ru')
+
+
+block scroll
+	.content_title
+	.content_scroll_items
+		each image in event.images
+			img.content_scroll_item(src=image.thumb)

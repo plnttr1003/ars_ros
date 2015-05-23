@@ -1,0 +1,24 @@
+extends ../../layout
+
+block title
+	title КАТЕГОРИИ
+
+block content_style
+	link(rel='stylesheet', type='text/css', href='/build/css/add.css')
+
+block content_scripts
+	script(type='text/javascript', src='/build/js/lists.js')
+
+block content
+	a.back_link(href='/auth') < Назад
+	.title КАТЕГОРИИ
+	br
+	a.add(href='/auth/categorys/add') добавить категорию
+	br
+	br
+	.main_menu_block
+		each category in categorys
+			.category
+				a.rm_category(href='#', id=category._id)= 'удалить '
+				!=' | '
+				a(href='/auth/categorys/edit/' + category._id)= category.i18n.title.get('ru')

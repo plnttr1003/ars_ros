@@ -1,0 +1,32 @@
+extends ../../layout
+include ../forms.jade
+
+block title
+	title РЕДАКТИРОВАТЬ КАТЕГОРИЮ
+
+block content_style
+	link(rel='stylesheet', type='text/css', href='/build/css/add.css')
+
+block content_scripts
+	script(type='text/javascript', src='/build/css/add.js')
+
+//- block content_right
+//- 	.navigator
+//- 		.nav_title КАТЕГОРИЮ
+//- 		.nav_project_children
+//- 		br
+//- 		b.nav_settings_title настройки
+//- 		.toggle_eng перевод
+//- 		br
+//- 		b.form_submit ОТПРАВИТЬ
+
+block content
+	.form_block
+		a.back_link(href='/auth/categorys') < Назад
+		.title РЕДАКТИРОВАТЬ КАТЕГОРИЮ
+		form(action="", method="post")
+			.form_title Заголовок:
+			+form_text_single('title', category)
+			br
+			br
+			input(type='submit', value='отправить')
