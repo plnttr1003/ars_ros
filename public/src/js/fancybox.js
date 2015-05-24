@@ -5,4 +5,10 @@ $(document).ready(function() {
 		closeEffect : 'none',
 		closeClick : true
 	});
+	$('.goto_down_inner').click(function () {
+			var scr = $('body').height();
+			$('.intro_block').animate({
+				marginTop: - parseInt(scr),
+			}, 500 ).hide(600);
+		});
 })

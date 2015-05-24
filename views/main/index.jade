@@ -20,20 +20,28 @@ block content
 	- var months = ['января', 'февраля', 'мара', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря']
 	- ev_lnght = Math.floor(Math.random() * ((events.length - 1) - 0 + 1)) + 0
 
-	.screen_block.intro_block(style='background-image:url(' + events[ev_lnght].images[0].original + ')')
+	.screen_block.intro_block
+		.intro_block_background(style='background-image:url(' + events[ev_lnght].images[0].original + ')')
 		.intro_block_inner
-			img(src='/images/design/logo.png')
-			| Арсений Россихин
-	.content_navigate_block
-		.navigate_title Наши последние события:
-		.navigate_items_block
-			.navigate_item.excursion экскурсии
-			.navigate_item.exhibition выставки
-			.navigate_item.lecture лекции
-			.navigate_item.action мероприятия
-			.navigate_item.xxi Дискуссионная площадка Тверская XXI
-	.content_outer_block
+			.intro_block_image
+				img(src='/images/design/logo.png')
+		.goto_down
+			a.goto_down_inner ﹀
 
+	.screen_block.menu_block
+		.content_navigate_block
+			.navigate_title Наши последние события:
+			.navigate_items_block
+				.navigate_item.excursion экскурсии
+				.navigate_item.exhibition выставки
+				.navigate_item.lecture лекции
+				.navigate_item.action мероприятия
+				.navigate_item.xxi Дискуссионная площадка Тверская XXI
+		.goto_down
+			a.goto_down_inner ﹀
+
+
+	.content_outer_block
 
 		each event in events
 			if (event.status == 'important')

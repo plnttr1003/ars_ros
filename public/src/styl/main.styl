@@ -1,19 +1,48 @@
-html
-body
-	height 100%
 .screen_block
 	height 100%
-	&.intro_block
-		background-size cover
-		background-position 50%
-		opacity 0.9
+	&.menu_block
 		width 100%
-		display table
-		.intro_block_inner
+		position absolute
+		overflow hidden
+		z-index 200
+		background #000
+		display none
+	&.intro_block
+		width 100%
+		position absolute
+		overflow hidden
+		z-index 200
+		background #000
+		.intro_block_background
 			height 100%
-			display table-cell
-			vertical-align middle
-			text-align center
+			background-size cover
+			background-position 50%
+			filter blur(10px)
+			transform scale(1.1)
+		.intro_block_inner
+			width 100%
+			display table
+			height 100%
+			position absolute
+			top 0
+			.intro_block_image
+				height 100%
+				display table-cell
+				vertical-align middle
+				text-align center
+				background rgba(0, 0, 0, 0.69)
+
+.goto_down
+	position absolute
+	bottom 0
+	color #fff
+	text-align center
+	width 100%
+	font-size 30px
+	line-height 60px
+	a.goto_down_inner
+		cursor pointer
+
 .content_outer_block
 	opacity 0
 	transition opacity 0.2s ease-in-out
