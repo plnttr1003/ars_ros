@@ -20,16 +20,24 @@
 	margin-bottom 30px
 	background-size cover
 	background-position center
+	cursor pointer
 	.item_image
 		width 220px
 		display block
 	.item_description
 		padding-top 10px
-		//background #fff
+		display none
+		display table
+		height 100%
+		width 100%
 		.item_date
-			font 10pt/12pt 'PT Sans'
+			font 10pt/12pt 'Roboto'
 		.item_title
-			font-weight bold
+			font 24pt/26pt 'Roboto'
+			font-weight 300
+			display none
+			vertical-align middle
+			text-align center
 	&.important
 		background-size cover
 		background-position center
@@ -38,16 +46,22 @@
 		.item_description
 			background transparent
 			box-sizing border-box
-			width 460px
+			width 480px
 			color white
-			text-shadow 1px 1px 2px black
 			position absolute
 			padding 10px
 			bottom 0
 			.item_date
-				font 10pt/12pt 'PT Sans'
+				font 10pt/12pt 'Roboto'
 			.item_title
-				font 16pt/18pt 'PT Sans'
+				font 36pt/38pt 'Roboto'
+				font-weight 100
+	&:hover
+		background #f00!important
+		.item_description
+			.item_title
+				display table-cell
+
 
 
 // Test

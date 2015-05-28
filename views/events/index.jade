@@ -1,7 +1,7 @@
 extends ../layout
 
 block title
-	- var types = {'exhibition': 'Выставки', 'excursion': 'Экскурсии', 'lecture': 'Лекции', 'xii': 'Дискуссионная площадка Тверская XXI', 'action': 'Мероприятия'}
+	- var types = {'exhibition': 'Природа', 'excursion': 'Путешествия', 'lecture': 'Люди', 'xxi': 'Свадьбы', 'action': 'Пейзажи'}
 	title= types[type]
 
 block content_style
@@ -16,7 +16,7 @@ block content_scripts
 
 
 block content
-	- var types = {'exhibition': 'Выставки', 'excursion': 'Экскурсии', 'lecture': 'Лекции', 'xxi': 'Дискуссионная площадка Тверская XXI', 'action': 'Мероприятия'}
+	- var types = {'exhibition': 'Природа', 'excursion': 'Путешествия', 'lecture': 'Люди', 'xxi': 'Свадьбы', 'action': 'Пейзажи'}
 	.content_title(class=type)= types[type]
 
 	.content_navigate_block.subsidiarys
