@@ -1,7 +1,7 @@
 extends ../../layout
 
 block title
-	title= 'СОБЫТИЯ'
+	title= 'АЛЬБОМЫ'
 
 block content_style
 	link(rel='stylesheet', type='text/css', href='/build/css/add.css')
@@ -11,9 +11,9 @@ block content_scripts
 
 block content
 	a.back_link(href='/auth') < Назад
-	.title= 'СОБЫТИЯ'
+	.title= 'АЛЬБОМЫ'
 	br
-	a.add(href='/auth/events/add') добавить событие
+	a.add(href='/auth/events/add') добавить альбом
 	br
 	br
 	.main_menu_block

@@ -23,7 +23,7 @@ block content
 	- var months = ['ЯНВАРЬ', 'ФЕВРАЛЬ', 'МАРТ', 'АПРЕЛЬ', 'МАЙ', 'ИЮНЬ', 'ИЮЛЬ', 'АВГУСТ', 'СЕНТЯБРЬ', 'ОКТЯБРЬ', 'НОЯБРЬ', 'ДЕКАБРЬ']
 	.form_block
 		a.back_link(href='/auth/events') < Назад
-		.title ДОБАВИТЬ СОБЫТИЕ
+		.title ДОБАВИТЬ АЛЬБОМ
 		form(action="", method="post")
 			.form_title Заголовок:
 			+form_text_single('title')
@@ -31,7 +31,7 @@ block content
 			+form_text_multi('description')
 			.form_title Категории:
 			+form_multiple_select('categorys', categorys)
-			.form_title Филиал:
+			.form_title Страна:
 			+form_single_select('subsidiary', subsidiarys)
 			.form_title Статус
 			input(type='checkbox', name='status', value='important')
