@@ -5,12 +5,12 @@ html
 	body
 		include counters
 		.main_block
-			//.header_block
+			.header_block
 				.header_inner
 					a.header_logo(href='/')
 						img.logo_image(src='/images/design/logo.png')
 					.menu_block.left
-						.menu_item_block
+						//.menu_item_block
 							a.menu_item(href='#') Музей
 							.menu_drop
 								.drop_inner
@@ -23,18 +23,19 @@ html
 									a.menu_item(href='/team') Команда
 									a.menu_item(href='/official').block Официальная информация
 						.menu_item_block
-							a.menu_item(href='/partners') Партнерство
+							a.menu_item(href='/contacts') Обо мне
 						//- .menu_item_block
 						//- 	a.menu_item(href='/live') Живая история
 					.menu_block.right
-						.social_block
+						//.social_block
 							a(href='https://vk.com/sovr_history', target='_blank') 
 							a(href='https://www.facebook.com/sovr.history', target='_blank') 
 							a(href='https://twitter.com/sovrmuse', target='_blank') 
 							a(href='https://instagram.com/sovr.history', target='_blank') 
 						.options_block
-							.option.search 
-							.option.lang.block EN
+							//.option.search 
+							.option.menu_option 
+							//.option.lang.block EN
 				.search_block
 					.search_inner
 						input.search_input(type='text', placeholder='Найти...')

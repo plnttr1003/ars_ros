@@ -2,3 +2,13 @@
     font-family: Icons;
     src: url('/fonts/icons.ttf');
 }
+@font-face {
+  font-family: 'menu';
+  src: url('/fonts/menu.eot?59389739');
+  src: url('/fonts/menu.eot?59389739#iefix') format('embedded-opentype'),
+       url('/fonts/menu.woff?59389739') format('woff'),
+       url('/fonts/menu.ttf?59389739') format('truetype'),
+       url('/fonts/menu.svg?59389739#menu') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
