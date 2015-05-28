@@ -24,8 +24,13 @@ html, body, .main_block, .content_block, .content_columns_block, .content_column
 	position absolute
 	width 100%
 	background #fff
+	color #000
 	z-index 999
-
+	&.black_header
+		background transparent
+		color #fff
+		.header_logo
+			background-image url('/images/design/logo.png')
 .search_block
 	width 100%
 	display none
@@ -90,7 +95,6 @@ html, body, .main_block, .content_block, .content_columns_block, .content_column
 				display block
 				margin-top 4px
 				font 12pt/14pt 'Roboto'
-				color #000
 				text-decoration none
 				padding-bottom 3px
 				&:hover
@@ -124,9 +128,8 @@ html, body, .main_block, .content_block, .content_columns_block, .content_column
 			color rgb(196, 20, 59)
 
 .options_block
-	color #000
 	float left
-	border-left 1px solid #000
+	border-left 1px solid
 	margin-left 10px
 .option
 	margin-left 10px
@@ -149,13 +152,11 @@ html, body, .main_block, .content_block, .content_columns_block, .content_column
 .header_logo
 	display block
 	overflow hidden
-	margin-right 10px
+	width 90px
+	height 43px
 	float left
-	.logo_image
-		min-width 50px
-		height 23px
-		display block
-		float left
+	background url('/images/design/logo_black.png') 0 0 no-repeat
+	background-size 100%
 	.logo_title
 		margin-left 15px
 		color white
