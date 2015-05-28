@@ -15,7 +15,7 @@ h3
 body
 	margin 0
 	padding 0
-	font 12pt/14pt 'PT Sans'
+	font 12pt/14pt 'Roboto'
 
 html, body, .main_block, .content_block, .content_columns_block, .content_column, .column_inner_block
 	height 100%
@@ -23,7 +23,7 @@ html, body, .main_block, .content_block, .content_columns_block, .content_column
 .header_block
 	position absolute
 	width 100%
-	background-color rgba(0, 0, 0, 0.7)
+	background #fff
 	z-index 999
 
 .search_block
@@ -43,7 +43,7 @@ html, body, .main_block, .content_block, .content_columns_block, .content_column
 	outline none
 	padding-bottom 5px
 	border-bottom 1px solid white
-	font-family 'PT Sans'
+	font-family 'Roboto'
 
 .search_result
 	width 100%
@@ -67,7 +67,7 @@ html, body, .main_block, .content_block, .content_columns_block, .content_column
 	display block
 	text-decoration none
 	margin-top 10px
-	font 14pt/16pt 'PT Sans'
+	font 14pt/16pt 'Roboto'
 	&:hover
 		color rgb(196, 20, 59)
 
@@ -89,8 +89,8 @@ html, body, .main_block, .content_block, .content_columns_block, .content_column
 			.menu_item
 				display block
 				margin-top 4px
-				font 12pt/14pt 'PT Sans'
-				color white
+				font 12pt/14pt 'Roboto'
+				color #000
 				text-decoration none
 				padding-bottom 3px
 				&:hover
@@ -124,9 +124,9 @@ html, body, .main_block, .content_block, .content_columns_block, .content_column
 			color rgb(196, 20, 59)
 
 .options_block
-	color white
+	color #000
 	float left
-	border-left 1px solid white
+	border-left 1px solid #000
 	margin-left 10px
 .option
 	margin-left 10px
@@ -162,29 +162,31 @@ html, body, .main_block, .content_block, .content_columns_block, .content_column
 		text-decoration none
 		width 190px
 		float left
-		font 8pt/10pt 'PT Serif'
+		font 8pt/10pt 'Roboto'
 
 .content_columns_block
 	overflow hidden
-	//width 1280px
 	margin 0 auto
 
 .content_column
 	box-sizing border-box
 	&.main
 		overflow hidden
-		//width 1280px
-		//float left
 		.content_title
 			padding-top 90px
 			margin-bottom 60px
-			font 24pt/26pt 'PT Serif'
+			font 24pt/26pt 'Roboto'
 		.column_main_inner
-			//width 1295px
 			overflow-y scroll
 			height 100%
 		.content_outer_block
-			overflow hidden
+			//overflow hidden
+			width 1540px
+			margin 0 auto
+			background #fc0
+			.content_outer_block_inner
+				margin-top 100px
+				position relative
 	&.scroll
 		overflow hidden
 		width 320px
@@ -198,7 +200,7 @@ html, body, .main_block, .content_block, .content_columns_block, .content_column
 			position absolute
 			color white
 			text-shadow: 1px 1px 2px black
-			font 14pt/16pt 'PT Serif'
+			font 14pt/16pt 'Roboto'
 		.content_scroll_items
 			overflow-y scroll
 			overflow-x hidden
@@ -246,11 +248,9 @@ html, body, .main_block, .content_block, .content_columns_block, .content_column
 				&:after
 					content '✕'
 					background #4b4b4b
-
-
 .footer_block
 	border-top 1px solid black
-	font 10pt/12pt 'PT Serif'
+	font 10pt/12pt 'Roboto'
 	padding-top 15px
 	margin-top 20px
 	padding-bottom 20px
