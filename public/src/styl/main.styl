@@ -5,7 +5,7 @@
 		position absolute
 		overflow hidden
 		z-index 200
-		background #000
+		background rgba(0,0,0,0.75)
 		display none
 		.info_block_inner
 			width 700px
@@ -24,15 +24,17 @@
 	&.intro_block
 		width 100%
 		position absolute
-		overflow hidden
+		//overflow hidden
+		overflow-y scroll
 		z-index 2000
 		background #000
 		.intro_block_background
 			height 100%
-			background-size cover
+			background-size 105%
 			background-position 50%
+			height 101%
 			filter blur(10px)
-			transform scale(1.1)
+			//transform scale(1.1)
 		.intro_block_inner
 			width 100%
 			display table
@@ -49,8 +51,8 @@
 		position absolute
 		overflow hidden
 		width 100%
-		background #000
-		color #6f6f6f
+		background rgba(0,0,0,0.75)
+		color #fff
 		display none
 		z-index 200
 		.about_block_inner

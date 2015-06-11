@@ -6,13 +6,21 @@ $(document).ready(function() {
 		closeClick : true
 	});
 
+function intro_runction() {
+	var scr = $('body').height();
+	$('.intro_block').animate({
+			marginTop: - parseInt(scr),
+	}, 800)
+	setTimeout(function() { $('.intro_block').remove()}, 1000)
+}
+
+	$('.screen_block.intro_block').on('scroll', function(event) {
+		intro_runction()
+	});
+
 	$('.goto_down_inner.intro').click(function () {
-			var scr = $('body').height();
-			$('.intro_block').animate({
-				marginTop: - parseInt(scr),
-			}, 800)
-			setTimeout(function() { $('.intro_block').remove()}, 1000)
-		});
+		intro_runction()
+	});
 
 
 	$('.option.menu_option').click(function () {

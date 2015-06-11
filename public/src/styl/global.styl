@@ -17,6 +17,7 @@ body
 	padding 0
 	font 12pt/14pt 'Roboto'
 	font-weight 400
+	overflow hidden
 
 html, body, .main_block, .content_block, .content_columns_block, .content_column, .column_inner_block
 	height 100%
@@ -233,24 +234,24 @@ html, body, .main_block, .content_block, .content_columns_block, .content_column
 			&:after
 				content ''
 				position absolute
-				right -12px
-				font-size 12px
+				left 100%
+				font-size 42pt
 				top 0px
 				background transparent
-				padding 0px 3px 0px 0px
-				line-height 20px
-				height 18px
+				padding 0px 3px 0px 10px
+				line-height 42pt
+				color #f00
 				@media screen and (max-width: 1280px)
 					height 21px
 					line-height 23px
 			&:hover
-				background #e5e5e5
+				color #f00
 			&.selected
-				background #4b4b4b
-				color #fff
+				background #fff
+				color #000
 				&:after
 					content '✕'
-					background #4b4b4b
+					background #fff
 .footer_block
 	font 10pt/12pt 'Roboto'
 	padding-top 15px
