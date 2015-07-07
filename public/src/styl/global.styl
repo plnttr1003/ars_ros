@@ -178,6 +178,7 @@ html, body, .main_block, .content_block, .content_columns_block, .content_column
 	box-sizing border-box
 	&.main
 		overflow hidden
+		padding-bottom 80px
 		.content_title
 			padding-top 90px
 			margin-bottom 60px
@@ -221,6 +222,7 @@ html, body, .main_block, .content_block, .content_columns_block, .content_column
 		float left
 		font-weight bold
 		margin-bottom 5px
+		margin-top 5px
 	.navigate_items_block
 		float left
 		.navigate_item
@@ -248,19 +250,22 @@ html, body, .main_block, .content_block, .content_columns_block, .content_column
 					height 21px
 					line-height 23px
 			&:hover
-				color #f00
+				color #9b9b9b
 			&.selected
-				background #fff
-				color #000
+				color #f00
 				&:after
 					content '✕'
-					background #fff
 .footer_block
 	font 10pt/12pt 'code_pro_lightregular'
 	padding-top 15px
 	margin-top 20px
 	padding-bottom 20px
 	text-align center
+	position fixed
+	bottom 0
+	left 0
+	right 0
+	background #fff
 	.social_block
 		float none
 		display block

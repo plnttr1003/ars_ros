@@ -26,6 +26,7 @@
 		position absolute
 		overflow-y scroll
 		cursor pointer
+
 		z-index 2000
 		background #000
 		.intro_block_background
@@ -66,16 +67,20 @@
 					display block
 					width 240px
 					margin-bottom 55px
-.goto_down
-	position absolute
+.goto_down a
+	position fixed
 	bottom 0
 	color #fff
 	text-align center
 	width 100%
 	font-size 30px
 	line-height 60px
-	a.goto_down_inner
-		cursor pointer
+	top 0
+	left 0
+	right 0
+	background-color #fc0
+	z-index -1
+	cursor pointer
 .content_outer_block
 	opacity 0
 	transition opacity 0.2s ease-in-out
