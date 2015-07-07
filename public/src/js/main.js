@@ -8,9 +8,9 @@ $(document).ready(function() {
 
 	$container.imagesLoaded(function() {
 		$container.masonry({
-			columnWidth: 60,
+			columnWidth: 20,
 			itemSelector: '.event',
-			gutter: 27,
+			gutter: 20,
 			isInitLayout: false
 		}).masonry('stamp', news_stamp).masonry('layout').css('opacity', 1);
 	});

@@ -38,6 +38,17 @@ block content
 					.navigate_item.lecture люди
 					.navigate_item.action свадьбы
 					.navigate_item.xxi пейзажи
+
+		.info_block_inner
+			.content_navigate_block
+				.navigate_title Последние фотографии:
+				.navigate_items_block
+					.navigate_item.excursion природа
+					.navigate_item.exhibition путешествия
+					.navigate_item.lecture люди
+					.navigate_item.action свадьбы
+					.navigate_item.xxi пейзажи
+
 		.goto_down
 			a.goto_down_inner.info ﹀
 
@@ -59,14 +70,9 @@ block content
 				p Практически каждую фотографию Вы можете купить, (пожалуй, за исключением свадебных кадров) связавшись со мной по любому из предложенных способов в разделе «Контакты». Заказать съемку или встретиться для обсуждения способов сотрудничества вы также можете в разделе «Контакты».
 		.social_block
 			a(href='https://vk.com/rossikhin')  
-			a(href='https://www.facebook.com/arseny.rossikhin')  
-			// a 
-			// a 
-
+			a(href='https://www.facebook.com/arseny.rossikhin') 
 		.goto_down
 			a.goto_down_inner.about ﹀
-
-
 	.content_outer_block
 		.content_outer_block_inner
 
@@ -74,16 +80,12 @@ block content
 				if (event.status == 'important')
 					.content_item.event.important(href='/events/' + event.type +'/' + event._id, style='background-image: url(' + (event.images && event.images.length > 0 && event.images[0].original) + ')')
 						.item_description
-							//-.item_date= ('0' + event.interval.start.getUTCDate()).slice(-2)  + '/' + ('0' + event.interval.start.getUTCMonth()).slice(-2) + '/' + ('0' + event.interval.start.getUTCFullYear()).slice(-2) + ' - ' + ('0' + event.interval.end.getUTCDate()).slice(-2)  + '/' + ('0' + event.interval.end.getUTCMonth()).slice(-2) + '/' + ('0' + event.interval.end.getUTCFullYear()).slice(-2)
 							.item_title= event.i18n.title.get('ru')
 								each image in event.images
-									// aside= image
 									a.item_fancy(href=image.original, data-fancybox-group='' + event._id + '', title= image.description)
-
 				else
 					.content_item.event(href='/events/' + event.type +'/' + event._id, style='background-image: url(' + (event.images && event.images.length > 0 && event.images[0].original) + ')' )
 						.item_description
-							//-.item_date= ('0' + event.interval.start.getUTCDate()).slice(-2)  + '/' + ('0' + event.interval.start.getUTCMonth()).slice(-2) + '/' + ('0' + event.interval.start.getUTCFullYear()).slice(-2) + ' - ' + ('0' + event.interval.end.getUTCDate()).slice(-2)  + '/' + ('0' + event.interval.end.getUTCMonth()).slice(-2) + '/' + ('0' + event.interval.end.getUTCFullYear()).slice(-2)
 							.item_title= event.i18n.title.get('ru')
 								each image in event.images
 									a.item_fancy(href=image.original, data-fancybox-group='' + event._id + '', title= image.description)
