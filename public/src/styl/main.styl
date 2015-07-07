@@ -80,6 +80,20 @@
 	right 0
 	z-index -1
 	cursor pointer
+	&:after
+		position fixed
+		content ''
+		top 40px
+		right 40px
+		background-color #fc0
+		width 30px
+		height 30px
+		background url("/images/design/cross.png") 0 0 no-repeat
+		background-size 60px
+	&:hover
+		&:after
+			opacity 0.8
+
 .content_outer_block
 	opacity 0
 	transition opacity 0.2s ease-in-out
