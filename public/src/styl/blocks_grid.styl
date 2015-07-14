@@ -8,14 +8,14 @@
 .content_item
 	width 240px
 	float left
-	height 145px
+	height 175px
 	overflow hidden
 	text-decoration none
 	color black
 	display block
-	padding-bottom 30px
 	background-size cover
 	background-position center
+	margin-bottom 10px
 	cursor pointer
 	.item_image
 		width 240px
@@ -38,8 +38,8 @@
 	&.important
 		background-size cover
 		background-position center
-		width 480px
-		height 325px
+		width 490px
+		height 355px
 		&:hover
 			background #f00!important
 			color #000
@@ -48,7 +48,23 @@
 			box-sizing border-box
 			width 480px
 			position absolute
-			padding 10px
+			bottom 0
+			.item_date
+				font 10pt/12pt 'code_pro_lightregular'
+			.item_title
+				font 36pt/38pt 'code_pro_lightregular'
+				font-weight 200
+	&:first-child
+		width 740px
+		&:hover
+			background #fff!important
+			color #f00
+			//outline 1px solid #f00
+		.item_description
+			background transparent
+			box-sizing border-box
+			width 740px
+			position absolute
 			bottom 0
 			.item_date
 				font 10pt/12pt 'code_pro_lightregular'
