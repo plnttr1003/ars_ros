@@ -31,8 +31,9 @@
 		background #000
 		.intro_block_background
 			height 100%
-			background-size 105%
+			background-size cover
 			background-position 50%
+			background-repeat no-repeat
 			height 101%
 			filter blur(10px)
 		.intro_block_inner
@@ -133,3 +134,20 @@
 	position absolute
 	left 720px
 	margin-bottom 20px
+
+
+.content_column.main .content_outer_block, .header_inner
+	@media screen and (max-width: 1490px)
+		max-width 1240px
+
+.content_column.main .content_outer_block, .header_inner
+	@media screen and (max-width: 1240px)
+		max-width 990px
+
+.content_column.main .content_outer_block, .header_inner
+	@media screen and (max-width: 990px)
+		max-width 740px
+
+.content_column.main .content_outer_block, .header_inner
+	@media screen and (max-width: 740px)
+		max-width 490px
