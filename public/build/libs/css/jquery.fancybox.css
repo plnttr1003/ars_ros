@@ -152,6 +152,10 @@ a.fancybox-prev {
 
 a.fancybox-next {
     right: -70px;
+    left: 0;
+    z-index: 10000;
+    width: auto;
+    cursor: pointer;
 }
 
 a.fancybox-nav span {
