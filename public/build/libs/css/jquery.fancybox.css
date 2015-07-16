@@ -332,7 +332,7 @@ a.fancybox-expand {
 }
 
 .fancybox-default-overlay {
-    background: rgba(0,0,0,0.75);
+    background: rgba(0,0,0,0.85);
 }
 
 .fancybox-default a.fancybox-close,
