@@ -83,6 +83,51 @@
 			font 12pt/14pt 'code_pro_lightregular'
 			color #fff
 			padding 5px
+	&.contacts_block
+		position absolute
+		overflow-y auto
+		width 100%
+		background rgba(0,0,0,0.75)
+		color #fff
+		display none
+		z-index 200
+		.about_block_inner
+			overflow-y visible
+			width 700px
+			margin 63px auto 0
+			.about_block_image
+				img
+					margin 0 auto
+					display block
+					width 240px
+					margin-bottom 55px
+		.about_text_inner
+			font 17pt/20pt 'code_pro_lightregular'
+			p
+				text-align center
+				margin 0 0 10px
+				padding 0
+				a
+					color #fff
+					&:hover
+						color #f00
+		.form_block
+			width 600px;
+			border 1px solid
+			margin 40px auto 0
+			margin-bottom 20px
+			background rgba(208, 208, 208, 0.2)
+			display block
+			font 12pt/14pt 'code_pro_lightregular'
+			color #fff
+			padding 5px
+			&:focus
+				border-color #f00
+				outline none
+		textarea
+			height 230px
+		input
+			height 40px
 .goto_down a
 	position fixed
 	bottom 0
