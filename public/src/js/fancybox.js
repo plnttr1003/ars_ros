@@ -9,9 +9,9 @@ $(document).ready(function() {
 function intro_runction() {
 	var scr = $('body').height();
 	$('.intro_block').animate({
-			marginTop: - parseInt(scr),
-	}, 800)
-	setTimeout(function() { $('.intro_block').remove()}, 1000)
+			opacity: 0,
+	}, 500)
+	setTimeout(function() { $('.intro_block').remove()}, 600)
 }
 
 	$('.screen_block.intro_block').on('scroll', function(event) {
