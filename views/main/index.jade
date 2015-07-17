@@ -84,8 +84,14 @@ block content
 		.content_outer_block_inner
 
 			each event in events
-				if (event.status == 'important')
+				if (event.type == 'excursion')
 					.content_item.event.important(href='/events/' + event.type +'/' + event._id, style='background-image: url(' + (event.images && event.images.length > 0 && event.images[0].original) + ')')
+						.item_description
+							.item_title= event.i18n.title.get('ru')
+								each image in event.images
+									a.item_fancy(href=image.original, data-fancybox-group='' + event._id + '', title= image.description)
+				else if (event.type == 'exhibition')
+					.content_item.event.special_important(href='/events/' + event.type +'/' + event._id, style='background-image: url(' + (event.images && event.images.length > 0 && event.images[0].original) + ')')
 						.item_description
 							.item_title= event.i18n.title.get('ru')
 								each image in event.images

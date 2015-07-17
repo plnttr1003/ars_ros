@@ -1,7 +1,8 @@
 extends ../layout
 
 block title
-	- var types = {'exhibition': 'Природа', 'excursion': 'Путешествия', 'lecture': 'Люди', 'xxi': 'Свадьбы', 'action': 'Пейзажи'}
+	- var types = {'exhibition': 'Очень большой', 'excursion': 'Большой', 'lecture': 'Обычный'}
+	//-{'exhibition': 'Очень большой', 'excursion': 'Большой', 'lecture': 'Обычный', 'xxi': 'Свадьбы', 'action': 'Пейзажи'}
 	title= types[type]
 
 block content_style
@@ -16,7 +17,8 @@ block content_scripts
 
 
 block content
-	- var types = {'exhibition': 'Природа', 'excursion': 'Путешествия', 'lecture': 'Люди', 'xxi': 'Свадьбы', 'action': 'Пейзажи'}
+	- var types = {'exhibition': 'Очень большой', 'excursion': 'Большой', 'lecture': 'Обычный'}
+	//-{'exhibition': 'Очень большой', 'excursion': 'Большой', 'lecture': 'Обычный', 'xxi': 'Свадьбы', 'action': 'Пейзажи'}
 	.content_title(class=type)= types[type]
 
 	.content_navigate_block.subsidiarys
@@ -34,8 +36,14 @@ block content
 
 	.content_outer_block
 		each event in events
-			if (event.status == 'important')
+			if (event.type == 'excursion')
 				a.content_item.event.important(href='/events/' + event.type +'/' + event._id, style='background-image: url(' + (event.images && event.images.length > 0 && event.images[0].original) + ')')
+					.item_description
+						.item_date= ('0' + event.interval.start.getUTCDate()).slice(-2)  + '/' + ('0' + event.interval.start.getUTCMonth()).slice(-2) + '/' + ('0' + event.interval.start.getUTCFullYear()).slice(-2) + ' - ' + ('0' + event.interval.end.getUTCDate()).slice(-2)  + '/' + ('0' + event.interval.end.getUTCMonth()).slice(-2) + '/' + ('0' + event.interval.end.getUTCFullYear()).slice(-2)
+						.item_title= event.i18n.title.get('ru')
+			else if (event.type == 'exhibition')
+				a.content_item.event.(href='/events/' + event.type +'/' + event._id)
+					//img.item_image(src=event.images && event.images.length > 0 && event.images[0].thumb)
 					.item_description
 						.item_date= ('0' + event.interval.start.getUTCDate()).slice(-2)  + '/' + ('0' + event.interval.start.getUTCMonth()).slice(-2) + '/' + ('0' + event.interval.start.getUTCFullYear()).slice(-2) + ' - ' + ('0' + event.interval.end.getUTCDate()).slice(-2)  + '/' + ('0' + event.interval.end.getUTCMonth()).slice(-2) + '/' + ('0' + event.interval.end.getUTCFullYear()).slice(-2)
 						.item_title= event.i18n.title.get('ru')
