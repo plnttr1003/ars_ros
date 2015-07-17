@@ -11,8 +11,8 @@ $(document).ready(function() {
 		// fallback_id: 'images_upload_fallback',
 		allowedfiletypes: ['image/jpeg','image/png','image/gif'],
 		allowedfileextensions: ['.jpg','.jpeg','.png','.gif'],
-		maxfiles: 5,
-		maxfilesize: 8,
+		maxfiles: 10,
+		maxfilesize: 20,
 		dragOver: function() {
 			$(this).css('outline', '2px solid red');
 		},
