@@ -27,8 +27,8 @@ mixin form_text_single(path, object)
 //- Multiple Text Form
 
 mixin form_text_multi(path, object)
-	textarea.ru.editor(name="ru[" + path + "]", rows="8",)= object && object['i18n'][path].get('ru')
-	textarea.en(name="en[" + path + "]", rows="8", disabled)= object && object['i18n'][path].get('en')
+	textarea.ru.editor(name="ru[" + path + "]",)= object && object['i18n'][path].get('ru')
+	textarea.en.editor(name="en[" + path + "]", disabled)= object && object['i18n'][path].get('en')
 
 
 //- Single Select Form
@@ -66,3 +66,32 @@ mixin form_multiple_select(path, options, select_options)
 						each option in options
 							option(value=option._id, selected=option._id.toString() == select_option)= option['i18n']['title'].get('ru')
 		input.forward(type="button", value="+")
+
+//- Multiple Input Form
+
+mixin form_multiple_input(path, options)
+	.snake_outer
+		if (!options || !options.length > 0)
+			span.snake
+				input.back(type="button", value="-")
+				input.input(type='text', name=path + '[]')
+		else
+			each option in options
+				span.snake
+					input.back(type="button", value="-")
+					input.input(type='text', name=path + '[]', value=option)
+		input.forward(type="button", value="+")
+
+//- Images Upload Form
+
+mixin form_images_upload(images)
+	- function get_locale(option, lang) {var locale = option.filter(function(locale) { return locale.lg == lang })[0]; if (locale) {return locale.value } else {return ''} }
+	.form_images_upload
+		.form_desc_title Нажми или перетащи
+		each image, i in images
+			.image_upload_block
+				.image_upload_preview(style='background-image:url(' + image.thumb + ')')
+					.image_upload_delete Удалить
+				textarea.image_upload_description.ru_img(name='images[description][ru][]', placeholder='Описание') #{get_locale(image.description, 'ru')}
+				textarea.image_upload_description.en_img(name='images[description][en][]', disabled, placeholder='Description') #{get_locale(image.description, 'en')}
+				input.image_upload_form(type='hidden', name='images[path][]', value=images_preview[i])

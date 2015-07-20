@@ -1,0 +1,25 @@
+extends ../../layout
+
+block title
+	title ПОЛЬЗОВАТЕЛИ
+
+block content_style
+	link(rel='stylesheet', type='text/css', href='/build/css/add.css')
+
+block content_scripts
+	script(type='text/javascript', src='/build/js/lists.js')
+
+block content
+	a.back_link(href='/auth') < Назад
+	.title ПОЛЬЗОВАТЕЛИ
+	br
+	if (session.status == 'Admin')
+		a.add(href='/auth/users/add') добавить пользователя
+		br
+	br
+	.main_menu_block
+		each user in users
+			.user
+				a.rm_user(href='#', id=user._id)= 'удалить '
+				!=' | '
+				a(href='/auth/users/edit/' + user._id)= user.login

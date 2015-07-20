@@ -1,7 +1,7 @@
 extends ../../layout
 
 block title
-	title= 'СТРАНЫ'
+	title= 'ФИЛИАЛЫ'
 
 block content_style
 	link(rel='stylesheet', type='text/css', href='/build/css/add.css')
@@ -11,9 +11,9 @@ block content_scripts
 
 block content
 	a.back_link(href='/auth') < Назад
-	.title= 'СТРАНЫ'
+	.title= 'ФИЛИАЛЫ'
 	br
-	a.add(href='/auth/subsidiarys/add') добавить страну
+	a.add(href='/auth/subsidiarys/add') добавить филиал
 	br
 	br
 	.main_menu_block

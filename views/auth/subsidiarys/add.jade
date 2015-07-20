@@ -2,13 +2,12 @@ extends ../../layout
 include ../forms.jade
 
 block title
-	title ДОБАВИТЬ СТРАНУ
+	title ДОБАВИТЬ ФИЛИАЛ
 
 block content_style
 	link(rel='stylesheet', type='text/css', href='/build/libs/css/font-awesome.css')
 	link(rel='stylesheet', type='text/css', href='/build/libs/css/wysiwyg-editor.css')
 	link(rel='stylesheet', type='text/css', href='/build/css/add.css')
-	link(rel='stylesheet', type='text/css', href='/build/css/subsidiary_admin.css')
 
 block content_scripts
 	script(type='text/javascript', src='/build/libs/js/wysiwyg.js')
@@ -24,24 +23,28 @@ block content
 	- var months = ['ЯНВАРЬ', 'ФЕВРАЛЬ', 'МАРТ', 'АПРЕЛЬ', 'МАЙ', 'ИЮНЬ', 'ИЮЛЬ', 'АВГУСТ', 'СЕНТЯБРЬ', 'ОКТЯБРЬ', 'НОЯБРЬ', 'ДЕКАБРЬ']
 	.form_block
 		a.back_link(href='/auth/subsidiarys') < Назад
-		.title ДОБАВИТЬ
+		button.toggle_eng(type='button') перевод
+		.title ДОБАВИТЬ ФИЛИАЛ
 		form(action="", method="post", enctype="multipart/form-data")
 			.form_title Заголовок:
 			+form_text_single('title')
 			.form_title Описание:
 			+form_text_multi('description')
-			.additional
-				.form_title Адрес:
-				+form_text_single('adress')
-				.form_title Логотип:
-				input(type='file', name='logo')
-				.form_title Логотип (координата x)
-				input(type="text", name="position[x]", value='100')
-				.form_title Логотип (координата y)
-				input(type="text", name="position[y]", value='100')
-				.form_title Изображения:
-				.form_images_upload
-					.form_desc_title Перетащи сюда
+			.form_title Адрес:
+			+form_text_single('adress')
+			.form_title Статус
+			select(name='status')
+				option(value='') обычный
+				option(value='important') важный
+			.form_title Логотип:
+			input(type='file', name='logo')
+			.form_title Логотип (координата x)
+			input(type="text", name="position[x]")
+			.form_title Логотип (координата y)
+			input(type="text", name="position[y]")
+			.form_title Изображения:
+			.form_images_upload
+				.form_desc_title Перетащи сюда
 			br
 			br
 			input(type='submit', value='отправить')

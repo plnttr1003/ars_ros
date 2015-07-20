@@ -1,0 +1,28 @@
+extends ../layout
+
+block title
+	title= __('БИЛЕТЫ И РАСПИСАНИЕ')
+
+block content_style
+	link(rel='stylesheet', type='text/css', href='/build/css/schedule.css' + version)
+	link(rel='stylesheet', type='text/css', href='/build/css/schedule_mobile.css' + version)
+
+block content_scripts
+	script(type='text/javascript', src='/build/js/scroll.js' + version)
+
+
+block content
+	.content_title= __('Билеты и расписание')
+	.content_schedule
+		if (locale == 'ru')
+			include content/schedule/ru.html
+		else
+			include content/schedule/en.html
+
+block scroll
+	.content_title
+	.content_scroll_items
+		each image in images
+			.content_scroll_item
+				img(src=image.path.thumb)
+				.content_image_description= image.i18n.description.get(locale)

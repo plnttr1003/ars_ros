@@ -2,7 +2,7 @@ var Hall = require('../models/main.js').Hall;
 var Exhibit = require('../models/main.js').Exhibit;
 
 exports.index = function(req, res) {
-	Hall.find().sort('-date').exec(function(err, halls) {
+	Hall.find().where('title.lg').equals(req.locale).sort('-date').exec(function(err, halls) {
 		res.render('exposure', {halls: halls});
 	});
 }

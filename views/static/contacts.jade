@@ -1,0 +1,24 @@
+extends ../layout
+
+block title
+	title= __('КОНТАКТЫ')
+
+block content_style
+	link(rel='stylesheet', type='text/css', href='/build/css/contacts.css' + version)
+	link(rel='stylesheet', type='text/css', href='/build/css/contacts_mobile.css' + version)
+
+block content_scripts
+	script(type='text/javascript', src='http://maps.googleapis.com/maps/api/js?sensor=false')
+	script(type='text/javascript', src='/build/js/g_maps.js' + version)
+	//- script(type='text/javascript', src='/build/js/contacts.js' + version)
+
+
+block content
+	.map_block#map_canvas
+
+block scroll
+	.contacts_block
+		if (locale == 'ru')
+			include content/contacts/ru.html
+		else
+			include content/contacts/en.html

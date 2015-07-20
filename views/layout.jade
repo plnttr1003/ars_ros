@@ -1,6 +1,7 @@
 doctype html
 html
 	head
+		include vars
 		include header
 	body
 		include counters
@@ -8,11 +9,68 @@ html
 			.header_block
 				.header_inner
 					a.header_logo(href='/')
+						img.logo_image(src='/images/design/logo.png')
+						.logo_title= __('Государственный центральный музей современной истории России')
+					.menu_block.left
+						.menu_item_block
+							a.menu_item.menu_empty= __('Музей')
+							.menu_drop
+								.drop_inner
+									a.menu_item(href='/news')= __('Новости')
+									a.menu_item(href='/history')= __('История музея')
+									a.menu_item(href='/subsidiarys')= __('Филиалы')
+									a.menu_item(href='/exposure')= __('Экспозиция')
+									a.menu_item(href='/collections')= __('Коллекции')
+									a.menu_item(href='/vacancys')= __('Вакансии и стажировки')
+									a.menu_item(href='/official')= __('Официальная информация')
+									//- a.menu_item(href='/team')= __('Команда')
+									a.menu_item(href='/partners')= __('Партнерство')
+						.menu_item_block
+							a.menu_item(href='http://vm.sovrhistory.ru/sovremennoy-istorii-rossii/', target='_blank')= __('Виртуальный музей')
+						.menu_item_block
+							a.menu_item.menu_empty= __('События')
+							.menu_drop
+								.drop_inner
+									a.menu_item(href='/events/exhibition')= __('Выставки')
+									a.menu_item(href='/events/lecture')= __('Лекции')
+									a.menu_item(href='/events/action')= __('Мероприятия')
+						.menu_item_block
+							a.menu_item.menu_empty= __('Посетителям')
+							.menu_drop
+								.drop_inner
+									a.menu_item(href='/events/excursion')= __('Экскурсии')
+									a.menu_item(href='/events/education')= __('Образовательные программы')
+									a.menu_item(href='/events/teach')= __('Центр музейной педагогики')
+									//- a.menu_item(href='/souvenirs')= __('Сувенирная продукция')
+									a.menu_item(href='/schedule')= __('Билеты и расписание')
+						//- .menu_item_block
+							a.menu_item(href='/partners') Партнерство
+						.menu_item_block
+							a.menu_item(href='/live')= __('Живая история')
+						.menu_item_block
+							a.menu_item(href='/contacts')= __('Контакты')
 					.menu_block.right
+						.social_block
+							a(href='https://vk.com/sovr_history', target='_blank') 
+							a(href='https://www.facebook.com/sovr.history', target='_blank') 
+							a(href='https://twitter.com/sovrmuse', target='_blank') 
+							a.inst(href='https://instagram.com/sovr.history', target='_blank') 
 						.options_block
-							.option.menu_item.about Обо мне
-							.option.menu_item.contacts Контакты
-							.option.menu_option 
+							.option.search 
+							if (locale == 'ru')
+								a.option.lang(href='/lang/en') EN
+							else
+								a.option.lang(href='/lang/ru') RU
+				.search_block
+					.search_inner
+						input.search_input(type='text', placeholder= __('Найти...'))
+						.search_result
+							.search_context.exhibits
+								.context_title= __('Экспонаты')
+								.context_results_block
+							.search_context.events
+								.context_title= __('События')
+								.context_results_block
 			.content_block
 				.content_up_block
 					block content_up
@@ -21,8 +79,18 @@ html
 						.column_main_inner
 							block content
 							.footer_block
-								.footer_block_inner Все тексты и изображения ©Арсений Россихин
+								//- .social_block
+									a(href='https://vk.com/sovr_history', target='_blank') 
+									a(href='https://www.facebook.com/sovr.history', target='_blank') 
+									a(href='https://twitter.com/sovrmuse', target='_blank') 
+									a(href='https://instagram.com/sovr.history', target='_blank') 
+								.footer_block_inner= '© 2015. ' +  __('Государственный центральный музей современной истории России')
 									br
-									| 2015 Все права защищены
+									!= __('Все права защищены. Использование материалов сайта разрешено только с предварительного согласия правообладателей.')
+									br
+									b= __('Сайт находится в стадии бета-тестирования.')
+								.footer_bureau
+									span.nrdn_type Дизайн и разработка —
+									a.nrdn_name(href='http://nrdn.ru', target='_blank') Народный архитектор
 					.content_column.scroll
 						block scroll

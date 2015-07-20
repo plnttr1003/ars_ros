@@ -1,0 +1,30 @@
+extends ../layout
+
+block title
+	title= __('СУВЕНИРНАЯ ПРОДУКЦИЯ')
+
+block content_style
+	link(rel='stylesheet', type='text/css', href='/build/css/blocks_grid.css' + version)
+	link(rel='stylesheet', type='text/css', href='/build/css/collects.css' + version)
+
+block content_scripts
+	script(type='text/javascript', src='/build/libs/js/imagesloaded.pkgd.min.js' + version)
+	script(type='text/javascript', src='/build/libs/js/masonry.pkgd.min.js' + version)
+	script(type='text/javascript', src='/build/js/scroll.js' + version)
+	script(type='text/javascript', src='/build/js/collects.js' + version)
+
+
+block content
+	.content_title Каталоги
+	.content_outer_block
+		each catalogue in catalogues
+			a.content_item.collect(href='/souvenirs/' + catalogue._id)
+				img.item_image(src=catalogue.logo.path)
+				.item_description
+					.item_title= catalogue.i18n.title.get(locale)
+
+block scroll
+	.content_title= __('Государственный центральный музей современной истории России')
+	.content_scroll_items
+		each souvenir in souvenirs
+			img.content_scroll_item(src=souvenir.images[0].thumb)

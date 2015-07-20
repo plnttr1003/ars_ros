@@ -16,6 +16,7 @@ block content
 	- var months = ['ЯНВАРЬ', 'ФЕВРАЛЬ', 'МАРТ', 'АПРЕЛЬ', 'МАЙ', 'ИЮНЬ', 'ИЮЛЬ', 'АВГУСТ', 'СЕНТЯБРЬ', 'ОКТЯБРЬ', 'НОЯБРЬ', 'ДЕКАБРЬ']
 	.form_block
 		a.back_link(href='/auth/history/') < Назад
+		button.toggle_eng(type='button') перевод
 		.title РЕДАКТИРОВАТЬ СОБЫТИЕ
 		form(action="", method="post")
 			.form_title Заголовок:
@@ -27,8 +28,7 @@ block content
 			.form_title Дата конца:
 			+form_calendar('date_end', history.interval.end)
 			.form_title Изображения:
-			.form_images_upload
-				.form_desc_title Перетащи сюда
+			+form_images_upload(exhibit.images)
 			br
 			br
 			input(type='submit', value='отправить')

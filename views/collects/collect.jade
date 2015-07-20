@@ -1,7 +1,7 @@
 extends ../layout
 
 block title
-	title= 'КОЛЛЕКЦИИ | ' + collect.i18n.title.get('ru').toUpperCase()
+	title= __('КОЛЛЕКЦИИ') + ' | ' + collect.i18n.title.get(locale).toUpperCase()
 
 block content_style
 	link(rel='stylesheet', type='text/css', href='/build/css/blocks_grid.css' + version)
@@ -16,14 +16,15 @@ block content_scripts
 
 
 block content
-	.content_title= collect.i18n.title.get('ru')
+	.content_title= collect.i18n.title.get(locale)
+	.content_body: != collect.i18n.description.get(locale)
 	.content_outer_block
 		each exhibit in exhibits
 			.content_item.exhibit(class=exhibit._id.toString())
 				img.item_image(src=exhibit.images && exhibit.images.length > 0 && exhibit.images[0].thumb)
 				.item_description
-					.item_title= exhibit.i18n.title.get('ru')
-					.item_body= exhibit.i18n.description.get('ru')
+					.item_title= exhibit.i18n.title.get(locale)
+					.item_body= exhibit.i18n.description.get(locale)
 
 block content_up
 	.exhibit_preview_block

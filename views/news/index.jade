@@ -1,7 +1,7 @@
 extends ../layout
 
 block title
-	title НОВОСТИ
+	title= __('НОВОСТИ')
 
 block content_style
 	//- link(rel='stylesheet', type='text/css', href='/build/css/blocks_grid.css' + version)
@@ -23,17 +23,19 @@ mixin trimString(str, length)
 
 
 block content
-	- var months = ['января', 'февраля', 'мара', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря']
-	.content_title Новости
+	.content_title= __('Новости')
 	.content_outer_block
 		each item in news
 			a.content_item.news.important(href='/news/' + item._id)
 				.item_description
-					.item_title= item.i18n.title.get('ru')
-					.item_body: +trimString(item.i18n.description.get('ru').replace(/(<([^>]+)>)/ig, ''), 100)
+					.item_title= item.i18n.title.get(locale)
+					.item_body: +trimString(item.i18n.description.get(locale).replace(/(<([^>]+)>)/ig, ''), 100)
 					.item_date= item.date.getDate() + ' ' + months[item.date.getMonth()] + ' ' + item.date.getFullYear()
 
 block scroll
 	.content_title
 	.content_scroll_items
-		include ../gallerys/main.jade
+		each image in images
+			.content_scroll_item
+				img(src=image.path.thumb)
+				.content_image_description= image.i18n.description.get(locale)

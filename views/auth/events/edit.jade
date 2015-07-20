@@ -2,7 +2,7 @@ extends ../../layout
 include ../forms.jade
 
 block title
-	title РЕДАКТИРОВАТЬ АЛЬБОМ
+	title РЕДАКТИРОВАТЬ СОБЫТИЕ
 
 block content_style
 	link(rel='stylesheet', type='text/css', href='/build/libs/css/font-awesome.css')
@@ -23,7 +23,8 @@ block content
 	- var months = ['ЯНВАРЬ', 'ФЕВРАЛЬ', 'МАРТ', 'АПРЕЛЬ', 'МАЙ', 'ИЮНЬ', 'ИЮЛЬ', 'АВГУСТ', 'СЕНТЯБРЬ', 'ОКТЯБРЬ', 'НОЯБРЬ', 'ДЕКАБРЬ']
 	.form_block
 		a.back_link(href='/auth/events/') < Назад
-		.title РЕДАКТИРОВАТЬ АЛЬБОМ
+		button.toggle_eng(type='button') перевод
+		.title РЕДАКТИРОВАТЬ СОБЫТИЕ
 		form(action="", method="post")
 			.form_title Заголовок:
 			+form_text_single('title', event)
@@ -31,31 +32,36 @@ block content
 			+form_text_multi('description', event)
 			.form_title Категории:
 			+form_multiple_select('categorys', categorys, event.categorys)
-			.form_title Страна:
+			.form_title Филиал:
 			+form_single_select('subsidiary', subsidiarys, event.subsidiary)
-			//-.form_title Статус
-			//-input(type='checkbox', name='status', value='important', checked=event.status)
-			//-|важное
-			.form_title Статус:
+			.form_title Статус
+			select(name='status')
+				option(value='') обычный
+				option(value='important', selected=event.status == 'important') важный
+				option(value='out', selected=event.status == 'out') в разделе
+				option(value='hidden', selected=event.status == 'hidden') скрытый
+			.form_title Тип:
 			select(name='type')
-				option(value='lecture') Обычный
-				option(value='excursion') Большой
-				option(value='exhibition') Очень большой
-				//-option(value='action', selected=event.type == 'action') Свадьбы
-				//-option(value='xxi', selected=event.type == 'xxi') Пейзажи
-			.form_title Дата начала:
+				option(value='exhibition', selected=event.type == 'exhibition') Выставка
+				option(value='excursion', selected=event.type == 'excursion') Экскурсия
+				option(value='lecture', selected=event.type == 'lecture') Лекция
+				option(value='action', selected=event.type == 'action') Мероприятие
+				option(value='teach', selected=event.type == 'teach') Центр прикладной педагогики
+				option(value='education', selected=event.type == 'education') Образовательные программы
+			.form_title Дата публикации:
+			+form_calendar('date', event.date)
+			.form_title Дата начала события:
 			+form_calendar('date_start', event.interval.start)
-			.form_title Дата конца:
+			.form_title Дата окончания события:
 			+form_calendar('date_end', event.interval.end)
+			br
+			br
+			input(type='checkbox', name='date_hidden', value='true', checked=event.interval.hidden)
+			!=' скрыть дату'
+			.form_title Видео:
+			+form_multiple_input('videos', event.videos)
 			.form_title Изображения:
-			.form_images_upload
-				.form_desc_title Нажми или перетащи
-				each image, i in event.images
-					.image_upload_block
-						.image_upload_preview(style='background-image:url(' + image.thumb + ')')
-							.image_upload_delete Удалить
-						textarea.image_upload_description(name='images[description][]')= image.description.filter(function(locale) { return locale.lg == 'ru' })[0].value
-						input.image_upload_form(type='hidden', name='images[path][]', value=images_preview[i])
+			+form_images_upload(event.images)
 			br
 			br
 			input(type='submit', value='отправить')

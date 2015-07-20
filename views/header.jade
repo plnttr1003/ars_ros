@@ -1,14 +1,15 @@
-- var version = '?ver=5'
+- var version = '?ver=7'
 meta(charset="utf-8")
 meta(name='viewport', content='width=1000, user-scalable=yes')
-link(rel='shortcut icon', href='/images/design/favicon.png', type='image/png')
-link(href='http://fonts.googleapis.com/css?family=Roboto:500,400italic,100,700italic,300,700,500italic,100italic,300italic,400&subset=cyrillic-ext,latin', rel='stylesheet', type='text/css')
+link(href='/images/design/favicon.png', rel='shortcut icon', type='image/vnd.microsoft.icon')
+link(href='http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic,700italic|PT+Serif:400,700,400italic,700italic&subset=latin,cyrillic,cyrillic-ext,latin-ext' rel='stylesheet', type='text/css')
 block title
 link(rel='stylesheet', type='text/css', href='/build/libs/css/fonts.css' + version)
 link(rel='stylesheet', type='text/css', href='/build/css/global.css' + version)
+link(rel='stylesheet', type='text/css', href='/build/css/mobile.css' + version)
 block content_style
-	- var version = '?ver=6'
+	- var version = '?ver=7'
 script(type='text/javascript', src='/build/libs/js/jquery-1.11.1.min.js' + version)
 script(type='text/javascript', src='/build/js/global.js' + version)
 block content_scripts
-	- var version = '?ver=5'
+	- var version = '?ver=7'

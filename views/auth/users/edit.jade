@@ -1,0 +1,31 @@
+extends ../../layout
+
+block title
+	title РЕДАКТИРОВАТЬ ПОЛЬЗОВАТЕЛЯ
+
+block content_style
+	link(rel='stylesheet', type='text/css', href='/build/css/add.css')
+
+block content_scripts
+	script(type='text/javascript', src='/build/js/add.js')
+
+block content
+	.form_block
+		a.back_link(href='/auth/users') < Назад
+		.title РЕДАКТИРОВАТЬ ПОЛЬЗОВАТЕЛЯ
+		br
+		form(action="", method="post")
+			.form_title ЛОГИН:
+			input(type='text', name='login', value=user.login)
+			.form_title E-MAIL:
+			input(type='text', name='email', value=user.email)
+			.form_title ПАРОЛЬ:
+			input(type='password', name='password')
+			if (session.status == 'Admin')
+				.form_title РОЛЬ:
+				select(name='status')
+					option(value='User', selcted=user.status == 'User') Пользователь
+					option(value='Admin', selected=user.status == 'Admin') Администратор
+			br
+			br
+			input(type='submit', value='отправить')

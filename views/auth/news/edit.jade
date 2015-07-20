@@ -30,23 +30,24 @@ block content_scripts
 block content
 	.form_block
 		a.back_link(href='/auth/news') < Назад
+		button.toggle_eng(type='button') перевод
 		.title РЕДАКТИРОВАТЬ НОВОСТЬ
 		form(action="", method="post")
 			.form_title Заголовок:
 			+form_text_single('title', news)
 			.form_title Описание:
 			+form_text_multi('description', news)
-			.form_title Дата:
+			.form_title Статус:
+			select(name='status')
+				option(value='') обычный
+				option(value='out', selected=news.status == 'out') в разделе
+				option(value='hidden', selected=news.status == 'hidden') скрытый
+			.form_title Дата публикации:
 			+form_calendar('date', news.date)
+			.form_title Видео:
+			+form_multiple_input('videos', news.videos)
 			.form_title Изображения:
-			.form_images_upload
-				.form_desc_title Нажми или перетащи
-				each image, i in news.images
-					.image_upload_block
-						.image_upload_preview(style='background-image:url(' + image.thumb + ')')
-							.image_upload_delete Удалить
-						textarea.image_upload_description(name='images[description][]')= image.description.filter(function(locale) { return locale.lg == 'ru' })[0].value
-						input.image_upload_form(type='hidden', name='images[path][]', value=images_preview[i])
+			+form_images_upload(news.images)
 			br
 			br
 			input(type='submit', value='отправить')

@@ -29,7 +29,7 @@ var checkNested = function (obj, layers) {
 
 
 exports.list = function(req, res) {
-  Category.find().exec(function(err, categorys) {
+  Category.find().sort('-date').exec(function(err, categorys) {
     res.render('auth/categorys/', {categorys: categorys});
   });
 }
@@ -56,6 +56,8 @@ exports.add_form = function(req, res) {
       && category.setPropertyLocalised('title', post[locale].title, locale);
 
   });
+
+  category.status = post.status;
 
   category.save(function(err, category) {
     res.redirect('/auth/categorys');
@@ -89,6 +91,8 @@ exports.edit_form = function(req, res) {
         && category.setPropertyLocalised('title', post[locale].title, locale);
 
     });
+
+    category.status = post.status;
 
     category.save(function(err, category) {
       res.redirect('/auth/categorys');

@@ -23,12 +23,19 @@ exports.login = function(req, res) {
 exports.login_form = function(req, res) {
   var post = req.body;
 
-  User.findOne({ 'login': post.login, 'password': post.password }).exec(function (err, person) {
+  User.findOne({ 'login': post.login }).exec(function (err, person) {
     if (!person) return res.redirect('back');
-    req.session.user_id = person._id;
-    req.session.status = person.status;
-    req.session.login = person.login;
-    res.redirect('/auth');
+    person.verifyPassword(post.password, function(err, isMatch) {
+      if (isMatch) {
+        req.session.user_id = person._id;
+        req.session.status = person.status;
+        req.session.login = person.login;
+        res.redirect('/auth');
+      }
+      else {
+        res.redirect('back');
+      }
+    });
   });
 }
 
@@ -39,10 +46,9 @@ exports.login_form = function(req, res) {
 
 
 exports.logout = function(req, res) {
-  delete req.session.user_id;
-  delete req.session.login;
-  delete req.session.status;
-  res.redirect('back');
+  req.session.destroy();
+  res.clearCookie('session');
+  res.redirect('/login');
 }
 
 
@@ -68,7 +74,8 @@ exports.registr_form = function(req, res) {
   });
 
   user.save(function(err, user) {
-    if(err) {throw err;}
+    // if(err) {throw err;}
+    if (err) return res.redirect('back');
     console.log('New User created');
     req.session.user_id = user._id;
     req.session.login = user.login;

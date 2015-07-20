@@ -1,0 +1,15 @@
+extends ../layout
+
+block title
+	title= __('ЖИВАЯ ИСТОРИЯ')
+
+block content_style
+	link(rel='stylesheet', type='text/css', href='/build/css/live.css' + version)
+
+block content_scripts
+	script(type='text/javascript', src='/build/js/live.js' + version)
+
+
+block content
+	.content_title= __('Живая история')
+	|<iframe src="https://drive.google.com/file/d/0B7MVjlN1K5Q8MG16SXNhTUVlTjg/preview" width="640" height="480"></iframe>

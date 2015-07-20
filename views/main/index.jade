@@ -1,104 +1,51 @@
 extends ../layout
+include ../events_list.jade
 
 block title
-	title ГЛАВНАЯ
+	title= __('ГЦМСИР')
 
 block content_style
 	link(rel='stylesheet', type='text/css', href='/build/css/blocks_grid.css' + version)
 	link(rel='stylesheet', type='text/css', href='/build/css/main.css' + version)
-	link(rel='stylesheet', type='text/css', href='/build/libs/css/jquery.fancybox.css' + version)
+	link(rel='stylesheet', type='text/css', href='/build/css/events_subsidiary_after.css' + version)
+
 block content_scripts
 	script(type='text/javascript', src='/build/libs/js/imagesloaded.pkgd.min.js' + version)
 	script(type='text/javascript', src='/build/libs/js/masonry.pkgd.min.js' + version)
-	script(type='text/javascript', src='/build/libs/js/jquery.fancybox.js' + version)
-	//script(type='text/javascript', src='/build/js/scroll.js' + version)
+	script(type='text/javascript', src='/build/js/scroll.js' + version)
 	script(type='text/javascript', src='/build/js/main.js' + version)
-	script(type='text/javascript', src='/build/js/fancybox.js' + version)
-
 
 block content
-	- var months = ['января', 'февраля', 'мара', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря']
-	- ev_lnght = Math.floor(Math.random() * ((events.length - 1) - 0 + 1)) + 0
-
-	.screen_block.intro_block
-		.intro_block_background(style='background-image:url(' + events[ev_lnght].images[0].original + ')')
-		.intro_block_inner
-			.intro_block_image
-				img(src='/images/design/logo_big.png')
-
-	.screen_block.info_block
-		.info_block_inner
-			.content_navigate_block
-				.navigate_title Последние фотографии:
-				.navigate_items_block
-					.navigate_item.excursion природа
-					.navigate_item.exhibition путешествия
-					.navigate_item.lecture люди
-					.navigate_item.action свадьбы
-					.navigate_item.xxi пейзажи
-
-		.goto_down
-			a.goto_down_inner.info
-
-	.screen_block.about_block
-		.about_block_inner
-			.about_block_image
-				img(src='/images/design/photo.jpg')
-			.about_text_inner
-				p Мне 24 года. Я - японист, фотограф, путешественник. Закончил Институт Стран Азии и Африки Московского Государственного Университета в 2012  г. Занимаюсь преимущественно travel-фотографией, также принимаю заказы на свадебную, интерьерную, семейную съемки. Сколько себя помню, всегда любил фотографировать. С тех пор, как взял в руки свою первую камеру (кажется, это был Kodak), прошло много лет, а желание фотографировать с годами росло вместе с объемом заказов и работы.
-
-				p За любовь к фотографии я очень благодарен своим родителям, которые, наряду со всеми моими пристрастиями, будь то музыка, спорт и многое другое, с самого детства поощряли мое хобби, впоследствии переросшее в профессию.
-
-				p На этом сайте размещены фотографии из стран, в которых мне посчастливилось побывать. Самым старым фотографиям здесь более 6 лет – это фото из Кении.
-
-				p На сайте Вы также найдете примеры свадебных фотографий, портреты и абстрактные кадры.
-
-				p Я снимаю на самые разные фотоаппараты: это и дальномерный пленочный ФЭД, и среднеформатная Yashica mat124g, и Canon 5d mark2 (большинство фотографий, представленных на сайте, сняты именно на эту камеру.)
-
-				p Практически каждую фотографию Вы можете купить, (пожалуй, за исключением свадебных кадров) связавшись со мной по любому из предложенных способов в разделе «Контакты». Заказать съемку или встретиться для обсуждения способов сотрудничества вы также можете в разделе «Контакты».
-		.goto_down
-			a.goto_down_inner.about
-
-
-	.screen_block.contacts_block
-		.about_block_inner
-			.about_text_inner
-				p.name Арсений Россихин
-				p.phone +7 (925) 729-79-81
-				p.email
-					a(href="mailto:rossikhinarseny@mail.ru") rossikhinarseny@mail.ru
-
-			input.form_block(placeholder="Ваше имя...")
-			input.form_block(placeholder="E-mail...")
-			textarea.form_block(placeholder="Сообщение...")
-			.social_block
-				a.vk(href='https://vk.com/rossikhin')  
-				a.fb(href='https://www.facebook.com/arseny.rossikhin') 
-				a.inst(href='https://instagram.com/rossikhinarseny/')  
-				a.shutterstock(href='http://www.shutterstock.com/g/Arseniy+Rossikhin')
-		.goto_down
-			a.goto_down_inner.about
-
-
+	.content_title= __('Историю создаете вы')
+	a.content_banner(href= 'http://pobedaonline.ru/')
+	.content_navigate_block.types
+		.navigate_title= __('Наши последние события:')
+		.navigate_items_block
+			//- .navigate_item.excursion= __('Экскурсии')
+			.navigate_item.exhibition= __('Выставки')
+			.navigate_item.lecture= __('Лекции')
+			.navigate_item.action= __('Мероприятия')
+	if (categorys.length > 0)
+		.content_navigate_block.categorys
+			.navigate_title= __('Категории:')
+			.navigate_items_block
+				each category in categorys
+					.navigate_item(class=category._id.toString())= category.i18n.title.get(locale)
 	.content_outer_block
-		.content_outer_block_inner
+		.content_news_block
+			each item in news
+				a.content_item.news(href='/news/' + item._id)
+					.item_title= item.i18n.title.get(locale)
+					.item_date= item.date.getDate() + ' ' + months[item.date.getMonth()] + ' ' + item.date.getFullYear()
+			a.content_item.news.content_news_goto(href= '/news/')= __('Перейти в новости')
+		.content_events_block
+			+eventsList(events)
 
-			each event in events
-				if (event.type == 'excursion')
-					.content_item.event.important(href='/events/' + event.type +'/' + event._id, style='background-image: url(' + (event.images && event.images.length > 0 && event.images[0].original) + ')')
-						.item_description
-							.item_title= event.i18n.title.get('ru')
-								each image in event.images
-									a.item_fancy(href=image.original, data-fancybox-group='' + event._id + '', title= image.description)
-				else if (event.type == 'exhibition')
-					.content_item.event.special_important(href='/events/' + event.type +'/' + event._id, style='background-image: url(' + (event.images && event.images.length > 0 && event.images[0].original) + ')')
-						.item_description
-							.item_title= event.i18n.title.get('ru')
-								each image in event.images
-									a.item_fancy(href=image.original, data-fancybox-group='' + event._id + '', title= image.description)
-				else
-					.content_item.event(href='/events/' + event.type +'/' + event._id, style='background-image: url(' + (event.images && event.images.length > 0 && event.images[0].original) + ')' )
-						.item_description
-							.item_title= event.i18n.title.get('ru')
-								each image in event.images
-									a.item_fancy(href=image.original, data-fancybox-group='' + event._id + '', title= image.description)
+
+block scroll
+	.content_title= __('Государственный центральный музей современной истории России')
+	.content_scroll_items
+		each image in images
+			.content_scroll_item
+				img(src=image.path.thumb)
+				.content_image_description= image.i18n.description.get(locale)

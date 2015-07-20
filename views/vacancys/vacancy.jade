@@ -1,0 +1,37 @@
+extends ../layout
+
+block title
+	title= __('ВАКАНСИИ И СТАЖИРОВКИ') + ' | ' + vacancy.i18n.title.get('ru').toUpperCase()
+
+block content_style
+	link(rel='stylesheet', type='text/css', href='/build/css/vacancys_item.css' + version)
+
+block content_scripts
+	script(type='text/javascript', src='/build/js/scroll.js' + version)
+	script(type='text/javascript', src='/build/js/vacancys_item.js' + version)
+
+
+block content
+	.content_title= vacancy.i18n.title.get('ru')
+	.content_body: != vacancy.i18n.description.get('ru')
+
+	if (vacancy.videos && vacancy.videos.length == 1)
+		.content_video_block
+			each video in vacancy.videos
+				.content_video_item.important_video: != video
+	else if (vacancy.videos && vacancy.videos.length > 1)
+		.content_video_block
+			each video in vacancy.videos
+				.content_video_item: != video
+
+block scroll
+	- function get_locale(option, lang) {var locale = option.filter(function(locale) { return locale.lg == lang })[0]; if (locale) {return locale.value } else {return ''} }
+	.content_title
+	.content_scroll_items
+		each image in vacancy.images
+			.content_scroll_item
+				img(src=image.thumb)
+				- var description = get_locale(image.description, locale)
+				if (description != '')
+					.content_image_description: != description
+

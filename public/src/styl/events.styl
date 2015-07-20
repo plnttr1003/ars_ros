@@ -1,3 +1,8 @@
+.content_outer_block
+	min-width 940px
+	@media screen and (max-width: 1280px)
+		min-width 700px
+
 .content_item
 	&:hover
 		&:after
@@ -9,3 +14,13 @@
 			background rgba(0,0,0,0.2)
 			content ''
 			z-index 0
+.content_navigate_block
+	.navigate_items_block
+		.navigate_item
+			&.important
+				&:after
+					border-right 1px solid #4b4b4b
+				&:first-child
+					padding-left 0
+					margin-left 0
+					margin-right 17px

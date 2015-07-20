@@ -9,49 +9,48 @@ var Category = require('../models/main.js').Category;
 var __appdir = path.dirname(require.main.filename);
 
 
-function uniq(a) {
-	a = a.map(function(item) {
-		return item.toString();
-	});
-	uniqueArray = a.filter(function(item, pos) {
-		return a.indexOf(item) == pos;
-	});
-	return uniqueArray;
-}
-
 exports.index = function(req, res) {
-	var categorys = [];
-	Event.find({type: req.params.type}).sort('-date').limit(12).exec(function(err, events) {
-		async.each(events, function(event, callback) {
-			categorys = categorys.concat(event.categorys);
-			callback();
-		}, function() {
-			categorys = uniq(categorys);
-			Category.where('_id').in(categorys).exec(function(err, categorys) {
-				Subsidiary.find().exec(function(err, subsidiarys) {
-					res.render('events', {type: req.params.type, events: events, categorys: categorys, subsidiarys: subsidiarys});
+	Event.find({type: req.params.type}).where('title.lg').equals(req.locale).where('status').ne('hidden').sort('-date').limit(12).populate('subsidiary').exec(function(err, events) {
+		Event.distinct('categorys', {type: req.params.type}).exec(function(err, categorys) {
+			Category.where('title.lg').equals(req.locale).where('_id').in(categorys).exec(function(err, categorys) {
+				Event.distinct('subsidiary', {type: req.params.type}).exec(function(err, subsidiarys) {
+					Subsidiary.where('title.lg').equals(req.locale).where('_id').in(subsidiarys).exec(function(err, subsidiarys) {
+						res.render('events', {type: req.params.type, events: events, categorys: categorys, subsidiarys: subsidiarys});
+					});
 				});
 			});
 		});
 	});
 }
 
+
 exports.event = function(req, res) {
 	var id = req.params.id;
-	Event.findById(id).exec(function(err, event) {
-		res.render('events/event.jade', {event: event})
+	Event.findById(id).populate('subsidiary').exec(function(err, event) {
+		res.render('events/event.jade', {event: event});
 	});
 }
+
 
 exports.get_events = function(req, res) {
 	var post = req.body;
 
-	var Query = post.context.categorys || post.context.subsidiarys
-		? Event.find({'type': post.context.type}).or([{ 'categorys': {'$in': post.context.categorys || []} }, { 'subsidiary': {'$in': post.context.subsidiarys || []} }])
-		: Event.find({'type': post.context.type});
+	if (post.context.categorys && post.context.subsidiarys) {
+		var Query = Event.find({'type': post.context.type, 'subsidiary': {'$in': post.context.subsidiarys}, 'categorys': {'$in': post.context.categorys}});
+	} else if (post.context.categorys && !post.context.subsidiarys) {
+		var Query = Event.find({'type': post.context.type, 'categorys': {'$in': post.context.categorys} });
+	} else if (!post.context.categorys && post.context.subsidiarys) {
+		var Query = Event.find({'type': post.context.type, 'subsidiary': {'$in': post.context.subsidiarys} });
+	} else {
+		var Query = Event.find({'type': post.context.type});
+	}
 
-	Query.sort('-date').skip(post.skip).limit(post.limit).exec(function(err, events) {
-		var opts = {events: events, compileDebug: false, debug: false, cache: true, pretty: false};
+	// var Query = post.context.categorys || post.context.subsidiarys
+	// 	? Event.find({'type': post.context.type}).or([{ 'categorys': {'$in': post.context.categorys || []} }, { 'subsidiary': {'$in': post.context.subsidiarys || []} }])
+	// 	: Event.find({'type': post.context.type});
+
+	Query.where('title.lg').equals(req.locale).where('status').ne('hidden').sort('-date').skip(post.skip).limit(post.limit).populate('subsidiary').exec(function(err, events) {
+		var opts = {events: events, locale: req.locale, compileDebug: false, debug: false, cache: true, pretty: false};
 		events.length > 0
 			? res.send(jade.renderFile(__appdir + '/views/events/get_events.jade', opts))
 			: res.send('out');

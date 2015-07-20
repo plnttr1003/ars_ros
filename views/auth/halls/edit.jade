@@ -23,6 +23,7 @@ block content
 	- var months = ['ЯНВАРЬ', 'ФЕВРАЛЬ', 'МАРТ', 'АПРЕЛЬ', 'МАЙ', 'ИЮНЬ', 'ИЮЛЬ', 'АВГУСТ', 'СЕНТЯБРЬ', 'ОКТЯБРЬ', 'НОЯБРЬ', 'ДЕКАБРЬ']
 	.form_block
 		a.back_link(href='/auth/halls/') < Назад
+		button.toggle_eng(type='button') перевод
 		.title РЕДАКТИРОВАТЬ ЗАЛ
 		form(action="", method="post")
 			.form_title Заголовок:
@@ -34,14 +35,7 @@ block content
 			.form_title Филиал:
 			+form_single_select('subsidiary', subsidiarys, hall.subsidiary)
 			.form_title Изображения:
-			.form_images_upload
-				.form_desc_title Нажми или перетащи
-				each image, i in hall.images
-					.image_upload_block
-						.image_upload_preview(style='background-image:url(' + image.thumb + ')')
-							.image_upload_delete Удалить
-						textarea.image_upload_description(name='images[description][]')= image.description.filter(function(locale) { return locale.lg == 'ru' })[0].value
-						input.image_upload_form(type='hidden', name='images[path][]', value=images_preview[i])
+			+form_images_upload(hall.images)
 			br
 			br
 			input(type='submit', value='отправить')

@@ -1,0 +1,24 @@
+extends ../../layout
+
+block title
+	title ВАКАНСИИ И СТАЖИРОВКИ
+
+block content_style
+	link(rel='stylesheet', type='text/css', href='/build/css/add.css')
+
+block content_scripts
+	script(type='text/javascript', src='/build/js/lists.js')
+
+block content
+	a.back_link(href='/auth') < Назад
+	.title Вакансии и стажировки
+	br
+	a.add(href='/auth/vacancys/add') добавить материал
+	br
+	br
+	.main_menu_block
+		each vacancy in vacancys
+			.officials
+				a.rm_officials(href='#', id=vacancy._id)= 'удалить '
+				!=' | '
+				a(href='/auth/vacancys/edit/' + vacancy._id)= vacancy.i18n.title.get('ru')

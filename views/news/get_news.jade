@@ -1,6 +1,16 @@
+include ../vars.jade
+
+mixin trimString(str, length)
+	if (str.length > length)
+		span.body: != str.substr(0, length)
+		span.etc ...
+		span.hide= str.substr(length, str.length)
+	- else
+		span.body: != str
+
 each item in news
-	.content_item.news.important
+	a.content_item.news.important(href='/news/' + item._id)
 		.item_description
-			.item_date= ('0' + item.date.getUTCDate()).slice(-2) + '/' + ('0' + item.date.getUTCMonth()).slice(-2)
-			.item_title= item.i18n.title.get('ru')
-			.item_body= item.i18n.description.get('ru')
+			.item_title= item.i18n.title.get(locale)
+			.item_body: +trimString(item.i18n.description.get(locale).replace(/(<([^>]+)>)/ig, ''), 100)
+			.item_date= item.date.getDate() + ' ' + months[item.date.getMonth()] + ' ' + item.date.getFullYear()

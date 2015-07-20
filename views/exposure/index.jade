@@ -1,7 +1,7 @@
 extends ../layout
 
 block title
-	title ЭКСПОЗИЦИЯ
+	title= __('ЭКСПОЗИЦИЯ')
 
 block content_style
 	link(rel='stylesheet', type='text/css', href='/build/css/blocks_grid.css' + version)
@@ -15,21 +15,19 @@ block content_scripts
 
 
 block content
-	.content_title Экспозиция
+	.content_title= __('Экспозиция')
 	.content_outer_block
 		each hall in halls
 			a.content_item.hall(href='/exposure/' + hall._id)
 				img.item_image(src=hall.images && hall.images.length > 0 && hall.images[0].thumb)
 				.item_description
-					.item_title= hall.i18n.title.get('ru')
+					.item_title= hall.i18n.title.get(locale)
 
-//- block scroll
-//- 	.content_title Государственный центральный музей современной истории России
-//- 	.content_scroll_items
-//- 		each exhibit in exhibits
-//- 			img.content_scroll_item(src=exhibit.images[0].thumb)
 
 block scroll
-	.content_title Государственный центральный музей современной истории России
+	.content_title= __('Государственный центральный музей современной истории России')
 	.content_scroll_items
-		include ../gallerys/main.jade
+		each image in images
+			.content_scroll_item
+				img(src=image.path.thumb)
+				.content_image_description= image.i18n.description.get(locale)

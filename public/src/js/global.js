@@ -21,7 +21,7 @@ $(document).ready(function() {
 				});
 
 				data.events.forEach(function(event) {
-					var context_result = $('<a/>', {'class': 'context_result', 'href': '/events/' + event._id, 'text': event.title[0].value});
+					var context_result = $('<a/>', {'class': 'context_result', 'href': '/events/' + event.type + '/' + event._id, 'text': event.title[0].value});
 					$('.search_context.events').show().children('.context_results_block').append(context_result);
 				});
 			});

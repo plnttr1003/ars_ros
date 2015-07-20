@@ -14,14 +14,23 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 app.locals.pretty = true;
 
+var MongoStore = require('connect-mongo')(session);
+var i18n = require('i18n');
+
+i18n.configure({
+	locales: ['ru', 'en'],
+	defaultLocale: 'ru',
+	cookie: 'locale',
+	directory: __dirname + '/locales'
+});
+
 app.use(express.static(__dirname + '/public'));
-app.use(multer({ dest: __dirname + '/uploads'}));
+app.use(multer({ dest: __dirname + '/uploads', includeEmptyFields: true}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride());
 app.use(cookieParser());
-
-var MongoStore = require('connect-mongo')(session);
+app.use(i18n.init);
 
 app.use(session({
 	key: 'sovhis.sess',
@@ -39,6 +48,7 @@ app.use(session({
 app.use(function(req, res, next) {
 	res.locals.session = req.session;
 	res.locals.locale = req.cookies.locale || 'ru';
+	req.locale = req.cookies.locale || 'ru';
 	next();
 });
 
@@ -51,23 +61,34 @@ app.use(function(req, res, next) {
 var main = require('./routes/main.js');
 var events = require('./routes/events.js');
 var news = require('./routes/news.js');
+var vacancys = require('./routes/vacancys.js');
 var collects = require('./routes/collects.js');
 var history = require('./routes/history.js');
 var exposure = require('./routes/exposure.js');
 var subsidiarys = require('./routes/subsidiarys.js');
+var souvenirs = require('./routes/souvenirs.js');
 var content = require('./routes/content.js');
 var files = require('./routes/files.js');
 
 var auth = require('./routes/auth.js');
 
+var admin_users = require('./routes/admin/users.js');
 var admin_history = require('./routes/admin/history.js');
 var admin_news = require('./routes/admin/news.js');
+var admin_vacancys = require('./routes/admin/vacancys.js');
 var admin_exhibits = require('./routes/admin/exhibits.js');
 var admin_collects = require('./routes/admin/collects.js');
 var admin_halls = require('./routes/admin/halls.js');
 var admin_subsidiarys = require('./routes/admin/subsidiarys.js');
 var admin_events = require('./routes/admin/events.js');
 var admin_categorys = require('./routes/admin/categorys.js');
+var admin_catalogues= require('./routes/admin/catalogues.js');
+var admin_souvenirs = require('./routes/admin/souvenirs.js');
+
+var admin_official = require('./routes/admin/official.js');
+var admin_contacts = require('./routes/admin/contacts.js');
+var admin_schedule = require('./routes/admin/schedule.js');
+var admin_gallerys = require('./routes/admin/gallerys.js');
 
 var options = require('./routes/admin/options.js');
 var globals = require('./routes/globals.js');
@@ -84,7 +105,6 @@ function checkAuth (req, res, next) {
 }
 
 
-
 // ------------------------
 // *** Main Routes Block ***
 // ------------------------
@@ -93,7 +113,7 @@ function checkAuth (req, res, next) {
 
 // === Main Route
 app.route('/')
-	.get(main.index)
+	.get(globals.imageGallery('main'), main.index)
 	.post(main.get_events);
 
 // === Events Route
@@ -108,10 +128,27 @@ app.route('/events/:type').get(events.index);
 app.route('/events/:type/:id').get(events.event);
 
 // === News Route
-app.route('/news').get(news.index);
+app.route('/news')
+	.get(globals.imageGallery('main'), news.index)
+	.post(news.get_news);
 
 // === News Route
 app.route('/news/:id').get(news.news);
+
+
+// === Officials Route
+app.route('/official')
+	.get(content.official)
+
+
+// === Vacancys Route
+app.route('/vacancys')
+	.get(globals.imageGallery('main'), vacancys.index)
+	.post(vacancys.vacancys);
+
+// === Vacancys Route
+app.route('/vacancys/:id').get(globals.imageGallery('main'), vacancys.vacancys);
+
 
 // === Exposure Route
 app.route('/exposure').get(exposure.index);
@@ -126,7 +163,7 @@ app.route('/collections').get(collects.index);
 app.route('/collections/:id').get(collects.collect);
 
 // === History Route
-app.route('/history').get(history.index);
+app.route('/history').get(globals.imageGallery('history'), history.index);
 
 // === Subsidiarys Route
 app.route('/subsidiarys').get(subsidiarys.index);
@@ -134,10 +171,43 @@ app.route('/subsidiarys').get(subsidiarys.index);
 // === Subsidiary Route
 app.route('/subsidiarys/:id').get(subsidiarys.subsidiary);
 
+// === Souvenirs Route
+app.route('/souvenirs').get(souvenirs.index);
+
+// === Souvenir Route
+app.route('/souvenirs/:id').get(souvenirs.catalogue);
 
 
 // ------------------------
-// *** Admin History Routes Block ***
+// *** Admin Users Routes Block ***
+// ------------------------
+
+
+
+// === Admin users Route
+app.route('/auth/users').get(checkAuth, admin_users.list);
+
+
+// === Admin @add users Route
+app.route('/auth/users/add')
+	 .get(checkAuth, admin_users.add)
+	 .post(checkAuth, admin_users.add_form);
+
+
+// === Admin @edit users Route
+app.route('/auth/users/edit/:id')
+	 .get(checkAuth, admin_users.edit)
+	 .post(checkAuth, admin_users.edit_form);
+
+
+// === Admin @remove users Route
+app.route('/auth/users/remove')
+	 .post(checkAuth, admin_users.remove);
+
+
+
+// ------------------------
+// *** Admin News Routes Block ***
 // ------------------------
 
 
@@ -161,6 +231,33 @@ app.route('/auth/news/edit/:id')
 // === Admin @remove news Route
 app.route('/auth/news/remove')
 	 .post(checkAuth, admin_news.remove);
+
+
+
+// ------------------------
+// *** Admin Vacancys Routes Block ***
+// ------------------------
+
+
+// === Admin vacancys Route
+app.route('/auth/vacancys').get(checkAuth, admin_vacancys.list);
+
+
+// === Admin @add vacancys Route
+app.route('/auth/vacancys/add')
+	 .get(checkAuth, admin_vacancys.add)
+	 .post(checkAuth, admin_vacancys.add_form);
+
+
+// === Admin @edit vacancys Route
+app.route('/auth/vacancys/edit/:id')
+	 .get(checkAuth, admin_vacancys.edit)
+	 .post(checkAuth, admin_vacancys.edit_form);
+
+
+// === Admin @remove vacancys Route
+app.route('/auth/vacancys/remove')
+	 .post(checkAuth, admin_vacancys.remove);
 
 
 
@@ -359,6 +456,102 @@ app.route('/auth/categorys/remove')
 	 .post(checkAuth, admin_categorys.remove);
 
 
+// ------------------------
+// *** Admin Catalogues Routes Block ***
+// ------------------------
+
+
+// === Admin catalogues Route
+app.route('/auth/catalogues').get(checkAuth, admin_catalogues.list);
+
+
+// === Admin @add catalogues Route
+app.route('/auth/catalogues/add')
+	 .get(checkAuth, admin_catalogues.add)
+	 .post(checkAuth, admin_catalogues.add_form);
+
+
+// === Admin @edit catalogues Route
+app.route('/auth/catalogues/edit/:id')
+	 .get(checkAuth, admin_catalogues.edit)
+	 .post(checkAuth, admin_catalogues.edit_form);
+
+
+// === Admin @remove catalogues Route
+app.route('/auth/catalogues/remove')
+	 .post(checkAuth, admin_catalogues.remove);
+
+
+// ------------------------
+// *** Admin Souvenirs Routes Block ***
+// ------------------------
+
+
+// === Admin souvenirs Route
+app.route('/auth/catalogues/edit/:id/souvenirs').get(checkAuth, admin_souvenirs.list);
+
+
+// === Admin @add souvenirs Route
+app.route('/auth/catalogues/edit/:id/souvenirs/add')
+	 .get(checkAuth, admin_souvenirs.add)
+	 .post(checkAuth, admin_souvenirs.add_form);
+
+
+// === Admin @edit souvenirs Route
+app.route('/auth/catalogues/edit/:id/souvenirs/edit/:souvenir_id')
+	 .get(checkAuth, admin_souvenirs.edit)
+	 .post(checkAuth, admin_souvenirs.edit_form);
+
+
+// === Admin @remove souvenirs Route
+app.route('/auth/catalogues/edit/:id/souvenirs/edit/:souvenir_id/remove')
+	 .post(checkAuth, admin_souvenirs.remove);
+
+
+// ------------------------
+// *** Admin Gallerys Routes Block ***
+// ------------------------
+
+
+
+// === Admin gallerys Route
+app.route('/auth/gallerys').get(checkAuth, admin_gallerys.list);
+
+
+// === Admin @add gallerys Route
+app.route('/auth/gallerys/add')
+	 .get(checkAuth, admin_gallerys.add)
+	 .post(checkAuth, admin_gallerys.add_form);
+
+
+// === Admin @edit gallerys Route
+app.route('/auth/gallerys/edit/:id')
+	 .get(checkAuth, admin_gallerys.edit)
+	 .post(checkAuth, admin_gallerys.edit_form);
+
+
+// === Admin @remove gallerys Route
+app.route('/auth/gallerys/remove')
+	 .post(checkAuth, admin_gallerys.remove);
+
+
+// ------------------------
+// *** Admin Contacts Content ***
+// ------------------------
+
+
+app.route('/auth/contacts')
+	 .get(checkAuth, admin_contacts.edit)
+	 .post(checkAuth, admin_contacts.edit_form);
+
+app.route('/auth/official')
+	 .get(checkAuth, admin_official.edit)
+	 .post(checkAuth, admin_official.edit_form);
+
+app.route('/auth/schedule')
+	 .get(checkAuth, admin_schedule.edit)
+	 .post(checkAuth, admin_schedule.edit_form);
+
 
 // ------------------------
 // *** Auth Routes Block ***
@@ -392,13 +585,23 @@ app.route('/registr')
 // ------------------------
 
 
+// === Team Route
+app.route('/team').get(content.team);
 
-// === About Route
+// === Partners Route
+app.route('/partners').get(globals.imageGallery('main'), content.partners);
+
+// === Live Route
+app.route('/live').get(content.live);
+
+// === Schedule Route
+app.route('/schedule').get(globals.imageGallery('main'), content.schedule);
 
 // === Contacts Route
-app.route('/about').get(content.contacts);
+app.route('/contacts').get(content.contacts);
 
-
+// === Official Route
+app.route('/official').get(content.contacts);
 
 
 
@@ -445,36 +648,36 @@ app.route('/robots.txt').get(files.robots);
 // ------------------------
 
 
-app.use(function(req, res, next) {
-	var accept = accepts(req);
-	res.status(404);
+// app.use(function(req, res, next) {
+// 	var accept = accepts(req);
+// 	res.status(404);
 
-	// respond with html page
-	if (accept.types('html')) {
-		res.render('error', { url: req.url, status: 404 });
-		return;
-	}
+// 	// respond with html page
+// 	if (accept.types('html')) {
+// 		res.render('error', { url: req.url, status: 404 });
+// 		return;
+// 	}
 
-	// respond with json
-	if (accept.types('json')) {
-			res.send({
-			error: {
-				status: 'Not found'
-			}
-		});
-		return;
-	}
+// 	// respond with json
+// 	if (accept.types('json')) {
+// 			res.send({
+// 			error: {
+// 				status: 'Not found'
+// 			}
+// 		});
+// 		return;
+// 	}
 
-	// default to plain-text
-	res.type('txt').send('Not found');
-});
+// 	// default to plain-text
+// 	res.type('txt').send('Not found');
+// });
 
-app.use(function(err, req, res, next) {
-	var status = err.status || 500;
+// app.use(function(err, req, res, next) {
+// 	var status = err.status || 500;
 
-	res.status(status);
-	res.render('error', { error: err, status: status });
-});
+// 	res.status(status);
+// 	res.render('error', { error: err, status: status });
+// });
 
 
 // ------------------------

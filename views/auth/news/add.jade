@@ -30,14 +30,22 @@ block content_scripts
 block content
 	.form_block
 		a.back_link(href='/auth/news') < Назад
+		button.toggle_eng(type='button') перевод
 		.title ДОБАВИТЬ НОВОСТЬ
 		form(action="/auth/news/add", method="post")
 			.form_title Заголовок:
 			+form_text_single('title')
 			.form_title Описание:
 			+form_text_multi('description')
-			.form_title Дата:
+			.form_title Статус:
+			select(name='status')
+				option(value='') обычный
+				option(value='out') в разделе
+				option(value='hidden') скрытый
+			.form_title Дата публикации:
 			+form_calendar('date')
+			.form_title Видео:
+			+form_multiple_input('videos')
 			.form_title Изображения:
 			.form_images_upload
 				.form_desc_title Перетащи сюда

@@ -1,22 +1,39 @@
-.content_column
-	&.main
-		// background-color #DFA3D7
-	&.scroll
-		// background-color #48A1DF
-		.content_scroll_item
-			// background-color #647A8A
-			width 320px
-			min-height 100px
-			display block
-
 .content_title
 	width 700px
 
 .content_date
+.content_s_title
 	font 16pt/18pt 'PT Sans'
-	margin-bottom 60px
+	margin-bottom 5px
 	color #B8B8B8
 	width 700px
 
+.content_subs
+	margin-bottom 30px
+	font 16pt/20pt 'PT Sans'
+
 .content_body
 	width 700px
+
+.content_video_block
+	width 700px
+	margin-top 60px
+	overflow hidden
+
+.content_video_item
+	width 340px
+	height 191px
+	margin-right 20px
+	margin-bottom 20px
+	float left
+	iframe
+		width 340px!important
+		height 191px!important
+	&:nth-child(2n)
+		margin-right 0
+	&.important_video
+		width 460px
+		height 259px
+		iframe
+			width 460px!important
+			height 259px!important
