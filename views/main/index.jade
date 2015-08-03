@@ -67,6 +67,51 @@ block content
 				p.phone +7 (925) 729-79-81
 				p.email
 					a(href="mailto:rossikhinarseny@mail.ru") rossikhinarseny@mail.ru
+			//-.form_block
+				|	<!-- Begin Response-O-Matic Form -->
+				|	<!-- DO NOT EDIT YOUR FORM HERE, PLEASE LOG IN AND EDIT AT RESPONSE-O-MATIC.COM -->
+				|	<form enctype="multipart/form-data" method="post" action="http://www.response-o-matic.com/mail.php" accept-charset="UTF-8">
+				|		<div>
+				|			<input type="hidden" name="acctid" id="acctid" value="n1n5yn4c47g7v8c1" />
+				|			<input type="hidden" name="formid" id="formid" value="1273716" />
+				|			<input type="hidden" name="required_vars" id="required_vars" value="name,email" />
+				|		</div>
+				|		<table cellspacing="5" cellpadding="5" border="0">
+				|			<tr>
+				|				<td valign="top">
+				|					<strong>&#1042;&#1072;&#1096;&#1077; &#1080;&#1084;&#1103;:</strong>
+				|				</td>
+				|				<td valign="top">
+				|					<input type="text" name="name" id="name" size="40" value="" />
+				|				</td>
+				|			</tr>
+				|			<tr>
+				|				<td valign="top">
+				|					<strong>Email:</strong>
+				|				</td>
+				|				<td valign="top">
+				|					<input type="text" name="email" id="email" size="40" value="" />
+				|				</td>
+				|			</tr>
+				|			<tr>
+				|				<td valign="top">
+				|					<strong>&#1057;&#1086;&#1086;&#1073;&#1097;&#1077;&#1085;&#1080;&#1077;:</strong>
+				|				</td>
+				|				<td valign="top">
+				|					<textarea name="field-c6629b7d55acc52" id="field-c6629b7d55acc52" rows="6" cols="40"></textarea>
+				|				</td>
+				|			</tr>
+				|			<tr>
+				|				<td colspan="2" align="center">
+				|					<input type="submit" value=" Submit Form " />
+				|				</td>
+				|			</tr>
+				|		</table>
+				|	</form>
+				|	<br><center><font face="Arial, Helvetica" size="1"><b>
+				|	Get your own <a href="http://www.response-o-matic.com">free form</a> like this one.
+				|	</b></font></center>
+				|	<!-- End Response-O-Matic Form -->
 
 			input.form_block(placeholder="Ваше имя...")
 			input.form_block(placeholder="E-mail...")
@@ -85,20 +130,20 @@ block content
 
 			each event in events
 				if (event.type == 'excursion')
-					.content_item.event.important(href='/events/' + event.type +'/' + event._id, style='background-image: url(' + (event.images && event.images.length > 0 && event.images[0].original) + ')')
+					.content_item.event.important(href='/events/' + event.type +'/' + event._id, style='background-image: url(' + (event.images && event.images.length > 0 && event.images[event.images.length - 1].original) + ')')
 						.item_description
 							.item_title= event.i18n.title.get('ru')
-								each image in event.images
-									a.item_fancy(href=image.original, data-fancybox-group='' + event._id + '', title= image.description)
+								each image in event.images.reverse()
+									a.item_fancy(href=image.original, data-fancybox-group='' + event._id + '', title= event.i18n.title.get('ru'))
 				else if (event.type == 'exhibition')
-					.content_item.event.special_important(href='/events/' + event.type +'/' + event._id, style='background-image: url(' + (event.images && event.images.length > 0 && event.images[0].original) + ')')
+					.content_item.event.special_important(href='/events/' + event.type +'/' + event._id, style='background-image: url(' + (event.images && event.images.length > 0 && event.images[event.images.length - 1].original) + ')')
 						.item_description
 							.item_title= event.i18n.title.get('ru')
-								each image in event.images
-									a.item_fancy(href=image.original, data-fancybox-group='' + event._id + '', title= image.description)
+								each image in event.images.reverse()
+									a.item_fancy(href=image.original, data-fancybox-group='' + event._id + '', title= event.i18n.title.get('ru'))
 				else
-					.content_item.event(href='/events/' + event.type +'/' + event._id, style='background-image: url(' + (event.images && event.images.length > 0 && event.images[0].original) + ')' )
+					.content_item.event(href='/events/' + event.type +'/' + event._id, style='background-image: url(' + (event.images && event.images.length > 0 && event.images[event.images.length - 1].original) + ')' )
 						.item_description
 							.item_title= event.i18n.title.get('ru')
-								each image in event.images
-									a.item_fancy(href=image.original, data-fancybox-group='' + event._id + '', title= image.description)
+								each image in event.images.reverse()
+									a.item_fancy(href=image.original, data-fancybox-group='' + event._id + '', title= event.i18n.title.get('ru'))
