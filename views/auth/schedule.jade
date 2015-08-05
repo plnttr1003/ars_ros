@@ -1,0 +1,28 @@
+extends ../layout
+include forms.jade
+
+block title
+	title РЕДАКТИРОВАТЬ РАЗДЕЛ БИЛЕТЫ И РАСПИСАНИЕ
+
+block content_style
+	link(rel='stylesheet', type='text/css', href='/build/libs/css/font-awesome.css')
+	link(rel='stylesheet', type='text/css', href='/build/libs/css/wysiwyg-editor.css')
+	link(rel='stylesheet', type='text/css', href='/build/css/add.css')
+
+block content_scripts
+	script(type='text/javascript', src='/build/libs/js/wysiwyg.js')
+	script(type='text/javascript', src='/build/libs/js/wysiwyg-editor.js')
+	script(type='text/javascript', src='/build/js/add.js')
+
+block content
+	.form_block
+		a.back_link(href='/auth') < Назад
+		button.toggle_eng(type='button') перевод
+		.title РЕДАКТИРОВАТЬ РАЗДЕЛ БИЛЕТЫ И РАСПИСАНИЕ
+		form(action="", method="post")
+			.form_title Контент:
+			textarea.ru.editor(name="ru[content]",)= content.ru
+			textarea.en.editor(name="en[content]", disabled)= content.en
+			br
+			br
+			input(type='submit', value='отправить')

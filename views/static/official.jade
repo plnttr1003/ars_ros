@@ -1,0 +1,19 @@
+extends ../layout
+
+block title
+	title= __('ОФИЦИАЛЬНАЯ ИНФОРМАЦИЯ')
+
+block content_style
+	link(rel='stylesheet', type='text/css', href='/build/css/official.css' + version)
+
+block content_scripts
+	script(type='text/javascript', src='/build/js/official.js' + version)
+
+
+block content
+	.content_title= __('Официальная информация')
+	.block_official
+		if (locale == 'ru')
+			include content/official/ru.html
+		else
+			include content/official/en.html

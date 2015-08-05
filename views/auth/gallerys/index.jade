@@ -1,0 +1,24 @@
+extends ../../layout
+
+block title
+	title= 'ФОТОГРАФИИ'
+
+block content_style
+	link(rel='stylesheet', type='text/css', href='/build/css/add.css')
+
+block content_scripts
+	script(type='text/javascript', src='/build/js/lists.js')
+
+block content
+	a.back_link(href='/auth') < Назад
+	.title= 'ФОТОГРАФИИ'
+	br
+	a.add(href='/auth/gallerys/add') добавить фотографию
+	br
+	br
+	.main_menu_block
+		each gallery in gallerys
+			.gallery
+				a.rm_gallery(href='#', id=gallery._id)= 'удалить '
+				!=' | '
+				a(href='/auth/gallerys/edit/' + gallery._id)= gallery.i18n.description.get('ru') ? gallery.i18n.description.get('ru') : 'Описание фотографии'

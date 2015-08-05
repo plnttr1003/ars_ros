@@ -1,0 +1,24 @@
+extends ../../layout
+
+block title
+	title= 'ЖУРНАЛЫ'
+
+block content_style
+	link(rel='stylesheet', type='text/css', href='/build/css/add.css')
+
+block content_scripts
+	script(type='text/javascript', src='/build/js/lists.js')
+
+block content
+	a.back_link(href='/auth') < Назад
+	.title= 'ЖУРНАЛЫ'
+	br
+	a.add(href='/auth/magazines/add') добавить журнал
+	br
+	br
+	.main_menu_block
+		each magazine in magazines
+			.gallery
+				a.rm_magazine(href='#', id=magazine._id)= 'удалить '
+				!=' | '
+				a(href='/auth/magazines/edit/' + magazine._id)= magazine.i18n.title.get('ru') ? magazine.i18n.title.get('ru') + ' № ' + magazine.num : 'Название журнала'

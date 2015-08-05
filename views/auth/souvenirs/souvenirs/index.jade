@@ -1,0 +1,24 @@
+extends ../../../layout
+
+block title
+	title= 'СУВЕНИРЫ'
+
+block content_style
+	link(rel='stylesheet', type='text/css', href='/build/css/add.css')
+
+block content_scripts
+	script(type='text/javascript', src='/build/js/lists.js')
+
+block content
+	a.back_link(href='/auth') < Назад
+	.title= 'СУВЕНИРЫ'
+	br
+	a.add(href='/auth/catalogues/edit/' + catalogue + '/souvenirs/add') добавить сувенир
+	br
+	br
+	.main_menu_block
+		each souvenir in souvenirs
+			.souvenir
+				a.rm_souvenir(href='#', id=souvenir._id)= 'удалить '
+				!=' | '
+				a(href='/auth/catalogues/edit/' + catalogue + '/souvenirs/edit/' + souvenir._id)= souvenir.i18n.title.get('ru') ? souvenir.i18n.title.get('ru') : 'Заголовок сувенира'

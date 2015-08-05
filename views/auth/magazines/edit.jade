@@ -1,0 +1,33 @@
+extends ../../layout
+include ../forms.jade
+
+block title
+	title РЕДАКТИРОВАТЬ ЖУРНАЛ
+
+block content_style
+	link(rel='stylesheet', type='text/css', href='/build/libs/css/font-awesome.css')
+	link(rel='stylesheet', type='text/css', href='/build/libs/css/wysiwyg-editor.css')
+	link(rel='stylesheet', type='text/css', href='/build/css/add.css')
+
+block content_scripts
+	script(type='text/javascript', src='/build/libs/js/wysiwyg.js')
+	script(type='text/javascript', src='/build/libs/js/wysiwyg-editor.js')
+	script(type='text/javascript', src='/build/js/add.js')
+
+block content
+	.form_block
+		a.back_link(href='/auth/magazines') < Назад
+		button.toggle_eng(type='button') перевод
+		.title РЕДАКТИРОВАТЬ ЖУРНАЛ
+		form(action="", method="post", enctype="multipart/form-data")
+			.form_title Заголовок:
+			+form_text_single('title', magazine)
+			.form_title Номер:
+			input(type='text', name='num', value=magazine.num)
+			.form_title Ссылка:
+			input(type='text', name='url', value=magazine.url)
+			.form_title Изображение:
+			input(type='file', name='image')
+			br
+			br
+			input(type='submit', value='отправить')

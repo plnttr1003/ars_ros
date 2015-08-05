@@ -1,7 +1,7 @@
 extends ../layout
 
 block title
-	title КОЛЛЕКЦИИ
+	title= __('КОЛЛЕКЦИИ')
 
 block content_style
 	link(rel='stylesheet', type='text/css', href='/build/css/blocks_grid.css' + version)
@@ -15,16 +15,16 @@ block content_scripts
 
 
 block content
-	.content_title Коллекции
+	.content_title= __('Коллекции')
 	.content_outer_block
 		each collect in collects
 			a.content_item.collect(href='/collections/' + collect._id)
 				img.item_image(src=collect.logo.path)
 				.item_description
-					.item_title= collect.i18n.title.get('ru')
+					.item_title= collect.i18n.title.get(locale)
 
 block scroll
-	.content_title Государственный центральный музей современной истории России
+	.content_title= __('Государственный центральный музей современной истории России')
 	.content_scroll_items
 		each exhibit in exhibits
 			img.content_scroll_item(src=exhibit.images[0].thumb)

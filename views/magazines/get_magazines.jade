@@ -1,0 +1,7 @@
+include ../vars.jade
+
+each magazine in magazines
+	a.content_item.collect(href='/souvenirs/' + magazine._id)
+		img.item_image(src=magazine.path.thumb)
+		.item_description
+			.item_title= magazine.i18n.title.get(locale)

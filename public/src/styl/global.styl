@@ -163,9 +163,12 @@ html, body, .main_block, .content_block, .content_columns_block, .content_column
 	cursor pointer
 	display block
 	&:hover
-		color rgb(196, 20, 59)
+		color #f00
 	&.lang
-		margin-top 4px
+		color #000
+		text-decoration none
+		&:hover
+			color #f00
 	&.search
 		width 25px
 		height 25px
@@ -173,6 +176,8 @@ html, body, .main_block, .content_block, .content_columns_block, .content_column
 		background-size cover
 	&.menu_option
 		font-family 'menu'
+		&:hover
+			color #f00
 
 .header_logo
 	display block

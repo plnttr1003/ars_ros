@@ -2,6 +2,7 @@ var async = require('async');
 
 var Event = require('../models/main.js').Event;
 var Exhibit = require('../models/main.js').Exhibit;
+var Gallery = require('../models/main.js').Gallery;
 
 function searchNormalize(search) {
 	var words = search.split(' ');
@@ -21,7 +22,7 @@ exports.search = function(req, res) {
 	var search = searchNormalize(req.body.search);
 
 	Exhibit.find({ $text: { $search: search } }, { score : { $meta: 'textScore' } }).sort({ score : { $meta : 'textScore' } }).select('title _id').exec(function(err, exhibits) {
-		Event.find({ $text: { $search: search } }, { score : { $meta: 'textScore' } }).sort({ score : { $meta : 'textScore' } }).select('title _id').exec(function(err, events) {
+		Event.find({ $text: { $search: search } }, { score : { $meta: 'textScore' } }).sort({ score : { $meta : 'textScore' } }).select('title _id type').exec(function(err, events) {
 			res.send({events: events, exhibits: exhibits});
 		});
 	});
@@ -31,4 +32,14 @@ exports.search = function(req, res) {
 exports.locale = function(req, res) {
   res.cookie('locale', req.params.locale);
   res.redirect('back');
+}
+
+
+exports.imageGallery = function(type) {
+  return function(req, res, next) {
+    Gallery.random({'type': type}, 25, 'year', function(err, images) {
+    	res.locals.images = images;
+    	next();
+    });
+  }
 }

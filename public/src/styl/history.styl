@@ -1,0 +1,113 @@
+@keyframes animated {
+	from {background-color: #f0f0f0;}
+	to {background-color: transparent;}
+}
+body
+	overflow hidden
+.content_column.main
+	position relative
+	&:after
+		display block
+		width 4px
+		content ''
+		background #969696
+		height 100%
+		right 0px
+		position absolute
+		top 0
+.period_container
+	width 680px
+	padding 10px
+	margin-top 50px
+	@media screen and (max-width: 1280px)
+		width 440px
+	&.animated
+	&.animated_last
+		animation animated 0.7s ease-in
+	h3
+		font 22pt/24pt 'PT Serif'
+		position relative
+		a
+			position absolute
+			top -100px
+	h4
+		font 16pt/20pt 'PT Sans'
+	hr
+		border-top 0
+		border-style solid
+		border-color #777
+
+.history_left_block_inner
+	position absolute
+	top 185px
+	right 20px
+	z-index 10
+	bottom 0
+	a
+		display block
+		text-align left
+		margin-bottom 30px
+		border-top 1px solid
+		padding-top 10px
+		font-size 15px
+		width 215px
+		color #969696
+		position relative
+		margin-top 7px
+		padding-left 5px
+		white-space nowrap
+		cursor pointer
+		&:after
+			position absolute
+			top -3px
+			left 0px
+			//width 5px
+			//height 5px
+			//border-radius 50%
+			display block
+			content ''
+			background #969696
+		&:before
+			position absolute
+			right -20px
+			top 0px
+			bottom -31px
+			width 4px
+			background #969696
+			content ''
+		&.active
+		&.active_last
+			&:before
+				top -10000px
+
+.history_left_block_inner
+	a
+		&:hover
+		&.active
+		&.active_last
+			color #c4143b
+			&:after
+			&:before
+				background-color #c4143b
+
+.column_inner_2
+	.history_left_stripe
+		&.red_stripe
+			&:after
+				top 0
+				bottom 0
+				right 0
+				left 0
+				background #c4143b
+				content ''
+				display block
+				position absolute
+				z-index 10000000
+
+.footer_block
+	width 700px
+	@media screen and (max-width: 1280px)
+		width 460px
+	.footer_block_inner
+		@media screen and (max-width: 1280px)
+			width auto

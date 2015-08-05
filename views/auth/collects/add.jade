@@ -27,6 +27,7 @@ block content_scripts
 block content
 	.form_block
 		a.back_link(href='/auth/collects') < Назад
+		button.toggle_eng(type='button') перевод
 		.title ДОБАВИТЬ КОЛЛЕКЦИЮ
 		form(action="/auth/collects/add", method="post", enctype="multipart/form-data")
 			.form_title Заголовок:

@@ -1,8 +1,7 @@
 extends ../layout
+include ../events_list.jade
 
 block title
-	- var types = {'exhibition': 'Очень большой', 'excursion': 'Большой', 'lecture': 'Обычный'}
-	//-{'exhibition': 'Очень большой', 'excursion': 'Большой', 'lecture': 'Обычный', 'xxi': 'Свадьбы', 'action': 'Пейзажи'}
 	title= types[type]
 
 block content_style
@@ -15,44 +14,24 @@ block content_scripts
 	script(type='text/javascript', src='/build/js/scroll.js' + version)
 	script(type='text/javascript', src='/build/js/events.js' + version)
 
-
 block content
-	- var types = {'exhibition': 'Очень большой', 'excursion': 'Большой', 'lecture': 'Обычный'}
-	//-{'exhibition': 'Очень большой', 'excursion': 'Большой', 'lecture': 'Обычный', 'xxi': 'Свадьбы', 'action': 'Пейзажи'}
 	.content_title(class=type)= types[type]
 
-	.content_navigate_block.subsidiarys
-		.navigate_title Филиалы:
-		.navigate_items_block
-			each subsidiary in subsidiarys
-				.navigate_item(class=subsidiary._id)= subsidiary.i18n.title.get('ru')
+	if (subsidiarys.length > 0)
+		.content_navigate_block.subsidiarys
+			//- .navigate_title= __('Филиалы:')
+			.navigate_items_block
+				each subsidiary in subsidiarys
+					.navigate_item(class=subsidiary._id.toString(), class=subsidiary.status == 'important' && 'important')= subsidiary.i18n.title.get(locale)
 
 	if (categorys.length > 0)
 		.content_navigate_block.categorys
-			.navigate_title Категории:
+			.navigate_title= __('Категории:')
 			.navigate_items_block
 				each category in categorys
-					.navigate_item(class=category._id)= category.i18n.title.get('ru')
-
+					.navigate_item(class=category._id.toString())= category.i18n.title.get(locale)
 	.content_outer_block
-		each event in events
-			if (event.type == 'excursion')
-				a.content_item.event.important(href='/events/' + event.type +'/' + event._id, style='background-image: url(' + (event.images && event.images.length > 0 && event.images[0].original) + ')')
-					.item_description
-						.item_date= ('0' + event.interval.start.getUTCDate()).slice(-2)  + '/' + ('0' + event.interval.start.getUTCMonth()).slice(-2) + '/' + ('0' + event.interval.start.getUTCFullYear()).slice(-2) + ' - ' + ('0' + event.interval.end.getUTCDate()).slice(-2)  + '/' + ('0' + event.interval.end.getUTCMonth()).slice(-2) + '/' + ('0' + event.interval.end.getUTCFullYear()).slice(-2)
-						.item_title= event.i18n.title.get('ru')
-			else if (event.type == 'exhibition')
-				a.content_item.event.(href='/events/' + event.type +'/' + event._id)
-					//img.item_image(src=event.images && event.images.length > 0 && event.images[0].thumb)
-					.item_description
-						.item_date= ('0' + event.interval.start.getUTCDate()).slice(-2)  + '/' + ('0' + event.interval.start.getUTCMonth()).slice(-2) + '/' + ('0' + event.interval.start.getUTCFullYear()).slice(-2) + ' - ' + ('0' + event.interval.end.getUTCDate()).slice(-2)  + '/' + ('0' + event.interval.end.getUTCMonth()).slice(-2) + '/' + ('0' + event.interval.end.getUTCFullYear()).slice(-2)
-						.item_title= event.i18n.title.get('ru')
-			else
-				a.content_item.event(href='/events/' + event.type +'/' + event._id)
-					//img.item_image(src=event.images && event.images.length > 0 && event.images[0].thumb)
-					.item_description
-						.item_date= ('0' + event.interval.start.getUTCDate()).slice(-2)  + '/' + ('0' + event.interval.start.getUTCMonth()).slice(-2) + '/' + ('0' + event.interval.start.getUTCFullYear()).slice(-2) + ' - ' + ('0' + event.interval.end.getUTCDate()).slice(-2)  + '/' + ('0' + event.interval.end.getUTCMonth()).slice(-2) + '/' + ('0' + event.interval.end.getUTCFullYear()).slice(-2)
-						.item_title= event.i18n.title.get('ru')
+		+eventsList(events)
 
 block scroll
 	.content_title

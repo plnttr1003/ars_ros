@@ -8,29 +8,10 @@ block content_style
 
 block content
 	a.back_link(href='/logout') Выход
+	!= ' | ' + session.login
 	.title.star ЗВЕЗДОЧЕТ
 	.main_menu_block
 		br
-		//- b Новости:
-		//- a(href='/auth/news')= ' редактировать'
-		//- br
-		//- br
-		//- b История:
-		//- a(href='/auth/history')= ' редактировать'
-		//- br
-		//- br
-		//- b Экспонаты:
-		//- a(href='/auth/exhibits')= ' редактировать'
-		//- br
-		//- br
-		//- b Коллекции:
-		//- a(href='/auth/collects')= ' редактировать'
-		//- br
-		//- br
-		//- b Залы:
-		//- a(href='/auth/halls')= ' редактировать'
-		//- br
-		//- br
 		b Альбомы:
 		a(href='/auth/events')= ' редактировать'
 		br
@@ -43,3 +24,75 @@ block content
 		br
 		b Категории:
 		a(href='/auth/categorys')= ' редактировать'
+		br
+		br
+		b Раздел Обо мне:
+		a(href='/auth/contacts')= ' редактировать'
+
+
+
+		//-br
+		//-b Пользователи:
+		//-a(href='/auth/users')= ' редактировать'
+		//-br
+		//-br
+		//-b Новости:
+		//-a(href='/auth/news')= ' редактировать'
+		//- br
+		//- br
+		//- b История:
+		//- a(href='/auth/history')= ' редактировать'
+		//-br
+		//-br
+		//-b Экспонаты:
+		//-a(href='/auth/exhibits')= ' редактировать'
+		//-br
+		//-br
+		//-b Коллекции:
+		//-a(href='/auth/collects')= ' редактировать'
+		//-br
+		//-br
+		//-b Залы:
+		//-a(href='/auth/halls')= ' редактировать'
+		//-br
+			br
+			b Филиалы:
+			a(href='/auth/subsidiarys')= ' редактировать'
+			br
+			br
+			b Альбомы:
+			a(href='/auth/events')= ' редактировать'
+			br
+			br
+			b Категории:
+			a(href='/auth/categorys')= ' редактировать'
+			br
+		//-br
+		//-b Вакансии и стажировки:
+		//-a(href='/auth/vacancys')= ' редактировать'
+		//-br
+		//-br
+		//-b Сувениры:
+		//-a(href='/auth/catalogues')= ' редактировать'
+		//-br
+		//-br
+		//-b Журналы:
+		//-a(href='/auth/magazines')= ' редактировать'
+		//-br
+		//-br
+		//-hr
+		//-br
+		//-b Галереи фотографий:
+		//-a(href='/auth/gallerys')= ' редактировать'
+		//-br
+		//-br
+		//-b Раздел Билеты и расписание:
+		//-a(href='/auth/schedule')= ' редактировать'
+		//-br
+		//-br
+		//-b Раздел Официальная информация:
+		//-a(href='/auth/official')= ' редактировать'
+		//-br
+			br
+			b Раздел Обо мне:
+			a(href='/auth/contacts')= ' редактировать'

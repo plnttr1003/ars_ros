@@ -1,25 +1,56 @@
 extends ../layout
 
 block title
-	title= 'СОБЫТИЯ | ' + event.i18n.title.get('ru').toUpperCase()
+	title= __('СОБЫТИЯ') + ' | ' + event.i18n.title.get(locale).toUpperCase()
+	meta(name='description', content=event.i18n.description.get(locale).replace(/<[^>]+>/g,' '))
+	meta(property='og:description', content=event.i18n.description.get(locale).replace(/<[^>]+>/g,' '))
+	each image in event.images
+		meta(property='og:image', content=image.thumb)
 
 block content_style
 	link(rel='stylesheet', type='text/css', href='/build/css/event.css' + version)
+	link(rel='stylesheet', type='text/css', href='/build/css/ya_share.css' + version)
 
 block content_scripts
 	script(type='text/javascript', src='/build/js/scroll.js' + version)
 	script(type='text/javascript', src='/build/js/event.js' + version)
 
+mixin compareInterval(start, end)
+	if (start.getDate() == end.getDate() && start.getMonth() == end.getMonth() && start.getFullYear() == end.getFullYear())
+		!= start.getDate() + ' ' + months[event.interval.start.getMonth()] + ' ' + start.getFullYear()
+	else
+		!= start.getDate() + ' ' + months[start.getMonth()] + ' ' + start.getFullYear() + ' - ' + end.getDate() + ' ' + months[end.getMonth()] + ' ' + end.getFullYear()
+
 
 block content
-	- var months = ['января', 'февраля', 'мара', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря']
-	.content_title= event.i18n.title.get('ru')
-	.content_date= event.interval.start.getDate() + ' ' + months[event.interval.start.getMonth()] + ' ' + event.interval.start.getFullYear() + ' - ' + event.interval.end.getDate() + ' ' + months[event.interval.end.getMonth()] + ' ' + event.interval.end.getFullYear()
-	.content_body: != event.i18n.description.get('ru')
+	.content_title= event.i18n.title.get(locale)
+	if (!event.interval.hidden)
+		.content_date: +compareInterval(event.interval.start, event.interval.end)
+
+
+	.content_subs= event.subsidiary && event.subsidiary.i18n.title.get(locale)
+
+	.content_body: != event.i18n.description.get(locale)
+
+	if (event.videos && event.videos.length == 1)
+		.content_video_block
+			each video in event.videos
+				.content_video_item.important_video: != video
+	else if (event.videos && event.videos.length > 1)
+		.content_video_block
+			each video in event.videos
+				.content_video_item: != video
+
+	| <script type="text/javascript" src="//yastatic.net/share/share.js" charset="utf-8"></script><div class="yashare-auto-init" data-yashareL10n="ru" data-yashareType="none" data-yashareQuickServices="vkontakte,facebook,twitter"></div>
 
 
 block scroll
+	- function get_locale(option, lang) {var locale = option.filter(function(locale) { return locale.lg == lang })[0]; if (locale) {return locale.value } else {return ''} }
 	.content_title
 	.content_scroll_items
 		each image in event.images
-			img.content_scroll_item(src=image.thumb)
+			.content_scroll_item
+				img(src=image.thumb)
+				- var description = get_locale(image.description, locale)
+				if (description != '')
+					.content_image_description: != description

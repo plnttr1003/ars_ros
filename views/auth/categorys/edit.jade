@@ -23,10 +23,14 @@ block content_scripts
 block content
 	.form_block
 		a.back_link(href='/auth/categorys') < Назад
+		button.toggle_eng(type='button') перевод
 		.title РЕДАКТИРОВАТЬ КАТЕГОРИЮ
 		form(action="", method="post")
 			.form_title Заголовок:
 			+form_text_single('title', category)
+			.form_title Видимость:
+			input(type='checkbox', name='status', value='main', checked=category.status)
+			|на главной
 			br
 			br
 			input(type='submit', value='отправить')

@@ -40,7 +40,7 @@ var checkNested = function (obj, layers) {
 
 
 exports.list = function(req, res) {
-	Subsidiary.find().exec(function(err, subsidiarys) {
+	Subsidiary.find().sort('-date').exec(function(err, subsidiarys) {
 		res.render('auth/subsidiarys/', {subsidiarys: subsidiarys});
 	});
 }
@@ -75,6 +75,7 @@ exports.add_form = function(req, res) {
 			&& subsidiary.setPropertyLocalised('description', post[locale].description, locale);
 	});
 
+	subsidiary.status = post.status;
 
 	if (files.logo) {
 		fs.mkdir(__appdir + '/public/images/subsidiarys/' + subsidiary._id, function() {
@@ -109,10 +110,19 @@ exports.add_form = function(req, res) {
 	mkdirp.sync(public_path + images_path.thumb);
 
 	post.images.path.forEach(function(item, i) {
-		images.push({
-			path: post.images.path[i],
-			description: post.images.description[i]
-		});
+		var image_obj = {};
+		image_obj.path = post.images.path[i];
+		image_obj.description = {ru:null, en:null};
+
+		if (post.images.description.ru) {
+			image_obj.description.ru = post.images.description.ru[i];
+		}
+
+		if (post.images.description.en) {
+			image_obj.description.en = post.images.description.en[i];
+		}
+
+		images.push(image_obj);
 	});
 
 	async.forEachSeries(images, function(image, callback) {
@@ -123,14 +133,20 @@ exports.add_form = function(req, res) {
 
 		gm(public_path + image.path).resize(300, false).write(public_path + thumb_path, function() {
 			gm(public_path + image.path).write(public_path + original_path, function() {
-				subsidiary.images.push({
-					original: original_path,
-					thumb: thumb_path,
-					description: [{
-						lg: 'ru',
-						value: image.description
-					}]
-				});
+				var image_obj = {};
+				image_obj.original = original_path;
+				image_obj.thumb = thumb_path;
+				image_obj.description = [{
+					lg: 'ru',
+					value: image.description.ru
+				}]
+				if (image.description.en) {
+					image_obj.description.push({
+						lg: 'en',
+						value: image.description.en
+					})
+				}
+				subsidiary.images.push(image_obj);
 				callback();
 			});
 		});
@@ -188,6 +204,8 @@ exports.edit_form = function(req, res) {
 				&& subsidiary.setPropertyLocalised('description', post[locale].description, locale);
 		});
 
+		subsidiary.status = post.status;
+
 		subsidiary.logo.position.x = post.position.x || 0;
 		subsidiary.logo.position.y = post.position.y || 0;
 
@@ -224,10 +242,19 @@ exports.edit_form = function(req, res) {
 		subsidiary.images = [];
 
 		post.images.path.forEach(function(item, i) {
-			images.push({
-				path: post.images.path[i],
-				description: post.images.description[i]
-			});
+			var image_obj = {};
+			image_obj.path = post.images.path[i];
+			image_obj.description = {ru:null, en:null};
+
+			if (post.images.description.ru) {
+				image_obj.description.ru = post.images.description.ru[i];
+			}
+
+			if (post.images.description.en) {
+				image_obj.description.en = post.images.description.en[i];
+			}
+
+			images.push(image_obj);
 		});
 
 		async.forEachSeries(images, function(image, callback) {
@@ -238,14 +265,20 @@ exports.edit_form = function(req, res) {
 
 			gm(public_path + image.path).resize(300, false).write(public_path + thumb_path, function() {
 				gm(public_path + image.path).write(public_path + original_path, function() {
-					subsidiary.images.push({
-						original: original_path,
-						thumb: thumb_path,
-						description: [{
-							lg: 'ru',
-							value: image.description
-						}]
-					});
+					var image_obj = {};
+					image_obj.original = original_path;
+					image_obj.thumb = thumb_path;
+					image_obj.description = [{
+						lg: 'ru',
+						value: image.description.ru
+					}]
+					if (image.description.en) {
+						image_obj.description.push({
+							lg: 'en',
+							value: image.description.en
+						})
+					}
+					subsidiary.images.push(image_obj);
 					callback();
 				});
 			});

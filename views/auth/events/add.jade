@@ -2,7 +2,7 @@ extends ../../layout
 include ../forms.jade
 
 block title
-	title ДОБАВИТЬ АЛЬБОМ
+	title ДОБАВИТЬ СОБЫТИЕ
 
 block content_style
 	link(rel='stylesheet', type='text/css', href='/build/libs/css/font-awesome.css')
@@ -16,13 +16,15 @@ block content_scripts
 	script(type='text/javascript', src='/build/libs/js/jquery.filedrop.js')
 	script(type='text/javascript', src='/build/js/upload.js')
 	script(type='text/javascript', src='/build/js/add.js')
+
 block content
 	- var year = new Date()
 	- year = year.getFullYear()
 	- var months = ['ЯНВАРЬ', 'ФЕВРАЛЬ', 'МАРТ', 'АПРЕЛЬ', 'МАЙ', 'ИЮНЬ', 'ИЮЛЬ', 'АВГУСТ', 'СЕНТЯБРЬ', 'ОКТЯБРЬ', 'НОЯБРЬ', 'ДЕКАБРЬ']
 	.form_block
 		a.back_link(href='/auth/events') < Назад
-		.title ДОБАВИТЬ АЛЬБОМ
+		button.toggle_eng(type='button') перевод
+		.title ДОБАВИТЬ Альбом
 		form(action="", method="post")
 			.form_title Заголовок:
 			+form_text_single('title')
@@ -32,24 +34,36 @@ block content
 			+form_multiple_select('categorys', categorys)
 			.form_title Страна:
 			+form_single_select('subsidiary', subsidiarys)
-			//.form_title Статус
-			//input(type='checkbox', name='status', value='important')
-			//|важное
+			.form_title Порядок
+			select(name='status')
+				option(value='') обычный
+				option(value='important') наоборот
+				//-option(value='out') в разделе
+				//-option(value='hidden') скрытый
 			.form_title Статус:
 			select(name='type')
-				option(value='lecture') Обычный
-				option(value='excursion') Большой
 				option(value='exhibition') Очень большой
-				//option(value='action') Свадьбы
-				//option(value='xxi') Пейзажи
-			.form_title Дата начала:
+				option(value='excursion') Большой
+				option(value='lecture') Обычный
+				//-option(value='action') Мероприятие
+				//-option(value='teach') Центр прикладной педагогики
+				//-option(value='education') Образовательные программы
+				//- option(value='xxi') Дискуссионная площадка Тверская XXI
+			.form_title Дата альбома:
+			+form_calendar('date')
+			.form_title Дата начала альбома:
 			+form_calendar('date_start')
-			.form_title Дата конца:
+			.form_title Дата окончания альбома:
 			+form_calendar('date_end')
+			br
+			br
+			//-input(type='checkbox', name='date_hidden', value='true')
+			//-!=' скрыть дату'
+			//-.form_title Видео:
+			//-+form_multiple_input('videos')
 			.form_title Изображения:
 			.form_images_upload
 				.form_desc_title Перетащи сюда
 			br
 			br
 			input(type='submit', value='отправить')
-			//- button.toggle_eng перевод

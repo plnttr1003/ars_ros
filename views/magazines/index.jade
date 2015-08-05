@@ -1,0 +1,40 @@
+extends ../layout
+
+block title
+	title= __('ЖИВАЯ ИСТОРИЯ')
+
+block content_style
+	link(rel='stylesheet', type='text/css', href='/build/css/blocks_grid.css' + version)
+	link(rel='stylesheet', type='text/css', href='/build/css/collects.css' + version)
+
+block content_scripts
+	script(type='text/javascript', src='/build/libs/js/imagesloaded.pkgd.min.js' + version)
+	script(type='text/javascript', src='/build/libs/js/masonry.pkgd.min.js' + version)
+	script(type='text/javascript', src='/build/js/scroll.js' + version)
+	script(type='text/javascript', src='/build/js/collects.js' + version)
+
+mixin trimString(str, length)
+	if (str.length > length)
+		span.body: != str.substr(0, length)
+		span.etc ...
+		span.hide= str.substr(length, str.length)
+	- else
+		span.body: != str
+
+
+block content
+	.content_title Живая история
+	.content_outer_block
+		each magazine in magazines
+			a.content_item.collect(href='/magazines/' + magazine._id)
+				img.item_image(src=magazine.path.thumb)
+				.item_description
+					.item_title= magazine.i18n.title.get(locale)
+
+block scroll
+	.content_title
+	.content_scroll_items
+		each image in images
+			.content_scroll_item
+				img(src=image.path.thumb)
+				.content_image_description= image.i18n.description.get(locale)

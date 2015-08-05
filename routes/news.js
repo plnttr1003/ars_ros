@@ -11,7 +11,7 @@ var News = require('../models/main.js').News;
 
 
 exports.index = function(req, res) {
-  News.find().limit(5).sort('-date').exec(function(err, news) {
+  News.where('title.lg').equals(req.locale).where('status').ne('hidden').limit(12).sort('-date').exec(function(err, news) {
     res.render('news', {news: news});
   });
 }
@@ -28,10 +28,9 @@ exports.news = function(req, res) {
 exports.get_news = function(req, res) {
   var post = req.body;
 
-  News.find().sort('-date').skip(post.skip).limit(post.limit).exec(function(err, news) {
+  News.where('title.lg').equals(req.locale).where('status').ne('hidden').sort('-date').skip(post.skip).limit(post.limit).exec(function(err, news) {
     if (news.length > 0) {
-      var data = jade.renderFile(__appdir + '/views/news/get_news.jade', {news: news});
-      res.send(data);
+      res.send(jade.renderFile(__appdir + '/views/news/get_news.jade', {news: news, locale: req.locale}));
     } else {
       res.send('out');
     }

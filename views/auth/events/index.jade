@@ -1,24 +1,40 @@
 extends ../../layout
+include ../forms.jade
 
 block title
-	title= 'АЛЬБОМЫ'
+	title= 'Альбомы'
 
 block content_style
 	link(rel='stylesheet', type='text/css', href='/build/css/add.css')
+	link(rel='stylesheet', type='text/css', href='/build/css/eventslist.css')
 
 block content_scripts
 	script(type='text/javascript', src='/build/js/lists.js')
+	script(type='text/javascript', src='/build/js/eventslist.js')
 
 block content
 	a.back_link(href='/auth') < Назад
-	.title= 'АЛЬБОМЫ'
+	.title= 'Альбомы'
 	br
 	a.add(href='/auth/events/add') добавить альбом
-	br
-	br
+	//-.event_type_block
+		a#event ВСЕ
+		a#exhibition Выставка
+		a#lecture Лекция
+		a#action Мероприятие
+		a#excursion Экскурсия
+		a#teach Центр музейно-прикладной педагогики
+		a#education Музейно-образовательные программы
+		hr
+
+
+		each category in categorys
+			a(id= category.id)= category.i18n.title.get('ru')
+
+
 	.main_menu_block
 		each event in events
-			.event
+			.event(class= event.type + ' ' + event.categorys.join(' '))
 				a.rm_event(href='#', id=event._id)= 'удалить '
 				!=' | '
-				a(href='/auth/events/edit/' + event._id)= event.i18n.title.get('ru') ? event.i18n.title.get('ru') : 'Заголовок события'
+				a(href='/auth/events/edit/' + event._id)= event.i18n.title.get('ru') ? event.i18n.title.get('ru') : 'Заголовок альбома'

@@ -1,6 +1,7 @@
 doctype html
 html
 	head
+		include vars
 		include header
 	body
 		include counters
@@ -12,7 +13,11 @@ html
 						.options_block
 							.option.menu_item.about Обо мне
 							.option.menu_item.contacts Контакты
-							.option.menu_option 
+							//-.option.menu_option 
+							if (locale == 'ru')
+								a.option.lang(href='/lang/en') EN
+							else
+								a.option.lang(href='/lang/ru') RU
 			.content_block
 				.content_up_block
 					block content_up

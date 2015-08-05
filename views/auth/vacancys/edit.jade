@@ -1,0 +1,53 @@
+extends ../../layout
+include ../forms.jade
+
+block title
+	title РЕДАКТИРОВАТЬ ВАКАНСИЮ/СТАЖИРОВКУ
+
+block content_style
+	link(rel='stylesheet', type='text/css', href='/build/libs/css/font-awesome.css')
+	link(rel='stylesheet', type='text/css', href='/build/libs/css/wysiwyg-editor.css')
+	link(rel='stylesheet', type='text/css', href='/build/css/add.css')
+
+block content_scripts
+	script(type='text/javascript', src='/build/libs/js/wysiwyg.js')
+	script(type='text/javascript', src='/build/libs/js/wysiwyg-editor.js')
+	script(type='text/javascript', src='/build/libs/js/jquery-ui-1.10.4.custom.min.js')
+	script(type='text/javascript', src='/build/libs/js/jquery.filedrop.js')
+	script(type='text/javascript', src='/build/js/upload.js')
+	script(type='text/javascript', src='/build/js/add.js')
+
+//- block content_right
+//- 	.navigator
+//- 		.nav_title КАТЕГОРИЮ
+//- 		.nav_project_children
+//- 		br
+//- 		b.nav_settings_title настройки
+//- 		.toggle_eng перевод
+//- 		br
+//- 		b.form_submit ОТПРАВИТЬ
+
+block content
+	.form_block
+		a.back_link(href='/auth/vacancys') < Назад
+		button.toggle_eng(type='button') перевод
+		.title РЕДАКТИРОВАТЬ ВАКАНСИЮ/СТАЖИРОВКУ
+		form(action="", method="post")
+			.form_title Заголовок:
+			+form_text_single('title', vacancy)
+			.form_title Описание:
+			+form_text_multi('description', vacancy)
+			.form_title Статус:
+			select(name='status')
+				option(value='') обычный
+				option(value='out', selected=vacancy.status == 'out') в разделе
+				option(value='hidden', selected=vacancy.status == 'hidden') скрытый
+			.form_title Дата публикации:
+			+form_calendar('date', vacancy.date)
+			.form_title Видео:
+			+form_multiple_input('videos', vacancy.videos)
+			.form_title Изображения:
+			+form_images_upload(vacancy.images)
+			br
+			br
+			input(type='submit', value='отправить')

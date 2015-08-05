@@ -40,8 +40,12 @@ var checkNested = function (obj, layers) {
 
 
 exports.list = function(req, res) {
-	Event.find().exec(function(err, events) {
-		res.render('auth/events/', {events: events});
+	Event.find().sort('-date').exec(function(err, events) {
+		Event.distinct('categorys').exec(function(err, categorys) {
+			Category.where('_id').in(categorys).exec(function(err, categorys) {
+				res.render('auth/events/', {events: events, categorys: categorys});
+			});
+		});
 	});
 }
 
@@ -82,9 +86,13 @@ exports.add_form = function(req, res) {
 	event.subsidiary = post.subsidiary != 'none' ? post.subsidiary : undefined;
 	event.categorys = post.categorys == '' ? [] : post.categorys;
 
+	event.videos = post.videos.filter(function(n){ return n != '' });
+
 	event.interval.start = new Date(Date.UTC(post.date_start.year, post.date_start.month, post.date_start.date));
 	event.interval.end = new Date(Date.UTC(post.date_end.year, post.date_end.month, post.date_end.date));
+	event.interval.hidden = post.date_hidden;
 
+	event.date = new Date(Date.UTC(post.date.year, post.date.month, post.date.date));
 
 	if (!post.images) {
 		return (function () {
@@ -106,10 +114,19 @@ exports.add_form = function(req, res) {
 	mkdirp.sync(public_path + images_path.thumb);
 
 	post.images.path.forEach(function(item, i) {
-		images.push({
-			path: post.images.path[i],
-			description: post.images.description[i]
-		});
+		var image_obj = {};
+		image_obj.path = post.images.path[i];
+		image_obj.description = {ru:null, en:null};
+
+		if (post.images.description.ru) {
+			image_obj.description.ru = post.images.description.ru[i];
+		}
+
+		if (post.images.description.en) {
+			image_obj.description.en = post.images.description.en[i];
+		}
+
+		images.push(image_obj);
 	});
 
 	async.forEachSeries(images, function(image, callback) {
@@ -120,14 +137,20 @@ exports.add_form = function(req, res) {
 
 		gm(public_path + image.path).resize(520, false).write(public_path + thumb_path, function() {
 			gm(public_path + image.path).write(public_path + original_path, function() {
-				event.images.push({
-					original: original_path,
-					thumb: thumb_path,
-					description: [{
-						lg: 'ru',
-						value: image.description
-					}]
-				});
+				var image_obj = {};
+				image_obj.original = original_path;
+				image_obj.thumb = thumb_path;
+				image_obj.description = [{
+					lg: 'ru',
+					value: image.description.ru
+				}]
+				if (image.description.en) {
+					image_obj.description.push({
+						lg: 'en',
+						value: image.description.en
+					})
+				}
+				event.images.push(image_obj);
 				callback();
 			});
 		});
@@ -192,8 +215,13 @@ exports.edit_form = function(req, res) {
 		event.subsidiary = post.subsidiary != 'none' ? post.subsidiary : undefined;
 		event.categorys = post.categorys == '' ? [] : post.categorys;
 
+		event.videos = post.videos.filter(function(n){ return n != '' });
+
 		event.interval.start = new Date(Date.UTC(post.date_start.year, post.date_start.month, post.date_start.date));
 		event.interval.end = new Date(Date.UTC(post.date_end.year, post.date_end.month, post.date_end.date));
+		event.interval.hidden = post.date_hidden;
+
+		event.date = new Date(Date.UTC(post.date.year, post.date.month, post.date.date));
 
 		var public_path = __appdir + '/public';
 
@@ -219,10 +247,19 @@ exports.edit_form = function(req, res) {
 		event.images = [];
 
 		post.images.path.forEach(function(item, i) {
-			images.push({
-				path: post.images.path[i],
-				description: post.images.description[i]
-			});
+			var image_obj = {};
+			image_obj.path = post.images.path[i];
+			image_obj.description = {ru:null, en:null};
+
+			if (post.images.description.ru) {
+				image_obj.description.ru = post.images.description.ru[i];
+			}
+
+			if (post.images.description.en) {
+				image_obj.description.en = post.images.description.en[i];
+			}
+
+			images.push(image_obj);
 		});
 
 		async.forEachSeries(images, function(image, callback) {
@@ -233,14 +270,20 @@ exports.edit_form = function(req, res) {
 
 			gm(public_path + image.path).resize(520, false).write(public_path + thumb_path, function() {
 				gm(public_path + image.path).write(public_path + original_path, function() {
-					event.images.push({
-						original: original_path,
-						thumb: thumb_path,
-						description: [{
-							lg: 'ru',
-							value: image.description
-						}]
-					});
+					var image_obj = {};
+					image_obj.original = original_path;
+					image_obj.thumb = thumb_path;
+					image_obj.description = [{
+						lg: 'ru',
+						value: image.description.ru
+					}]
+					if (image.description.en) {
+						image_obj.description.push({
+							lg: 'en',
+							value: image.description.en
+						})
+					}
+					event.images.push(image_obj);
 					callback();
 				});
 			});
