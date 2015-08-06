@@ -24,7 +24,7 @@ block content
 	.form_block
 		a.back_link(href='/auth/events') < Назад
 		button.toggle_eng(type='button') перевод
-		.title ДОБАВИТЬ Альбом
+		.title ДОБАВИТЬ СОБЫТИЕ
 		form(action="", method="post")
 			.form_title Заголовок:
 			+form_text_single('title')
@@ -32,35 +32,36 @@ block content
 			+form_text_multi('description')
 			.form_title Категории:
 			+form_multiple_select('categorys', categorys)
-			.form_title Страна:
+			.form_title Филиал:
 			+form_single_select('subsidiary', subsidiarys)
-			.form_title Порядок
+			.form_title Статус
 			select(name='status')
 				option(value='') обычный
-				option(value='important') наоборот
+				option(value='important') важный
 				//-option(value='out') в разделе
 				//-option(value='hidden') скрытый
 			.form_title Статус:
 			select(name='type')
+				option(value='lecture') Обычный
 				option(value='exhibition') Очень большой
 				option(value='excursion') Большой
-				option(value='lecture') Обычный
 				//-option(value='action') Мероприятие
 				//-option(value='teach') Центр прикладной педагогики
 				//-option(value='education') Образовательные программы
 				//- option(value='xxi') Дискуссионная площадка Тверская XXI
-			.form_title Дата альбома:
+			.form_title Дата публикации:
 			+form_calendar('date')
-			.form_title Дата начала альбома:
+			.form_title Дата начала события:
 			+form_calendar('date_start')
-			.form_title Дата окончания альбома:
+			.form_title Дата окончания события:
 			+form_calendar('date_end')
 			br
-			br
-			//-input(type='checkbox', name='date_hidden', value='true')
+			//-br
+			input(type='checkbox', name='date_hidden', value='true', style='visibility:hidden')
 			//-!=' скрыть дату'
 			//-.form_title Видео:
-			//-+form_multiple_input('videos')
+			.videos_block(style='visibility:hidden')
+				+form_multiple_input('videos')
 			.form_title Изображения:
 			.form_images_upload
 				.form_desc_title Перетащи сюда

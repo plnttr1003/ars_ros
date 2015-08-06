@@ -42,9 +42,9 @@ block content
 				//-option(value='hidden', selected=event.status == 'hidden') скрытый
 			.form_title Статус:
 			select(name='type')
+				option(value='lecture', selected=event.type == 'lecture') Обычный
 				option(value='exhibition', selected=event.type == 'exhibition') Очень большой
 				option(value='excursion', selected=event.type == 'excursion') Большой
-				option(value='lecture', selected=event.type == 'lecture') Обычный
 				//-option(value='action', selected=event.type == 'action') Мероприятие
 				//-option(value='teach', selected=event.type == 'teach') Центр прикладной педагогики
 				//-option(value='education', selected=event.type == 'education') Образовательные программы
@@ -55,11 +55,12 @@ block content
 			.form_title Дата окончания альбома:
 			+form_calendar('date_end', event.interval.end)
 			br
-			br
-			//-input(type='checkbox', name='date_hidden', value='true', checked=event.interval.hidden)
+			//-br
+			input(type='checkbox', name='date_hidden', value='true', checked=event.interval.hidden, style='visibility:hidden')
 			//-!=' скрыть дату'
 			//-.form_title Видео:
-			//-+form_multiple_input('videos', event.videos)
+			.videos_block(style='visibility:hidden')
+				+form_multiple_input('videos')
 			.form_title Изображения:
 			+form_images_upload(event.images)
 			br
