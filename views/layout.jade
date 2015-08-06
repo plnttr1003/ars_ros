@@ -11,8 +11,8 @@ html
 					a.header_logo(href='/')
 					.menu_block.right
 						.options_block
-							.option.menu_item.about Обо мне
-							.option.menu_item.contacts Контакты
+							.option.menu_item.about= __('Обо мне')
+							.option.menu_item.contacts= __('Контакты')
 							//-.option.menu_option 
 							if (locale == 'ru')
 								a.option.lang(href='/lang/en') EN
@@ -26,8 +26,8 @@ html
 						.column_main_inner
 							block content
 							.footer_block
-								.footer_block_inner Все тексты и изображения ©Арсений Россихин
+								.footer_block_inner= __('Все тексты и изображения ©Арсений Россихин')
 									br
-									| 2015 Все права защищены
+									span= __('2015 Все права защищены')
 					.content_column.scroll
 						block scroll
