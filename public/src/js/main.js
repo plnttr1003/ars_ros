@@ -71,7 +71,7 @@ $(document).ready(function() {
 		});
 	}
 
-	function clickLoader(event) {
+	function clickLoader() {
 		context.skip = 12;
 		var context_item = $(this).closest('.content_navigate_block').attr('class').split(' ')[1];
 		var nav_item = $(this).attr('class').split(' ')[1];
