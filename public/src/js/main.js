@@ -38,8 +38,7 @@ $(document).ready(function() {
 
 		if (outer_offset_bottom - column_height <= $column_main.scrollTop()) {
 			$column_main.off('scroll.load').promise().done(function() {
-				$.ajax({ url: '/', method: 'POST', async: false, data: {context: context, skip: context.skip, limit: 6} }).done(function(elems) {
-
+				$.ajax({ url: '/', method: 'POST', async: false, data: {context: context, skip: context.skip, limit: 6} }).done(function(elems) {					
 					if (elems != 'out') {
 						$elems = $(elems);
 						$container.append($elems).masonry('appended', $elems).imagesLoaded(function() {
