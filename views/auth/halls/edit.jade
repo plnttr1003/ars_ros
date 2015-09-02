@@ -2,7 +2,7 @@ extends ../../layout
 include ../forms.jade
 
 block title
-	title РЕДАКТИРОВАТЬ ЗАЛ
+	title Обратная связь
 
 block content_style
 	link(rel='stylesheet', type='text/css', href='/build/libs/css/font-awesome.css')
@@ -23,19 +23,14 @@ block content
 	- var months = ['ЯНВАРЬ', 'ФЕВРАЛЬ', 'МАРТ', 'АПРЕЛЬ', 'МАЙ', 'ИЮНЬ', 'ИЮЛЬ', 'АВГУСТ', 'СЕНТЯБРЬ', 'ОКТЯБРЬ', 'НОЯБРЬ', 'ДЕКАБРЬ']
 	.form_block
 		a.back_link(href='/auth/halls/') < Назад
-		button.toggle_eng(type='button') перевод
-		.title РЕДАКТИРОВАТЬ ЗАЛ
+		.title Обращение
 		form(action="", method="post")
-			.form_title Заголовок:
+			.form_title Имя:
 			+form_text_single('title', hall)
-			.form_title Подзаголовок (номер):
+			.form_title E-mail:
 			+form_text_single('s_title', hall)
-			.form_title Описание:
+			.form_title Сообщение:
 			+form_text_multi('description', hall)
-			.form_title Филиал:
-			+form_single_select('subsidiary', subsidiarys, hall.subsidiary)
-			.form_title Изображения:
-			+form_images_upload(hall.images)
 			br
 			br
 			input(type='submit', value='отправить')
