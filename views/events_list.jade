@@ -7,26 +7,27 @@ mixin compareInterval(start, end)
 		!= ('0' + end.getUTCDate()).slice(-2) + '/' + ('0' + (end.getUTCMonth() + 1)).slice(-2) + '/' + ('0' + end.getUTCFullYear()).slice(-2)
 
 mixin eventsList(events)
+	| iiii
 	each event in events
 		if (event.type == 'excursion')
-			.content_item.event.important(href='/events/' + event.type +'/' + event._id, style='background-image: url(' + (event.images && event.images.length > 0 && event.images[0].original) + ')')
+			a.content_item.event.important(href='/events/' + event.type +'/' + event._id, style='background-image: url(' + (event.images && event.images.length > 0 && event.images[0].original) + ')')
 				.item_description.ttt1
 					.item_title= event.i18n.title.get(locale)
-						each image in event.images.reverse()
+						//-each image in event.images.reverse()
 							a.item_fancy(href=image.original, data-fancybox-group='' + event._id + '')
 							//- var description = get_locale(image.description, locale)
 							//-if (description != '')
 								.content_image_description: != description
 
 		else if (event.type == 'exhibition')
-			.content_item.event.special_important(href='/events/' + event.type +'/' + event._id, style='background-image: url(' + (event.images && event.images.length > 0 && event.images[0].original) + ')')
+			a.content_item.event.special_important(href='/events/' + event.type +'/' + event._id, style='background-image: url(' + (event.images && event.images.length > 0 && event.images[0].original) + ')')
 				.item_description.ttt2
 					.item_title= event.i18n.title.get(locale)
-						each image in event.images.reverse()
+						//-each image in event.images.reverse()
 							a.item_fancy(href=image.original, data-fancybox-group='' + event._id + '')
 		else
-			.content_item.event(href='/events/' + event.type +'/' + event._id, style='background-image: url(' + (event.images && event.images.length > 0 && event.images[0].original) + ')' )
+			a.content_item.event(href='/events/' + event.type +'/' + event._id, style='background-image: url(' + (event.images && event.images.length > 0 && event.images[0].original) + ')' )
 				.item_description.ttt3
 					.item_title= event.i18n.title.get(locale)
-						each image in event.images.reverse()
+						//-each image in event.images.reverse()
 							a.item_fancy(href=image.original, data-fancybox-group='' + event._id + '')
