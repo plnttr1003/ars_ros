@@ -18,9 +18,6 @@ function intro_runction() {
 
 	$('.option.menu_option').click(function () {
 			var scr = $('body').height();
-			/*$('.info_block').show().css({'margin-top': - parseInt(scr) }).animate({
-				marginTop: 0,
-			}, 800);*/
 			$('.info_block').show()
 			$('.about_block, .contacts_block').hide();
 			$('.header_block').addClass('black_header');

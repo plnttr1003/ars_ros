@@ -1,9 +1,14 @@
 extends ../layout
 
 block title
-	title= __('СОБЫТИЯ') + ' | ' + event.i18n.title.get(locale).toUpperCase()
-	meta(name='description', content=event.i18n.description.get(locale).replace(/<[^>]+>/g,' '))
-	meta(property='og:description', content=event.i18n.description.get(locale).replace(/<[^>]+>/g,' '))
+	if (!event.i18n.title.get(locale))
+		title= '####'
+	else
+		title= event.i18n.title.get(locale).toUpperCase()
+	if (!event.i18n.description.get(locale))
+	else
+		meta(name='description', content=event.i18n.description.get(locale).replace(/<[^>]+>/g,' '))
+		meta(property='og:description', content=event.i18n.description.get(locale).replace(/<[^>]+>/g,' '))
 	each image in event.images
 		meta(property='og:image', content=image.thumb)
 
