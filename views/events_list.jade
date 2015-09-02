@@ -7,7 +7,6 @@ mixin compareInterval(start, end)
 		!= ('0' + end.getUTCDate()).slice(-2) + '/' + ('0' + (end.getUTCMonth() + 1)).slice(-2) + '/' + ('0' + end.getUTCFullYear()).slice(-2)
 
 mixin eventsList(events)
-	| iiii
 	each event in events
 		if (event.type == 'excursion')
 			a.content_item.event.important(href='/events/' + event.type +'/' + event._id, style='background-image: url(' + (event.images && event.images.length > 0 && event.images[0].original) + ')')
