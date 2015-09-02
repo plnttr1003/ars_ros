@@ -49,7 +49,7 @@ block content
 	- function get_locale(option, lang) {var locale = option.filter(function(locale) { return locale.lg == lang })[0]; if (locale) {return locale.value } else {return ''} }
 	.content_title
 	.content_scroll_items
-		each image in event.images
+		each image in event.images.reverse()
 			a.item_fancy(href=image.original, data-fancybox-group='image')
 				img(src=image.thumb)
 				//- - var description = get_locale(image.description, locale)
