@@ -1,5 +1,5 @@
 extends ../layout
-include ../events_list.jade
+include ../events_list_main.jade
 
 block title
 	title= __('ГЛАВНАЯ')
@@ -12,10 +12,9 @@ block content_style
 
 block content_scripts
 	script(type='text/javascript', src='/build/libs/js/imagesloaded.pkgd.min.js' + version)
-	script(type='text/javascript', src='/build/libs/js/jquery.fancybox.js' + version)
 	script(type='text/javascript', src='/build/libs/js/masonry.pkgd.min.js' + version)
 	script(type='text/javascript', src='/build/js/main.js' + version)
-	script(type='text/javascript', src='/build/js/fancybox.js' + version)
+	script(type='text/javascript', src='/build/js/main_layers.js' + version)
 
 block content
 	- ev_lnght = Math.floor(Math.random() * ((events.length - 1) - 0 + 1)) + 0

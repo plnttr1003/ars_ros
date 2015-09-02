@@ -8,11 +8,15 @@ block title
 		meta(property='og:image', content=image.thumb)
 
 block content_style
+	link(rel='stylesheet', type='text/css', href='/build/css/blocks_grid.css' + version)
 	link(rel='stylesheet', type='text/css', href='/build/css/event.css' + version)
-	link(rel='stylesheet', type='text/css', href='/build/css/ya_share.css' + version)
+	link(rel='stylesheet', type='text/css', href='/build/libs/css/jquery.fancybox.css' + version)
 
 block content_scripts
-	script(type='text/javascript', src='/build/js/scroll.js' + version)
+	script(type='text/javascript', src='/build/libs/js/jquery.fancybox.js' + version)
+	script(type='text/javascript', src='/build/js/fancybox.js' + version)
+	//-script(type='text/javascript', src='/build/js/scroll.js' + version)
+	script(type='text/javascript', src='/build/libs/js/masonry.pkgd.min.js' + version)
 	script(type='text/javascript', src='/build/js/event.js' + version)
 
 mixin compareInterval(start, end)
@@ -22,34 +26,31 @@ mixin compareInterval(start, end)
 		!= start.getDate() + ' ' + months[start.getMonth()] + ' ' + start.getFullYear() + ' - ' + end.getDate() + ' ' + months[end.getMonth()] + ' ' + end.getFullYear()
 
 
-block content
+//-block content
 	.content_title= event.i18n.title.get(locale)
 	if (!event.interval.hidden)
 		.content_date: +compareInterval(event.interval.start, event.interval.end)
 
 
-	.content_subs= event.subsidiary && event.subsidiary.i18n.title.get(locale)
+	//-.content_subs= event.subsidiary && event.subsidiary.i18n.title.get(locale)
 
-	.content_body: != event.i18n.description.get(locale)
+	//-.content_body: != event.i18n.description.get(locale)
 
-	if (event.videos && event.videos.length == 1)
+	//-if (event.videos && event.videos.length == 1)
 		.content_video_block
 			each video in event.videos
 				.content_video_item.important_video: != video
-	else if (event.videos && event.videos.length > 1)
+	//-else if (event.videos && event.videos.length > 1)
 		.content_video_block
 			each video in event.videos
 				.content_video_item: != video
 
-	| <script type="text/javascript" src="//yastatic.net/share/share.js" charset="utf-8"></script><div class="yashare-auto-init" data-yashareL10n="ru" data-yashareType="none" data-yashareQuickServices="vkontakte,facebook,twitter"></div>
-
-
-block scroll
+block content
 	- function get_locale(option, lang) {var locale = option.filter(function(locale) { return locale.lg == lang })[0]; if (locale) {return locale.value } else {return ''} }
 	.content_title
 	.content_scroll_items
 		each image in event.images
-			.content_scroll_item
+			a.item_fancy(href=image.original, data-fancybox-group='image')
 				img(src=image.thumb)
 				- var description = get_locale(image.description, locale)
 				if (description != '')
