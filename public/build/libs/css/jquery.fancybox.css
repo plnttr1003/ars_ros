@@ -173,7 +173,7 @@ a.fancybox-nav span:after {
     content: '';
     height: 75px;
     line-height: 75px;
-    font-size: 75px;
+    font-size: 55px;
     color: #fff;
     text-align: center;
 }
