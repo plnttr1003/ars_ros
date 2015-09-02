@@ -48,10 +48,11 @@ mixin compareInterval(start, end)
 block content
 	- function get_locale(option, lang) {var locale = option.filter(function(locale) { return locale.lg == lang })[0]; if (locale) {return locale.value } else {return ''} }
 	.content_title
+		.content_title_inner= event.i18n.title.get(locale)
 	.content_scroll_items
 		each image in event.images.reverse()
-			a.item_fancy(href=image.original, data-fancybox-group='image')
-				img(src=image.thumb)
+			a.item_fancy(href=image.original, data-fancybox-group='image', style='background-image:url('+image.thumb+')')
+				//- img(src=)
 				//- - var description = get_locale(image.description, locale)
 				//-if (description != '')
 					.content_image_description: != description
