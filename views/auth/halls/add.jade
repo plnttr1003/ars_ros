@@ -2,7 +2,7 @@ extends ../../layout
 include ../forms.jade
 
 block title
-	title ДОБАВИТЬ ЗАЛ
+	title Оставить запись
 
 block content_style
 	link(rel='stylesheet', type='text/css', href='/build/libs/css/font-awesome.css')
@@ -32,11 +32,15 @@ block content
 
 
 		form(action="", method="post")
-			.form_title Ваше имя...
+			.form_title= __('Ваше имя...')
 			+form_text_single('title')
-			.form_title E-mail...
+			.form_title= __('E-mail...')
 			+form_text_single('s_title')
-			.form_title Сообщение...
+			.form_title= __('Сообщение...')
 			+form_text_multi('description')
-			input(type='submit', value='отправить')
+			if (locale == 'ru')
+				input(type='submit', value='отправить сообщение')
+			else
+				input(type='submit', value='send message')
+
 			//- button.toggle_eng перевод
