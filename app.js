@@ -64,6 +64,9 @@ var news = require('./routes/news.js');
 var vacancys = require('./routes/vacancys.js');
 var collects = require('./routes/collects.js');
 var history = require('./routes/history.js');
+
+//var halls = require('./routes/admin/halls.js');
+
 var exposure = require('./routes/exposure.js');
 var subsidiarys = require('./routes/subsidiarys.js');
 var souvenirs = require('./routes/souvenirs.js');
@@ -359,7 +362,7 @@ app.route('/auth/collects/remove')
 // ------------------------
 
 
-
+/*
 // === Admin halls Route
 app.route('/auth/halls').get(checkAuth, admin_halls.list);
 
@@ -368,6 +371,18 @@ app.route('/auth/halls').get(checkAuth, admin_halls.list);
 app.route('/auth/halls/add')
 	 .get(checkAuth, admin_halls.add)
 	 .post(checkAuth, admin_halls.add_form);
+
+*/
+
+// === Admin halls Route
+app.route('/auth/halls').get(admin_halls.list);
+
+
+// === Admin @add halls Route
+app.route('/auth/halls/add')
+	 .get(admin_halls.add)
+	 .post(admin_halls.add_form);
+
 
 
 // === Admin @edit halls Route

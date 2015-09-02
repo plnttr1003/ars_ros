@@ -29,18 +29,12 @@ block content
 		.info_block_inner
 			.content_navigate_block
 
-
 				if (categorys.length > 0)
 					.content_navigate_block.categorys
 						.navigate_title= __('Категории:')
 						.navigate_items_block
 							each category in categorys
 								.navigate_item(class=category._id.toString())= category.i18n.title.get(locale)
-
-				//-.navigate_items_block
-					.navigate_item.exhibition= __('Выставки')
-					.navigate_item.lecture= __('Лекции')
-					.navigate_item.action= __('Мероприятия')
 
 		.goto_down
 			a.goto_down_inner.info
@@ -60,14 +54,7 @@ block content
 	.screen_block.contacts_block
 		.about_block_inner
 			.about_text_inner
-				p.name= __('Арсений Россихин')
-				p.phone +7 (925) 729-79-81
-				p.email
-					a(href="mailto:rossikhinarseny@mail.ru") rossikhinarseny@mail.ru
-
-			input.form_block(placeholder="Ваше имя...")
-			input.form_block(placeholder="E-mail...")
-			textarea.form_block(placeholder="Сообщение...")
+				iframe(src='/auth/halls/add', width=700, height=700, frameborder=0, allowtransparency=1, scrolling=0)
 			.social_block
 				a.vk(href='https://vk.com/rossikhin')  
 				a.fb(href='https://www.facebook.com/arseny.rossikhin') 
@@ -79,12 +66,6 @@ block content
 	.content_outer_block
 		.content_outer_block_inner
 
-
 			.content_outer_block_inner
 				.content_events_block
 					+eventsList(events)
-
-
-
-
-

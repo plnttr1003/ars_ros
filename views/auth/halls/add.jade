@@ -8,6 +8,7 @@ block content_style
 	link(rel='stylesheet', type='text/css', href='/build/libs/css/font-awesome.css')
 	link(rel='stylesheet', type='text/css', href='/build/libs/css/wysiwyg-editor.css')
 	link(rel='stylesheet', type='text/css', href='/build/css/add.css')
+	link(rel='stylesheet', type='text/css', href='/build/css/add_static.css')
 
 block content_scripts
 	script(type='text/javascript', src='/build/libs/js/wysiwyg.js')
@@ -22,22 +23,20 @@ block content
 	- year = year.getFullYear()
 	- var months = ['ЯНВАРЬ', 'ФЕВРАЛЬ', 'МАРТ', 'АПРЕЛЬ', 'МАЙ', 'ИЮНЬ', 'ИЮЛЬ', 'АВГУСТ', 'СЕНТЯБРЬ', 'ОКТЯБРЬ', 'НОЯБРЬ', 'ДЕКАБРЬ']
 	.form_block
-		a.back_link(href='/auth/halls') < Назад
-		button.toggle_eng(type='button') перевод
-		.title ДОБАВИТЬ ЗАЛ
+		//- a.back_link(href='/auth/halls') < Назад
+		//- button.toggle_eng(type='button') перевод
+		p.name= __('Арсений Россихин')
+		p.phone +7 (925) 729-79-81
+		p.email
+			a(href="mailto:rossikhinarseny@mail.ru") rossikhinarseny@mail.ru
+
+
 		form(action="", method="post")
-			.form_title Заголовок:
+			.form_title Ваше имя...
 			+form_text_single('title')
-			.form_title Подзаголовок (номер):
+			.form_title E-mail...
 			+form_text_single('s_title')
-			.form_title Описание:
+			.form_title Сообщение...
 			+form_text_multi('description')
-			.form_title Филиал:
-			+form_single_select('subsidiary', subsidiarys)
-			.form_title Изображения:
-			.form_images_upload
-				.form_desc_title Перетащи сюда
-			br
-			br
 			input(type='submit', value='отправить')
 			//- button.toggle_eng перевод
