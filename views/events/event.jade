@@ -100,6 +100,10 @@ block content
 	- function get_locale(option, lang) {var locale = option.filter(function(locale) { return locale.lg == lang })[0]; if (locale) {return locale.value } else {return ''} }
 	.content_title
 		.content_title_inner= event.i18n.title.get(locale)
+				if (!event.i18n.description.get(locale))
+				else
+					a.item_fancy.text(href='#description') 
+					#description= event.i18n.description.get(locale)
 	.content_scroll_items
 		each image in event.images.reverse()
 			a.item_fancy(href=image.original, data-fancybox-group='image', style='background-image:url('+image.thumb+')')

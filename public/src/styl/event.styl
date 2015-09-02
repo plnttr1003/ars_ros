@@ -26,7 +26,6 @@
 		position absolute
 		overflow-y scroll
 		cursor pointer
-
 		z-index 2000
 		background #000
 		.intro_block_background
@@ -155,7 +154,8 @@
 		&:after
 			opacity 0.8
 
-
+#description
+	display none
 
 .content_scroll_items
 .content_title
@@ -175,5 +175,14 @@
 	background-size cover
 	background-position 50%
 	background-repeat no-repeat
+	&.text
+		display inline
+		margin 0
+		width auto
+		height auto
+		font-family 'menu'
+		color #000
+		text-decoration none
+		padding-left 20px
 	&:hover
 		opacity 0.5
