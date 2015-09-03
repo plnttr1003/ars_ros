@@ -160,24 +160,24 @@ app.route('/auth/users/remove')
 
 
 // === Admin halls Route
-app.route('/auth/halls').get(admin_halls.list);
+app.route('/auth/feedback').get(admin_halls.list);
 
 
 // === Admin @add halls Route
-app.route('/auth/halls/add')
+app.route('/auth/feedback/add')
 	 .get(admin_halls.add)
 	 .post(admin_halls.add_form);
 
 
 
 // === Admin @edit halls Route
-app.route('/auth/halls/edit/:id')
+app.route('/auth/feedback/edit/:id')
 	 .get(checkAuth, admin_halls.edit)
 	 .post(checkAuth, admin_halls.edit_form);
 
 
 // === Admin @remove halls Route
-app.route('/auth/halls/remove')
+app.route('/auth/feedback/remove')
 	 .post(checkAuth, admin_halls.remove);
 
 
@@ -189,23 +189,23 @@ app.route('/auth/halls/remove')
 
 
 // === Admin subsidiarys Route
-app.route('/auth/subsidiarys').get(checkAuth, admin_subsidiarys.list);
+app.route('/auth/countries').get(checkAuth, admin_subsidiarys.list);
 
 
 // === Admin @add subsidiarys Route
-app.route('/auth/subsidiarys/add')
+app.route('/auth/countries/add')
 	 .get(checkAuth, admin_subsidiarys.add)
 	 .post(checkAuth, admin_subsidiarys.add_form);
 
 
 // === Admin @edit subsidiarys Route
-app.route('/auth/subsidiarys/edit/:id')
+app.route('/auth/countries/edit/:id')
 	 .get(checkAuth, admin_subsidiarys.edit)
 	 .post(checkAuth, admin_subsidiarys.edit_form);
 
 
 // === Admin @remove subsidiarys Route
-app.route('/auth/subsidiarys/remove')
+app.route('/auth/countries/remove')
 	 .post(checkAuth, admin_subsidiarys.remove);
 
 
@@ -217,23 +217,23 @@ app.route('/auth/subsidiarys/remove')
 
 
 // === Admin events Route
-app.route('/auth/events').get(checkAuth, admin_events.list);
+app.route('/auth/albums').get(checkAuth, admin_events.list);
 
 
 // === Admin @add events Route
-app.route('/auth/events/add')
+app.route('/auth/albums/add')
 	 .get(checkAuth, admin_events.add)
 	 .post(checkAuth, admin_events.add_form);
 
 
 // === Admin @edit events Route
-app.route('/auth/events/edit/:id')
+app.route('/auth/albums/edit/:id')
 	 .get(checkAuth, admin_events.edit)
 	 .post(checkAuth, admin_events.edit_form);
 
 
 // === Admin @remove events Route
-app.route('/auth/events/remove')
+app.route('/auth/albums/remove')
 	 .post(checkAuth, admin_events.remove);
 
 

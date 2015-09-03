@@ -16,7 +16,7 @@ block content
 	a.back_link(href='/auth') < Назад
 	.title= 'Альбомы'
 	br
-	a.add(href='/auth/events/add') добавить альбом
+	a.add(href='/auth/albums/add') добавить альбом
 	//-.event_type_block
 		a#event ВСЕ
 		a#exhibition Выставка
@@ -37,4 +37,4 @@ block content
 			.event(class= event.type + ' ' + event.categorys.join(' '))
 				a.rm_event(href='#', id=event._id)= 'удалить '
 				!=' | '
-				a(href='/auth/events/edit/' + event._id)= event.i18n.title.get('ru') ? event.i18n.title.get('ru') : 'Заголовок альбома'
+				a(href='/auth/albums/edit/' + event._id)= event.i18n.title.get('ru') ? event.i18n.title.get('ru') : 'Заголовок альбома'

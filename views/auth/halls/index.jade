@@ -19,4 +19,4 @@ block content
 			.hall
 				a.rm_hall(href='#', id=hall._id)= 'удалить '
 				!=' | '
-				a(href='/auth/halls/edit/' + hall._id)= hall.i18n.title.get('ru') ? hall.i18n.title.get('ru') : 'Название зала'
+				a(href='/auth/feedback/edit/' + hall._id)= hall.i18n.title.get('ru') ? hall.i18n.title.get('ru') : 'Название зала'
