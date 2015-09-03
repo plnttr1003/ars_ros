@@ -108,17 +108,17 @@ app.route('/')
 	.post(main.get_events);
 
 // === Events Route
-app.route('/events')
+app.route('/albums')
 	.get(events.index)
 	.post(events.get_events);
 
 // === Events Tag Route
-app.route('/events/:type').get(events.index);
+//app.route('/albums/:type').get(events.index);
 
 // === Events Tag Route
-app.route('/events/:type/:id').get(events.event);
+//app.route('/albums/:type/:id').get(events.event);
 
-
+	app.route('/albums/:id').get(events.event);
 
 
 // === Subsidiarys Route
