@@ -14,18 +14,6 @@ var userSchema = new Schema({
 
 
 
-var exhibitSchema = new Schema({
-	title: { type: String, trim: true, locale: true },
-	description: { type: String, trim: true, locale: true },
-	hall: { type: Schema.Types.ObjectId, ref: 'Hall' },
-	collect: { type: Schema.Types.ObjectId, ref: 'Collect' },
-	images: [{
-		description: { type: String, trim: true, locale: true },
-		original: String,
-		thumb: String
-	}],
-	date: {type: Date, default: Date.now}
-});
 
 
 var hallSchema = new Schema({
@@ -139,13 +127,12 @@ gallerySchema.statics.random = function(opts, limit, sort, callback) {
 
 userSchema.plugin(mongooseBcrypt, { fields: ['password'] });
 
-exhibitSchema.plugin(mongooseLocale);
+
 hallSchema.plugin(mongooseLocale);
 subsidiarySchema.plugin(mongooseLocale);
 eventSchema.plugin(mongooseLocale);
 categorySchema.plugin(mongooseLocale);
 gallerySchema.plugin(mongooseLocale);
-magazineSchema.plugin(mongooseLocale);
 
 
 // ------------------------
@@ -153,7 +140,6 @@ magazineSchema.plugin(mongooseLocale);
 // ------------------------
 
 
-exhibitSchema.index({'title.value': 'text', 'description.value': 'text'}, {language_override:'lg', default_language: 'ru'});
 eventSchema.index({'title.value': 'text', 'description.value': 'text'}, {language_override:'lg', default_language: 'ru'});
 
 
@@ -163,10 +149,8 @@ eventSchema.index({'title.value': 'text', 'description.value': 'text'}, {languag
 
 
 module.exports.User = mongoose.model('User', userSchema);
-module.exports.Exhibit = mongoose.model('Exhibit', exhibitSchema);
 module.exports.Hall = mongoose.model('Hall', hallSchema);
 module.exports.Subsidiary = mongoose.model('Subsidiary', subsidiarySchema);
 module.exports.Event = mongoose.model('Event', eventSchema);
 module.exports.Category = mongoose.model('Category', categorySchema);
 module.exports.Gallery = mongoose.model('Gallery', gallerySchema);
-module.exports.Magazine = mongoose.model('Magazine', magazineSchema);

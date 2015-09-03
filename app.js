@@ -66,21 +66,18 @@ var events = require('./routes/events.js');
 
 var exposure = require('./routes/exposure.js');
 var subsidiarys = require('./routes/subsidiarys.js');
-var magazines = require('./routes/magazines.js');
 var content = require('./routes/content.js');
 var files = require('./routes/files.js');
 
 var auth = require('./routes/auth.js');
 
 var admin_users = require('./routes/admin/users.js');
-var admin_exhibits = require('./routes/admin/exhibits.js');
 
 var admin_halls = require('./routes/admin/halls.js');
 var admin_subsidiarys = require('./routes/admin/subsidiarys.js');
 var admin_events = require('./routes/admin/events.js');
 var admin_categorys = require('./routes/admin/categorys.js');
-var admin_magazines = require('./routes/admin/magazines.js');
-var admin_official = require('./routes/admin/official.js');
+
 var admin_contacts = require('./routes/admin/contacts.js');
 var admin_gallerys = require('./routes/admin/gallerys.js');
 
@@ -121,25 +118,6 @@ app.route('/events/:type').get(events.index);
 // === Events Tag Route
 app.route('/events/:type/:id').get(events.event);
 
-// === Officials Route
-app.route('/official')
-	.get(content.official)
-
-
-
-// === Magazines Route
-app.route('/magazines')
-	.get(globals.imageGallery('main'), magazines.index)
-	.post(magazines.get_magazines)
-
-// === Magazine Route
-app.route('/magazines/:id').get(magazines.magazine)
-
-// === Exposure Route
-app.route('/exposure').get(globals.imageGallery('main'), exposure.index);
-
-// === Exposure hall Route
-app.route('/exposure/:id').get(exposure.hall);
 
 
 
@@ -177,31 +155,6 @@ app.route('/auth/users/remove')
 	 .post(checkAuth, admin_users.remove);
 
 
-// ------------------------
-// *** Admin Exhibitis Routes Block ***
-// ------------------------
-
-
-
-// === Admin exhibitis Route
-app.route('/auth/exhibits').get(checkAuth, admin_exhibits.list);
-
-
-// === Admin @add exhibitis Route
-app.route('/auth/exhibits/add')
-	 .get(checkAuth, admin_exhibits.add)
-	 .post(checkAuth, admin_exhibits.add_form);
-
-
-// === Admin @edit exhibitis Route
-app.route('/auth/exhibits/edit/:id')
-	 .get(checkAuth, admin_exhibits.edit)
-	 .post(checkAuth, admin_exhibits.edit_form);
-
-
-// === Admin @remove exhibitis Route
-app.route('/auth/exhibits/remove')
-	 .post(checkAuth, admin_exhibits.remove);
 
 
 
@@ -340,32 +293,6 @@ app.route('/auth/gallerys/remove')
 	 .post(checkAuth, admin_gallerys.remove);
 
 
-// ------------------------
-// *** Admin Magazines Routes Block ***
-// ------------------------
-
-
-
-// === Admin magazines Route
-app.route('/auth/magazines').get(checkAuth, admin_magazines.list);
-
-
-// === Admin @add magazines Route
-app.route('/auth/magazines/add')
-	 .get(checkAuth, admin_magazines.add)
-	 .post(checkAuth, admin_magazines.add_form);
-
-
-// === Admin @edit magazines Route
-app.route('/auth/magazines/edit/:id')
-	 .get(checkAuth, admin_magazines.edit)
-	 .post(checkAuth, admin_magazines.edit_form);
-
-
-// === Admin @remove magazines Route
-app.route('/auth/magazines/remove')
-	 .post(checkAuth, admin_magazines.remove);
-
 
 // ------------------------
 // *** Admin Contacts Content ***
@@ -376,9 +303,6 @@ app.route('/auth/contacts')
 	 .get(checkAuth, admin_contacts.edit)
 	 .post(checkAuth, admin_contacts.edit_form);
 
-app.route('/auth/official')
-	 .get(checkAuth, admin_official.edit)
-	 .post(checkAuth, admin_official.edit_form);
 
 
 // ------------------------
@@ -422,10 +346,6 @@ app.route('/partners').get(globals.imageGallery('main'), content.partners);
 
 // === Contacts Route
 app.route('/contacts').get(content.contacts);
-
-// === Official Route
-app.route('/official').get(content.contacts);
-
 
 
 // ------------------------
