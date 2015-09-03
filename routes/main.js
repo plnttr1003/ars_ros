@@ -2,18 +2,15 @@ var path = require('path');
 var jade = require('jade');
 
 var Event = require('../models/main.js').Event;
-var News = require('../models/main.js').News;
 var Category = require('../models/main.js').Category;
 
 var __appdir = path.dirname(require.main.filename);
 
 
 exports.index = function(req, res) {
-	News.find().where('title.lg').equals(req.locale).nor([{'status': 'hidden'}, {'status': 'out'}]).sort('-date').limit(5).exec(function(err, news) {
-		Event.find().where('title.lg').equals(req.locale).nor([{'status': 'hidden'}, {'status': 'out'}]).sort('-date').limit(12).populate('subsidiary').exec(function(err, events) {
-			Category.where('title.lg').equals(req.locale).where('status').equals('main').exec(function(err, categorys) {
-				res.render('main', {events: events, news: news, categorys: categorys});
-			});
+	Event.find().where('title.lg').equals(req.locale).nor([{'status': 'hidden'}, {'status': 'out'}]).sort('-date').limit(12).populate('subsidiary').exec(function(err, events) {
+		Category.where('title.lg').equals(req.locale).where('status').equals('main').exec(function(err, categorys) {
+			res.render('main', {events: events, categorys: categorys});
 		});
 	});
 }

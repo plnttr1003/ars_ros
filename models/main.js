@@ -12,19 +12,6 @@ var userSchema = new Schema({
 	date: {type: Date, default: Date.now},
 });
 
-var newsSchema = new Schema({
-	title: { type: String, trim: true, locale: true },
-	description: { type: String, trim: true, locale: true },
-	date: {type: Date, default: Date.now},
-	status: String,
-	videos: [{type: String, trim: true}],
-	images: [{
-		description: { type: String, trim: true, locale: true },
-		original: String,
-		thumb: String
-	}]
-});
-
 var vacancySchema = new Schema({
 	title: { type: String, trim: true, locale: true },
 	description: { type: String, trim: true, locale: true },
@@ -206,7 +193,6 @@ gallerySchema.statics.random = function(opts, limit, sort, callback) {
 
 userSchema.plugin(mongooseBcrypt, { fields: ['password'] });
 
-newsSchema.plugin(mongooseLocale);
 vacancySchema.plugin(mongooseLocale);
 historySchema.plugin(mongooseLocale);
 exhibitSchema.plugin(mongooseLocale);
@@ -236,7 +222,6 @@ eventSchema.index({'title.value': 'text', 'description.value': 'text'}, {languag
 
 
 module.exports.User = mongoose.model('User', userSchema);
-module.exports.News = mongoose.model('News', newsSchema);
 module.exports.Vacancy = mongoose.model('Vacancy', vacancySchema);
 module.exports.History = mongoose.model('History', historySchema);
 module.exports.Exhibit = mongoose.model('Exhibit', exhibitSchema);

@@ -60,7 +60,6 @@ app.use(function(req, res, next) {
 
 var main = require('./routes/main.js');
 var events = require('./routes/events.js');
-var news = require('./routes/news.js');
 var vacancys = require('./routes/vacancys.js');
 var collects = require('./routes/collects.js');
 var history = require('./routes/history.js');
@@ -69,7 +68,6 @@ var history = require('./routes/history.js');
 
 var exposure = require('./routes/exposure.js');
 var subsidiarys = require('./routes/subsidiarys.js');
-var souvenirs = require('./routes/souvenirs.js');
 var magazines = require('./routes/magazines.js');
 var content = require('./routes/content.js');
 var files = require('./routes/files.js');
@@ -78,7 +76,6 @@ var auth = require('./routes/auth.js');
 
 var admin_users = require('./routes/admin/users.js');
 var admin_history = require('./routes/admin/history.js');
-var admin_news = require('./routes/admin/news.js');
 var admin_vacancys = require('./routes/admin/vacancys.js');
 var admin_exhibits = require('./routes/admin/exhibits.js');
 var admin_collects = require('./routes/admin/collects.js');
@@ -87,7 +84,6 @@ var admin_subsidiarys = require('./routes/admin/subsidiarys.js');
 var admin_events = require('./routes/admin/events.js');
 var admin_categorys = require('./routes/admin/categorys.js');
 var admin_catalogues= require('./routes/admin/catalogues.js');
-var admin_souvenirs = require('./routes/admin/souvenirs.js');
 var admin_magazines = require('./routes/admin/magazines.js');
 
 var admin_official = require('./routes/admin/official.js');
@@ -132,15 +128,6 @@ app.route('/events/:type').get(events.index);
 // === Events Tag Route
 app.route('/events/:type/:id').get(events.event);
 
-// === News Route
-app.route('/news')
-	.get(globals.imageGallery('main'), news.index)
-	.post(news.get_news);
-
-// === News Route
-app.route('/news/:id').get(news.news);
-
-
 // === Officials Route
 app.route('/official')
 	.get(content.official)
@@ -183,12 +170,6 @@ app.route('/subsidiarys').get(subsidiarys.index);
 // === Subsidiary Route
 app.route('/subsidiarys/:id').get(subsidiarys.subsidiary);
 
-// === Souvenirs Route
-app.route('/souvenirs').get(souvenirs.index);
-
-// === Souvenir Route
-app.route('/souvenirs/:id').get(souvenirs.catalogue);
-
 
 // ------------------------
 // *** Admin Users Routes Block ***
@@ -215,35 +196,6 @@ app.route('/auth/users/edit/:id')
 // === Admin @remove users Route
 app.route('/auth/users/remove')
 	 .post(checkAuth, admin_users.remove);
-
-
-
-// ------------------------
-// *** Admin News Routes Block ***
-// ------------------------
-
-
-
-// === Admin news Route
-app.route('/auth/news').get(checkAuth, admin_news.list);
-
-
-// === Admin @add news Route
-app.route('/auth/news/add')
-	 .get(checkAuth, admin_news.add)
-	 .post(checkAuth, admin_news.add_form);
-
-
-// === Admin @edit news Route
-app.route('/auth/news/edit/:id')
-	 .get(checkAuth, admin_news.edit)
-	 .post(checkAuth, admin_news.edit_form);
-
-
-// === Admin @remove news Route
-app.route('/auth/news/remove')
-	 .post(checkAuth, admin_news.remove);
-
 
 
 // ------------------------
@@ -354,7 +306,6 @@ app.route('/auth/collects/edit/:id')
 // === Admin @remove collects Route
 app.route('/auth/collects/remove')
 	 .post(checkAuth, admin_collects.remove);
-
 
 
 // ------------------------
@@ -506,30 +457,6 @@ app.route('/auth/catalogues/remove')
 	 .post(checkAuth, admin_catalogues.remove);
 
 
-// ------------------------
-// *** Admin Souvenirs Routes Block ***
-// ------------------------
-
-
-// === Admin souvenirs Route
-app.route('/auth/catalogues/edit/:id/souvenirs').get(checkAuth, admin_souvenirs.list);
-
-
-// === Admin @add souvenirs Route
-app.route('/auth/catalogues/edit/:id/souvenirs/add')
-	 .get(checkAuth, admin_souvenirs.add)
-	 .post(checkAuth, admin_souvenirs.add_form);
-
-
-// === Admin @edit souvenirs Route
-app.route('/auth/catalogues/edit/:id/souvenirs/edit/:souvenir_id')
-	 .get(checkAuth, admin_souvenirs.edit)
-	 .post(checkAuth, admin_souvenirs.edit_form);
-
-
-// === Admin @remove souvenirs Route
-app.route('/auth/catalogues/edit/:id/souvenirs/edit/:souvenir_id/remove')
-	 .post(checkAuth, admin_souvenirs.remove);
 
 
 // ------------------------
