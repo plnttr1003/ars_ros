@@ -60,9 +60,7 @@ app.use(function(req, res, next) {
 
 var main = require('./routes/main.js');
 var events = require('./routes/events.js');
-var vacancys = require('./routes/vacancys.js');
-var collects = require('./routes/collects.js');
-var history = require('./routes/history.js');
+
 
 //var halls = require('./routes/admin/halls.js');
 
@@ -75,20 +73,15 @@ var files = require('./routes/files.js');
 var auth = require('./routes/auth.js');
 
 var admin_users = require('./routes/admin/users.js');
-var admin_history = require('./routes/admin/history.js');
-var admin_vacancys = require('./routes/admin/vacancys.js');
 var admin_exhibits = require('./routes/admin/exhibits.js');
-var admin_collects = require('./routes/admin/collects.js');
+
 var admin_halls = require('./routes/admin/halls.js');
 var admin_subsidiarys = require('./routes/admin/subsidiarys.js');
 var admin_events = require('./routes/admin/events.js');
 var admin_categorys = require('./routes/admin/categorys.js');
-var admin_catalogues= require('./routes/admin/catalogues.js');
 var admin_magazines = require('./routes/admin/magazines.js');
-
 var admin_official = require('./routes/admin/official.js');
 var admin_contacts = require('./routes/admin/contacts.js');
-var admin_schedule = require('./routes/admin/schedule.js');
 var admin_gallerys = require('./routes/admin/gallerys.js');
 
 var options = require('./routes/admin/options.js');
@@ -133,13 +126,6 @@ app.route('/official')
 	.get(content.official)
 
 
-// === Vacancys Route
-app.route('/vacancys')
-	.get(globals.imageGallery('main'), vacancys.index)
-	.post(vacancys.vacancys);
-
-// === Vacancys Route
-app.route('/vacancys/:id').get(globals.imageGallery('main'), vacancys.vacancys);
 
 // === Magazines Route
 app.route('/magazines')
@@ -155,14 +141,7 @@ app.route('/exposure').get(globals.imageGallery('main'), exposure.index);
 // === Exposure hall Route
 app.route('/exposure/:id').get(exposure.hall);
 
-// === Collections Route
-app.route('/collections').get(collects.index);
 
-// === Collection Route
-app.route('/collections/:id').get(collects.collect);
-
-// === History Route
-app.route('/history').get(globals.imageGallery('history'), history.index);
 
 // === Subsidiarys Route
 app.route('/subsidiarys').get(subsidiarys.index);
@@ -199,61 +178,6 @@ app.route('/auth/users/remove')
 
 
 // ------------------------
-// *** Admin Vacancys Routes Block ***
-// ------------------------
-
-
-// === Admin vacancys Route
-app.route('/auth/vacancys').get(checkAuth, admin_vacancys.list);
-
-
-// === Admin @add vacancys Route
-app.route('/auth/vacancys/add')
-	 .get(checkAuth, admin_vacancys.add)
-	 .post(checkAuth, admin_vacancys.add_form);
-
-
-// === Admin @edit vacancys Route
-app.route('/auth/vacancys/edit/:id')
-	 .get(checkAuth, admin_vacancys.edit)
-	 .post(checkAuth, admin_vacancys.edit_form);
-
-
-// === Admin @remove vacancys Route
-app.route('/auth/vacancys/remove')
-	 .post(checkAuth, admin_vacancys.remove);
-
-
-
-// ------------------------
-// *** Admin History Routes Block ***
-// ------------------------
-
-
-
-// === Admin history Route
-app.route('/auth/history').get(checkAuth, admin_history.list);
-
-
-// === Admin @add history Route
-app.route('/auth/history/add')
-	 .get(checkAuth, admin_history.add)
-	 .post(checkAuth, admin_history.add_form);
-
-
-// === Admin @edit history Route
-app.route('/auth/history/edit/:id')
-	 .get(checkAuth, admin_history.edit)
-	 .post(checkAuth, admin_history.edit_form);
-
-
-// === Admin @remove history Route
-app.route('/auth/history/remove')
-	 .post(checkAuth, admin_history.remove);
-
-
-
-// ------------------------
 // *** Admin Exhibitis Routes Block ***
 // ------------------------
 
@@ -281,49 +205,6 @@ app.route('/auth/exhibits/remove')
 
 
 
-// ------------------------
-// *** Admin Collects Routes Block ***
-// ------------------------
-
-
-
-// === Admin collects Route
-app.route('/auth/collects').get(checkAuth, admin_collects.list);
-
-
-// === Admin @add collects Route
-app.route('/auth/collects/add')
-	 .get(checkAuth, admin_collects.add)
-	 .post(checkAuth, admin_collects.add_form);
-
-
-// === Admin @edit collects Route
-app.route('/auth/collects/edit/:id')
-	 .get(checkAuth, admin_collects.edit)
-	 .post(checkAuth, admin_collects.edit_form);
-
-
-// === Admin @remove collects Route
-app.route('/auth/collects/remove')
-	 .post(checkAuth, admin_collects.remove);
-
-
-// ------------------------
-// *** Admin Halls Routes Block ***
-// ------------------------
-
-
-/*
-// === Admin halls Route
-app.route('/auth/halls').get(checkAuth, admin_halls.list);
-
-
-// === Admin @add halls Route
-app.route('/auth/halls/add')
-	 .get(checkAuth, admin_halls.add)
-	 .post(checkAuth, admin_halls.add_form);
-
-*/
 
 // === Admin halls Route
 app.route('/auth/halls').get(admin_halls.list);
@@ -431,33 +312,6 @@ app.route('/auth/categorys/remove')
 	 .post(checkAuth, admin_categorys.remove);
 
 
-// ------------------------
-// *** Admin Catalogues Routes Block ***
-// ------------------------
-
-
-// === Admin catalogues Route
-app.route('/auth/catalogues').get(checkAuth, admin_catalogues.list);
-
-
-// === Admin @add catalogues Route
-app.route('/auth/catalogues/add')
-	 .get(checkAuth, admin_catalogues.add)
-	 .post(checkAuth, admin_catalogues.add_form);
-
-
-// === Admin @edit catalogues Route
-app.route('/auth/catalogues/edit/:id')
-	 .get(checkAuth, admin_catalogues.edit)
-	 .post(checkAuth, admin_catalogues.edit_form);
-
-
-// === Admin @remove catalogues Route
-app.route('/auth/catalogues/remove')
-	 .post(checkAuth, admin_catalogues.remove);
-
-
-
 
 // ------------------------
 // *** Admin Gallerys Routes Block ***
@@ -526,10 +380,6 @@ app.route('/auth/official')
 	 .get(checkAuth, admin_official.edit)
 	 .post(checkAuth, admin_official.edit_form);
 
-app.route('/auth/schedule')
-	 .get(checkAuth, admin_schedule.edit)
-	 .post(checkAuth, admin_schedule.edit_form);
-
 
 // ------------------------
 // *** Auth Routes Block ***
@@ -569,8 +419,6 @@ app.route('/team').get(content.team);
 // === Partners Route
 app.route('/partners').get(globals.imageGallery('main'), content.partners);
 
-// === Schedule Route
-app.route('/schedule').get(globals.imageGallery('main'), content.schedule);
 
 // === Contacts Route
 app.route('/contacts').get(content.contacts);

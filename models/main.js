@@ -12,33 +12,7 @@ var userSchema = new Schema({
 	date: {type: Date, default: Date.now},
 });
 
-var vacancySchema = new Schema({
-	title: { type: String, trim: true, locale: true },
-	description: { type: String, trim: true, locale: true },
-	date: {type: Date, default: Date.now},
-	status: String,
-	videos: [{type: String, trim: true}],
-	images: [{
-		description: { type: String, trim: true, locale: true },
-		original: String,
-		thumb: String
-	}]
-});
 
-var historySchema = new Schema({
-	title: { type: String, trim: true, locale: true },
-	description: { type: String, trim: true, locale: true },
-	interval: {
-		start: Date,
-		end: Date
-	},
-	images: [{
-		description: { type: String, trim: true, locale: true },
-		original: String,
-		thumb: String
-	}],
-	date: {type: Date, default: Date.now}
-});
 
 var exhibitSchema = new Schema({
 	title: { type: String, trim: true, locale: true },
@@ -53,14 +27,6 @@ var exhibitSchema = new Schema({
 	date: {type: Date, default: Date.now}
 });
 
-var collectSchema = new Schema({
-	title: { type: String, trim: true, locale: true },
-	description: { type: String, trim: true, locale: true },
-	logo: {
-		path: String
-	},
-	date: {type: Date, default: Date.now}
-});
 
 var hallSchema = new Schema({
 	title: { type: String, trim: true, locale: true },
@@ -134,26 +100,6 @@ var gallerySchema = new Schema({
 	date: {type: Date, default: Date.now}
 });
 
-var catalogueSchema = new Schema({
-	title: { type: String, trim: true, locale: true },
-	description: { type: String, trim: true, locale: true },
-	logo: {
-		path: String
-	},
-	date: {type: Date, default: Date.now}
-});
-
-var souvenirSchema = new Schema({
-	title: { type: String, trim: true, locale: true },
-	description: { type: String, trim: true, locale: true },
-	catalogue: { type: Schema.Types.ObjectId, ref: 'Catalogue' },
-	images: [{
-		description: { type: String, trim: true, locale: true },
-		original: String,
-		thumb: String
-	}],
-	date: {type: Date, default: Date.now}
-});
 
 var magazineSchema = new Schema({
 	title: { type: String, trim: true, locale: true },
@@ -193,17 +139,12 @@ gallerySchema.statics.random = function(opts, limit, sort, callback) {
 
 userSchema.plugin(mongooseBcrypt, { fields: ['password'] });
 
-vacancySchema.plugin(mongooseLocale);
-historySchema.plugin(mongooseLocale);
 exhibitSchema.plugin(mongooseLocale);
-collectSchema.plugin(mongooseLocale);
 hallSchema.plugin(mongooseLocale);
 subsidiarySchema.plugin(mongooseLocale);
 eventSchema.plugin(mongooseLocale);
 categorySchema.plugin(mongooseLocale);
 gallerySchema.plugin(mongooseLocale);
-catalogueSchema.plugin(mongooseLocale);
-souvenirSchema.plugin(mongooseLocale);
 magazineSchema.plugin(mongooseLocale);
 
 
@@ -222,15 +163,10 @@ eventSchema.index({'title.value': 'text', 'description.value': 'text'}, {languag
 
 
 module.exports.User = mongoose.model('User', userSchema);
-module.exports.Vacancy = mongoose.model('Vacancy', vacancySchema);
-module.exports.History = mongoose.model('History', historySchema);
 module.exports.Exhibit = mongoose.model('Exhibit', exhibitSchema);
-module.exports.Collect = mongoose.model('Collect', collectSchema);
 module.exports.Hall = mongoose.model('Hall', hallSchema);
 module.exports.Subsidiary = mongoose.model('Subsidiary', subsidiarySchema);
 module.exports.Event = mongoose.model('Event', eventSchema);
 module.exports.Category = mongoose.model('Category', categorySchema);
 module.exports.Gallery = mongoose.model('Gallery', gallerySchema);
 module.exports.Magazine = mongoose.model('Magazine', magazineSchema);
-module.exports.Catalogue = mongoose.model('Catalogue', catalogueSchema);
-module.exports.Souvenir = mongoose.model('Souvenir', souvenirSchema);
