@@ -176,13 +176,27 @@
 	background-position 50%
 	background-repeat no-repeat
 	&.text
-		display inline
+		display inline-block
 		margin 0
 		width auto
 		height auto
 		font-family 'menu'
-		color #000
+		color #fff
 		text-decoration none
-		padding-left 20px
+		margin-left 20px
+		border-bottom 3px solid #000
+		border-top 3px solid #000
+		position relative
+		height 29px
+		width 40px
+		&:after
+			position absolute
+			content ''
+			display block
+			top 50%
+			width 100%
+			margin-top -1.5px
+			height 3px
+			background #000
 	&:hover
 		opacity 0.5

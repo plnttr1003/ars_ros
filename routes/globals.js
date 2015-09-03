@@ -34,12 +34,3 @@ exports.locale = function(req, res) {
   res.redirect('back');
 }
 
-
-exports.imageGallery = function(type) {
-  return function(req, res, next) {
-    Gallery.random({'type': type}, 25, 'year', function(err, images) {
-    	res.locals.images = images;
-    	next();
-    });
-  }
-}

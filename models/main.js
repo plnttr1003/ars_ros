@@ -77,28 +77,7 @@ var categorySchema = new Schema({
 	date: {type: Date, default: Date.now}
 });
 
-var gallerySchema = new Schema({
-	type: String,
-	description: { type: String, trim: true, locale: true },
-	year: Number,
-	path: {
-		original: String,
-		thumb: String
-	},
-	date: {type: Date, default: Date.now}
-});
 
-
-var magazineSchema = new Schema({
-	title: { type: String, trim: true, locale: true },
-	num: Number,
-	url: { type: String, trim: true },
-	path: {
-		original: String,
-		thumb: String
-	},
-	date: {type: Date, default: Date.now}
-});
 
 
 // ------------------------
@@ -106,18 +85,6 @@ var magazineSchema = new Schema({
 // ------------------------
 
 
-gallerySchema.statics.random = function(opts, limit, sort, callback) {
-	this.count(function(err, count) {
-		if (err) {
-			return callback(err);
-		}
-
-		var skip_max = (count - limit) <= 0 ? 0 : count - limit;
-		var skip_rand = Math.floor(Math.random() * (skip_max + 1));
-
-		this.find(opts).sort(sort).skip(skip_rand).limit(limit).exec(callback);
-	}.bind(this));
-};
 
 
 // ------------------------
@@ -132,7 +99,6 @@ hallSchema.plugin(mongooseLocale);
 subsidiarySchema.plugin(mongooseLocale);
 eventSchema.plugin(mongooseLocale);
 categorySchema.plugin(mongooseLocale);
-gallerySchema.plugin(mongooseLocale);
 
 
 // ------------------------
@@ -153,4 +119,3 @@ module.exports.Hall = mongoose.model('Hall', hallSchema);
 module.exports.Subsidiary = mongoose.model('Subsidiary', subsidiarySchema);
 module.exports.Event = mongoose.model('Event', eventSchema);
 module.exports.Category = mongoose.model('Category', categorySchema);
-module.exports.Gallery = mongoose.model('Gallery', gallerySchema);

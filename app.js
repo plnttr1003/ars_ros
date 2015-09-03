@@ -79,7 +79,6 @@ var admin_events = require('./routes/admin/events.js');
 var admin_categorys = require('./routes/admin/categorys.js');
 
 var admin_contacts = require('./routes/admin/contacts.js');
-var admin_gallerys = require('./routes/admin/gallerys.js');
 
 var options = require('./routes/admin/options.js');
 var globals = require('./routes/globals.js');
@@ -104,7 +103,7 @@ function checkAuth (req, res, next) {
 
 // === Main Route
 app.route('/')
-	.get(globals.imageGallery('main'), main.index)
+	.get(main.index)
 	.post(main.get_events);
 
 // === Events Route
@@ -266,33 +265,6 @@ app.route('/auth/categorys/remove')
 
 
 
-// ------------------------
-// *** Admin Gallerys Routes Block ***
-// ------------------------
-
-
-
-// === Admin gallerys Route
-app.route('/auth/gallerys').get(checkAuth, admin_gallerys.list);
-
-
-// === Admin @add gallerys Route
-app.route('/auth/gallerys/add')
-	 .get(checkAuth, admin_gallerys.add)
-	 .post(checkAuth, admin_gallerys.add_form);
-
-
-// === Admin @edit gallerys Route
-app.route('/auth/gallerys/edit/:id')
-	 .get(checkAuth, admin_gallerys.edit)
-	 .post(checkAuth, admin_gallerys.edit_form);
-
-
-// === Admin @remove gallerys Route
-app.route('/auth/gallerys/remove')
-	 .post(checkAuth, admin_gallerys.remove);
-
-
 
 // ------------------------
 // *** Admin Contacts Content ***
@@ -336,12 +308,6 @@ app.route('/registr')
 // *** Content Routes Block ***
 // ------------------------
 
-
-// === Team Route
-app.route('/team').get(content.team);
-
-// === Partners Route
-app.route('/partners').get(globals.imageGallery('main'), content.partners);
 
 
 // === Contacts Route

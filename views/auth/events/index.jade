@@ -17,19 +17,6 @@ block content
 	.title= 'Альбомы'
 	br
 	a.add(href='/auth/albums/add') добавить альбом
-	//-.event_type_block
-		a#event ВСЕ
-		a#exhibition Выставка
-		a#lecture Лекция
-		a#action Мероприятие
-		a#excursion Экскурсия
-		a#teach Центр музейно-прикладной педагогики
-		a#education Музейно-образовательные программы
-		hr
-
-
-		each category in categorys
-			a(id= category.id)= category.i18n.title.get('ru')
 
 
 	.main_menu_block

@@ -20,7 +20,6 @@ block content_style
 block content_scripts
 	script(type='text/javascript', src='/build/libs/js/jquery.fancybox.js' + version)
 	script(type='text/javascript', src='/build/js/fancybox.js' + version)
-	//-script(type='text/javascript', src='/build/js/scroll.js' + version)
 	script(type='text/javascript', src='/build/libs/js/masonry.pkgd.min.js' + version)
 	script(type='text/javascript', src='/build/js/event.js' + version)
 
@@ -31,43 +30,11 @@ mixin compareInterval(start, end)
 		!= start.getDate() + ' ' + months[start.getMonth()] + ' ' + start.getFullYear() + ' - ' + end.getDate() + ' ' + months[end.getMonth()] + ' ' + end.getFullYear()
 
 
-//-block content
-	.content_title= event.i18n.title.get(locale)
-	if (!event.interval.hidden)
-		.content_date: +compareInterval(event.interval.start, event.interval.end)
-
-
-	//-.content_subs= event.subsidiary && event.subsidiary.i18n.title.get(locale)
-
-	//-.content_body: != event.i18n.description.get(locale)
-
-	//-if (event.videos && event.videos.length == 1)
-		.content_video_block
-			each video in event.videos
-				.content_video_item.important_video: != video
-	//-else if (event.videos && event.videos.length > 1)
-		.content_video_block
-			each video in event.videos
-				.content_video_item: != video
-
 block content
 
 	.screen_block.info_block
 		.info_block_inner
 			.content_navigate_block
-
-
-				//-if (categorys.length > 0)
-					.content_navigate_block.categorys
-						.navigate_title= __('Категории:')
-						.navigate_items_block
-							each category in categorys
-								.navigate_item(class=category._id.toString())= category.i18n.title.get(locale)
-
-				//-.navigate_items_block
-					.navigate_item.exhibition= __('Выставки')
-					.navigate_item.lecture= __('Лекции')
-					.navigate_item.action= __('Мероприятия')
 
 		.goto_down
 			a.goto_down_inner.info
@@ -102,12 +69,8 @@ block content
 		.content_title_inner= event.i18n.title.get(locale)
 				if (!event.i18n.description.get(locale))
 				else
-					a.item_fancy.text(href='#description') 
+					a.item_fancy.text(href='#description')
 					#description= event.i18n.description.get(locale)
 	.content_scroll_items
 		each image in event.images.reverse()
 			a.item_fancy(href=image.original, data-fancybox-group='image', style='background-image:url('+image.thumb+')')
-				//- img(src=)
-				//- - var description = get_locale(image.description, locale)
-				//-if (description != '')
-					.content_image_description: != description
