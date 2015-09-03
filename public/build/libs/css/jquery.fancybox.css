@@ -156,6 +156,7 @@ a.fancybox-next {
     z-index: 10000;
     /*width: auto;*/
     cursor: pointer;
+    width: 70%;
 }
 
 a.fancybox-nav span {
