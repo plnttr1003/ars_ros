@@ -16,7 +16,7 @@ $(document).ready(function() {
 	$('.rm_collect').on('click', {path:'/auth/collects/remove', description: 'Удалить коллекцию?'}, remove);
 	$('.rm_exhibit').on('click', {path:'/auth/exhibits/remove', description: 'Удалить экспонат?'}, remove);
 	$('.rm_hall').on('click', {path:'/auth/halls/remove', description: 'Удалить запись?'}, remove);
-	$('.rm_subsidiary').on('click', {path:'/auth/subsidiarys/remove', description: 'Удалить страну?'}, remove);
+	$('.rm_subsidiary').on('click', {path:'/auth/countries/remove', description: 'Удалить страну?'}, remove);
 	$('.rm_gallery').on('click', {path:'/auth/gallerys/remove', description: 'Удалить фотографию?'}, remove);
 	$('.rm_magazine').on('click', {path:'/auth/magazines/remove', description: 'Удалить журнал?'}, remove);
 

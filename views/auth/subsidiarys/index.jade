@@ -13,7 +13,7 @@ block content
 	a.back_link(href='/auth') < Назад
 	.title= 'Страны'
 	br
-	a.add(href='/auth/subsidiarys/add') добавить страну
+	a.add(href='/auth/countries/add') добавить страну
 	br
 	br
 	.main_menu_block
@@ -21,4 +21,4 @@ block content
 			.event
 				a.rm_subsidiary(href='#', id=subsidiary._id)= 'удалить '
 				!=' | '
-				a(href='/auth/subsidiarys/edit/' + subsidiary._id)= subsidiary.i18n.title.get('ru') ? subsidiary.i18n.title.get('ru') : 'Название страны'
+				a(href='/auth/countries/edit/' + subsidiary._id)= subsidiary.i18n.title.get('ru') ? subsidiary.i18n.title.get('ru') : 'Название страны'

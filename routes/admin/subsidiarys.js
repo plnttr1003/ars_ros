@@ -86,8 +86,6 @@ exports.add_form = function(req, res) {
 		});
 	}
 
-	subsidiary.logo.position.x = post.position.x || 0;
-	subsidiary.logo.position.y = post.position.y || 0;
 
 
 	if (!post.images) {
